@@ -1,0 +1,8 @@
+server/node_modules
+client/node_modules
+client/node_modules
+dashboard/node_modules
+
+erver/.env
+client/.env
+
