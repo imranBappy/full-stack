@@ -25,16 +25,19 @@ function User(props) {
     useEffect(()=>{
       props.getUserAction(page);
     },[]);
-    
   return (
           <>
-            <Table
+            {
+              props.user.user.length ? <Table
               columns = {user}
               rows = {props.user.user}
               length={props.user.length}
               path='/user'
               action = {props.getUserAction}
             />
+              :
+              <h1 style={{ textAlign: 'center'}} >Data Not Found</h1> 
+            }
           </>
   );
 }

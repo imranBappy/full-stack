@@ -20,7 +20,7 @@ const resultSchema = new Schema({
         ref:'bet',
         required: true
     }
-})
+});
 
-const Result = model('result', resultSchema)
+const Result = model('result', resultSchema);
 module.exports = Result;

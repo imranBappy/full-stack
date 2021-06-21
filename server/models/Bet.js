@@ -1,10 +1,14 @@
 const {Schema, model} = require('mongoose');
 
 const betSchema = new Schema({
-    question:{
+    title:{
         type: String,
         trim: true,
         required: true
+    },
+    game:{
+        type: Schema.Types.ObjectId,
+        ref:'game'
     }
 },{timestamps: true})
 

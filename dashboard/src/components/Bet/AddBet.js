@@ -3,60 +3,73 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { gameAddAction } from '../../store/actions/gameAction';
+import { Link, useLocation} from 'react-router-dom';
+import Title from './Title';
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+  
 const AddBet = (props) => {
     let { gameId } = useParams();
+    let query = useQuery();
     const [game, setGame] = useState({
-        title:'',
-        quation:'',
+        bet: gameId,
+        question:'',
         rate:'',
-        gameId
+        game: query.get("bet") ? query.get("bet") : '00000'
     })
     const [isValid, setIsValid] = useState(true)
     const handelChange = e => {
         let name = e.target.name, value = e.target.value
         setGame({ ...game, [name]: value });
     };
-    const checkValide = () =>{
+  
+    const checkValid = () =>{
         for (const key in game) {
             const element = game[key];
             if (!element) {
                 setIsValid(false)
                 return false
             }
+            if (key === 'rate') {
+                if (!Number(element)) {
+                    setIsValid(false) 
+                    return false
+                }
+            }
         }
         return true;
     };
+
     const handelSubmit = () =>{
-        if (checkValide()) {
+
+        if (checkValid()) {
             setIsValid(true);
-            // props.gameAddAction(newGame, history, props.game);  
+            console.log(game);
+            // props.gameAddAction(game);  
         }
     };
+    
     return (
         <>
-            <h1>gameId: {gameId}</h1>
             <div >
+                <Link style={{ textDecoration: 'none' }} to={`/bet/${gameId}`}>
+                    <Button variant='outlined' color='secondary' >
+                    {'Back Bets'}
+                    </Button>
+                </Link>
                 <Grid container justify="center">
                     <Grid item xs={12} md={6}>
+                        <Title/>
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
-                            id="title"
-                            label="Title"
-                            name="title"
-                            onChange={handelChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="quation"
-                            label="Quation"
-                            name="quation"
+                            id="question"
+                            label="question"
+                            name="question"
                             onChange={handelChange}
                         />
                         <TextField
@@ -78,7 +91,7 @@ const AddBet = (props) => {
                             fullWidth color="primary"
                             variant="contained"
                             onClick={handelSubmit}
-                        >Add</Button>
+                        >Add question </Button>
                     </Grid>
                 </Grid>
             </div>

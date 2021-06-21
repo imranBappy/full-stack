@@ -4,8 +4,8 @@
   "description": "This is gaming website",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "nodemon server",
+    "dev": "node server"
   },
   "author": "Imran Hossen",
   "license": "ISC",

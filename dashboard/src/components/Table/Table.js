@@ -32,7 +32,7 @@ function User(props) {
     };
     const changePage = (p) =>{
         props.action(p);
-    }
+    };
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
@@ -74,10 +74,11 @@ function User(props) {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-
-                            {column.id === 'sName'? value.username : column.format && typeof value === 'number' ? column.format(value) : value}
+                            {column.id === 'sName'? 
+                                value? value:'sName' 
+                            : column.format && typeof value === 'number' ? column.format(value) : value}
+                            
                             {column.id === 'option' && <Link to={`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
-
                           </TableCell>
                         );
                       })}

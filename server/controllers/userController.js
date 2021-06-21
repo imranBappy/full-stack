@@ -11,9 +11,9 @@ exports.registerPostController = async (req, res, next) =>{
         const username = await User.find({username: req.body.username})
         if (username.length !== 0 ) {
             return res.json({
-            message:'Username allready exist!',
-            error: true,
-            data:[]
+                message:'Username allready exist!',
+                error: true,
+                data:[]
             })
         };
         const sName = await User.find({username: req.body.sName.trim()})
@@ -38,6 +38,7 @@ exports.registerPostController = async (req, res, next) =>{
 exports.loginPostController = async (req, res, next)=>{
     const {username, password} = req.body
     try {
+        console.log(req.body);
         const result = await User.find({username: username.trim()});
         const user = result[0];
         if (!user) return res.json({message:'User not found!', error: true})

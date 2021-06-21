@@ -5,7 +5,7 @@ const isAdmin = require('../middlewares/isAdmin')
 const router = require('express').Router()
 
 router.get('/', isAdmin, dashboardGetController )
-router.post('/add',isAdmin, adminPostController )
+router.post('/add', isAdmin, adminPostController )
 router.post('/login', adminPostLoginController )
 router.get('/all-admin',isAdmin,  adminGetController )
 router.get('/single-user/:userId',isAdmin, singleAdminGetController )
