@@ -15,7 +15,8 @@ import Sidevar from '../Sidevar/Sidevar';
 import style from '../style/style';
 import User from '../User/User';
 import './Dashboard.css';
-
+import Club from '../Club/Club';
+import AddClub from '../Club/AddClub';
 
 const useStyles = style(makeStyles);
 
@@ -52,6 +53,12 @@ function Dashboard(props) {
         </PrivateRoute>
         <PrivateRoute path='/bet/:gameId'>
           <Bet/>
+        </PrivateRoute>
+        <PrivateRoute path='/club'>
+          <Club/>
+        </PrivateRoute>
+        <PrivateRoute path='/add-club'>
+          <AddClub/>
         </PrivateRoute>
       </main>
     </div>

@@ -9,7 +9,9 @@ const app = express();
 setMiddleware(app);
 
 // setRoute
+
 setRoutes(app);
+mongoose.set('useFindAndModify', false);
 
 app.use((req,res,next)=>{
     const error = new Error('404 Page Not Found!');
@@ -37,6 +39,9 @@ app.use((error, req, res, next)=>{
             });
     }
 });
+
+
+
 
 const port = process.env.PORT || 4000
 const mongoURI = process.env.MONGODB_URI || `mongodb://localhost:27017/bdGames`;

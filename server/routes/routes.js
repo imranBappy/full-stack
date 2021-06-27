@@ -3,7 +3,7 @@ const transactionRoute = require('./transactionRoute');
 const adminRoute = require('./adminRoutes');
 const gameRoute = require('./gameRoute');
 const betRoute = require('./betRoute');
-
+const clubRoute = require('./clubRoute');
 
 
 const routes = [
@@ -12,6 +12,7 @@ const routes = [
     {path:'/admin', router: adminRoute},
     {path:'/game', router: gameRoute},
     {path:'/bet', router: betRoute},
+    {path:'/club', router: clubRoute},
 
 ];
 

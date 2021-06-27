@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const resultSchema = new Schema({
-    ans:{
+    question:{
         type: String,
         trim: true,
         required: true

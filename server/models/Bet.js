@@ -6,9 +6,17 @@ const betSchema = new Schema({
         trim: true,
         required: true
     },
+    question:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'result'
+        }
+    ],
     game:{
         type: Schema.Types.ObjectId,
-        ref:'game'
+        ref:'game',
+        required: true
+
     }
 },{timestamps: true})
 

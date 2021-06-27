@@ -2,7 +2,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import './table.css';
 const useStyles = makeStyles({
   root: {
@@ -21,10 +21,11 @@ function User(props) {
     const { columns } = props;
     let query = useQuery();
     const history = useHistory()
-
+    let { gameId } = useParams()
+    
     const [page, setPage] = useState(Number(query.get('page')));
     const [rowsPerPage, setRowsPerPage] = useState(5);
-
+    console.log(props._id);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
         history.push(`${props.path}?page=${newPage}`);
@@ -39,8 +40,7 @@ function User(props) {
     };
     useEffect(()=>{
         changePage(page);
-    }, []);
-    
+    }, []); 
   return (
       <>
       {props.btnName&& <Link style={{ textDecoration: 'none' }} to={props.btnPath}>
@@ -77,8 +77,7 @@ function User(props) {
                             {column.id === 'sName'? 
                                 value? value:'sName' 
                             : column.format && typeof value === 'number' ? column.format(value) : value}
-                            
-                            {column.id === 'option' && <Link to={`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
+                            {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?betId=${row._id}&Id=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
                           </TableCell>
                         );
                       })}

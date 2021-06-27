@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 
-const clubSchem = new Schema({
+const clubSchema = new Schema({
     name:{
         type: String,
         trim: true,
@@ -8,12 +8,24 @@ const clubSchem = new Schema({
         minlength:2,
         maxlength:25
     },
+    user:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    ],
+    clubId:{
+        type: String,
+        trim: true,
+        required: true,
+        minlength:5,
+        maxlength:25
+    },
     clubHolder:{
-        type: Schema.Types.ObjectId,
-        ref:'user',
-        required: true
+        type: String,
+        ref:'user'
     }
 },{timestamps: true} );
 
-const Club = model('club', clubSchem);
+const Club = model('club', clubSchema);
 module.exports= Club;

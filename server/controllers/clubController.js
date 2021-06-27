@@ -1,7 +1,24 @@
 const Club = require("../models/Club")
+const User = require("../models/User")
 
 exports.clubPortController = async (req, res, next) =>{
     try {
+        const checkClub = await Club.find({clubId: req.body.clubId})
+        if (checkClub.length) {
+            return res.json({
+                message: 'Club Id Invalid',
+                error: true
+            })
+        }
+
+        const checkUser = await User.find({username: req.body.clubHolder})
+        if (!checkUser.length) {
+            return res.json({
+                message: 'Username Invalid',
+                error: true
+            })
+        }
+
         const newClub =  new Club(req.body);
         await newClub.save();
         res.json({

@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Grid, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { gameAddAction } from '../../store/actions/gameAction';
+import { resultAction } from '../../store/actions/betAction';
 import { Link, useLocation} from 'react-router-dom';
 import Title from './Title';
+import axios from 'axios';
+import { alertAction } from '../../store/actions/alertAction';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -14,11 +17,20 @@ const AddBet = (props) => {
     let { gameId } = useParams();
     let query = useQuery();
     const [game, setGame] = useState({
-        bet: gameId,
+        game: gameId,
         question:'',
         rate:'',
-        game: query.get("bet") ? query.get("bet") : '00000'
+        bet: ''
     })
+
+    useEffect(() =>{
+        axios.get(`/bet/get-single-bet?betId=${query.get("betId")}`).then(res =>{
+            if (res.data.bet) {
+                setGame(res.data.bet);
+            }
+        });
+    },[]);
+
     const [isValid, setIsValid] = useState(true)
     const handelChange = e => {
         let name = e.target.name, value = e.target.value
@@ -26,31 +38,42 @@ const AddBet = (props) => {
     };
   
     const checkValid = () =>{
+        if (!game.bet) {
+            setGame({ ...game, bet: query.get("bet") ? query.get("bet") : ''});
+        }
+        
         for (const key in game) {
             const element = game[key];
             if (!element) {
+                console.log(element);
                 setIsValid(false)
                 return false
             }
             if (key === 'rate') {
                 if (!Number(element)) {
+                    console.log(element);
                     setIsValid(false) 
                     return false
                 }
             }
         }
-        return true;
+        return true
     };
 
     const handelSubmit = () =>{
-
         if (checkValid()) {
             setIsValid(true);
-            console.log(game);
-            // props.gameAddAction(game);  
+            props.resultAction(game);  
         }
     };
-    
+    const handleUpdate = () =>{
+        if (checkValid()) {
+            setIsValid(true);
+            axios.put(`/bet/result-update`, game).then(res=>{
+                props.alertAction(res.data)
+            })
+        }
+    }
     return (
         <>
             <div >
@@ -63,6 +86,7 @@ const AddBet = (props) => {
                     <Grid item xs={12} md={6}>
                         <Title/>
                         <TextField
+                            value={game.question}
                             variant="outlined"
                             margin="normal"
                             required
@@ -73,6 +97,7 @@ const AddBet = (props) => {
                             onChange={handelChange}
                         />
                         <TextField
+                            value={game.rate}
                             variant="outlined"
                             margin="normal"
                             required
@@ -90,8 +115,8 @@ const AddBet = (props) => {
                             style={{ marginTop: '20px' }}
                             fullWidth color="primary"
                             variant="contained"
-                            onClick={handelSubmit}
-                        >Add question </Button>
+                            onClick={query.get("betId")? handleUpdate : handelSubmit}
+                        > { query.get("betId")? 'Update' : 'Add question' }</Button>
                     </Grid>
                 </Grid>
             </div>
@@ -103,4 +128,4 @@ const mapStateToProps = state =>({
     game: state.game
 });
 
-export default connect(mapStateToProps, { gameAddAction })(AddBet);
+export default connect(mapStateToProps, { resultAction, alertAction })(AddBet);
