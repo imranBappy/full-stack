@@ -18,6 +18,7 @@ import './Dashboard.css';
 import Club from '../Club/Club';
 import AddClub from '../Club/AddClub';
 import Admin from '../Admin/Admin';
+import AddAdmin from '../Admin/AddAdmin';
 import BetList from '../BetList/BetList';
 import Deposit from '../Deposit/Deposit';
 import Withdraw from '../Withdraw/Withdraw';
@@ -80,6 +81,9 @@ function Dashboard(props) {
         </PrivateRoute>
         <PrivateRoute path='/admin'>
           <Admin/>
+        </PrivateRoute>
+        <PrivateRoute path='/add-admin'>
+          <AddAdmin/>
         </PrivateRoute>
         <PrivateRoute path='/option'>
           <Option/>

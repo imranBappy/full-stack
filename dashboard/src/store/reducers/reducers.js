@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { adminReducer } from "./adminReducer";
 import { alertReducer } from './alertReducer';
 import authReducer from "./authReducer";
 import betReducer from "./betReducer";
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     game: gameReducer,
     user: userReducer,
     bet: betReducer,
-    club: clubReducer
+    club: clubReducer,
+    admin: adminReducer
 })
 
 export default reducers

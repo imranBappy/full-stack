@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, Grid, Button, Switch } from '@material-ui/core';
-
-const AddAdmin = () => {
+import { connect } from 'react-redux';
+import {adminAddAction} from '../../store/actions/adminAction';
+const AddAdmin = (props) => {
     const [admin, setAdmin] = useState({
         name:'',
         email:'',
@@ -34,10 +35,9 @@ const AddAdmin = () => {
     };
     const handelSubmit = (e) =>{
         if (checkValid()) {
-            console.log(admin);
+            props.adminAddAction(admin);
         }
     }
-    console.log(isValid);
     return (
         <div>
             <Grid container justify="center">
@@ -91,4 +91,4 @@ const AddAdmin = () => {
     );
 };
 
-export default AddAdmin;
+export default connect(null, {adminAddAction})(AddAdmin);

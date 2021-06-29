@@ -4,6 +4,11 @@ const jwt = require('jsonwebtoken');
 
 exports.adminPostController = async (req, res, next) =>{
     try {
+        const admin = await Admin.find({email: req.body.email})
+        if (admin.length === 1) return res.json({
+            message: 'Admin all ready exist',
+            error: true
+        })
         const hash = await bcrypt.hash(req.body.password, 10)
         req.body.password = hash;
         const newAdmin = new Admin(req.body);

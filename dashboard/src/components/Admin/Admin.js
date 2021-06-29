@@ -1,12 +1,31 @@
-import React from 'react';
-
-const Admin = () => {
-  
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import Table from '../Table/Table';
+import {connect} from 'react-redux';
+import { loadAdminAction } from '../../store/actions/adminAction';
+import columns from '../../data/admin';
+const Admin = (props) => {
+    const action = () =>{
+        
+    }
+    useEffect(() => {
+        props.loadAdminAction()
+    }, []);
     return (
         <div>
-            <h1>This is admin list</h1>
+            <Table
+                columns = {columns()}
+                rows = {props.admin}
+                length={props.admin.length}
+                path='/add-admin'
+                action = {action}
+                btnName = {'Add Admin'}
+                btnPath = {`/add-admin`}
+            />
         </div>
     );
 };
-//  
-export default Admin;
+const mapStateToProps = (state) =>({
+    admin: state.admin.admin
+})
+export default connect(mapStateToProps, {loadAdminAction})(Admin) ;
