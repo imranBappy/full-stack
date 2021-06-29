@@ -1,16 +1,16 @@
 import * as Types from '../actions/types';
 const init = {
-    club: [], length: 0
+    club: []
 }
 const clubReducer = (state = init, action) =>{
     switch (action.type) {
         case Types.SET_CLUB:
             return {
-                club: action.payload.club,
-                length: action.payload.length
+                club: action.payload.club
             }
         default:
-            return state;
+            return state
     }
 }
-export default clubReducer;
+
+export default clubReducer

@@ -30,16 +30,32 @@ exports.clubPortController = async (req, res, next) =>{
     }
 }
 exports.clubGetController = async (req, res, next) =>{
-    const page = req.prams.page || 0
+    const page = req.query.page || 0;
     try {
-        const club = await Club.find({}).skip(5* page).limit(5).select({
-                password: 0,
+        const clubLength = await Club.find({});
+        const club = await Club.find({}).skip(5* Number(page)).limit(5).select({
                 __v:0,
                 createdAt:0,
-                updatedAt:0
             })
         res.json({
-            date: club
+            club,
+            length: clubLength.length
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+exports.rankingClubGetController = async (req, res, next) =>{
+    try {
+        const club = await Club.find({}).select({
+            __v:0,
+            createdAt:0,
+            updatedAt:0,
+            clubHolder:0,
+            user: 0,
+        })
+        res.json({
+            club
         })
     } catch (error) {
         next(error)

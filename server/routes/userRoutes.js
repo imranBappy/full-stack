@@ -7,7 +7,7 @@ router.post('/register', registerPostController );
 
 router.post('/login', loginPostController );
 router.put('/login', isAuthenticated, changePasswordPutController)
-router.get('/singel-user/:userId',isAuthenticated, singleUserGetController)
+router.get('/single-user/:userId',isAuthenticated, singleUserGetController)
 router.get('/',isAdmin, allUserGetController)
 
 

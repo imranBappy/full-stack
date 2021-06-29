@@ -1,29 +1,32 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Club = require('../models/Club');
 
 exports.registerPostController = async (req, res, next) =>{
     try {
         const hash = await bcrypt.hash(req.body.password, 10)
         req.body.password = hash;
-        req.body.club = '608717011a8e9708d8e6cd66';
 
         const username = await User.find({username: req.body.username})
         if (username.length !== 0 ) {
             return res.json({
-                message:'Username allready exist!',
+                message:'Username all ready exist!',
                 error: true,
                 data:[]
             })
         };
         const sName = await User.find({username: req.body.sName.trim()})
             if (sName.length === 0 ) {
-                req.body.sName = '60afcb9df1fea52e98f525f0'
+                req.body.sName = '60d8c7fa7c05af12ce47a178'
             }else{
                 req.body.sName = sName[0]._id;
             }
         const user = new User(req.body);
-        await user.save()
+        const newUser = await user.save();
+        await Club.findByIdAndUpdate(req.body.club,{
+            $push:{'user': newUser._id}
+        })
         res.json({
             message:'User register successfully!',
             error: false,
@@ -93,6 +96,7 @@ exports.allUserGetController = async (req, res, next) =>{
         const arr =  await User.find({})
         const user = await User.find({})
             .populate('sName', 'username')
+            .populate('club', 'clubId')
             .skip(5* Number(page)).limit(5)
             .select({
                 password: 0,

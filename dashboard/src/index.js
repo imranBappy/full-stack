@@ -69,6 +69,7 @@ if (token) {
           }
         })
 }
+
 setAuthToken(token);
 
 ReactDOM.render(

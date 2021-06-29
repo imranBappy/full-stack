@@ -4,8 +4,7 @@ const isAuthenticated = async (req, res, next) =>{
     try {
         const {authorization} = req.headers;
         if (authorization) {
-            const token = authorization.split(' ')[1]
-            const decode = await jwt.verify(token, process.env.SECRET );
+            const decode = await jwt.verify(authorization, process.env.SECRET );
             res.user = decode._id
             next()
         }

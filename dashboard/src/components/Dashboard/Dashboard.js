@@ -17,6 +17,12 @@ import User from '../User/User';
 import './Dashboard.css';
 import Club from '../Club/Club';
 import AddClub from '../Club/AddClub';
+import Admin from '../Admin/Admin';
+import BetList from '../BetList/BetList';
+import Deposit from '../Deposit/Deposit';
+import Withdraw from '../Withdraw/Withdraw';
+import GameFinish from '../GameFinish/GameFinish';
+import Option from '../Option/Option';
 
 const useStyles = style(makeStyles);
 
@@ -59,6 +65,24 @@ function Dashboard(props) {
         </PrivateRoute>
         <PrivateRoute path='/add-club'>
           <AddClub/>
+        </PrivateRoute>
+        <PrivateRoute path='/bet-list'>
+          <BetList/>
+        </PrivateRoute>
+        <PrivateRoute path='/deposit'>
+          <Deposit/>
+        </PrivateRoute>
+        <PrivateRoute path='/withdraw'>
+          <Withdraw/>
+        </PrivateRoute>
+        <PrivateRoute path='/game-finish'>
+          <GameFinish/>
+        </PrivateRoute>
+        <PrivateRoute path='/admin'>
+          <Admin/>
+        </PrivateRoute>
+        <PrivateRoute path='/option'>
+          <Option/>
         </PrivateRoute>
       </main>
     </div>

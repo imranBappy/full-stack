@@ -15,7 +15,7 @@ const token = localStorage.getItem('token');
 
       
 if (token) {
-    setAuthToken(token);
+    
     store.dispatch({
       type: Types.SET_USER,
       payload:{
@@ -25,8 +25,7 @@ if (token) {
       }
     })
     const decode = jwt_decide(token);
-    
-    Axios.get(`/user/singel-user/${decode._id}`,{
+    Axios.get(`/user/single-user/${decode._id}`,{
       	headers:{
           authorization: token
         }
@@ -63,7 +62,7 @@ if (token) {
           }
         })
 }
-
+setAuthToken(token);
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

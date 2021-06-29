@@ -34,6 +34,7 @@ export const loginAction = (user, history) => async dispatch =>{
     try {
         const result = await axios.post('/user/login', user);
         const token = result.data.token;
+        localStorage.setItem('token', token)
         if (result.data.error) return dispatch({
                 type: Types.SET_ALERT,
                 payload:{
@@ -48,23 +49,26 @@ export const loginAction = (user, history) => async dispatch =>{
                     error: result.data.error
                 }
         })
-        localStorage.setItem('token', token)
+        
         const decode = jwt(token)
-        const res = await axios.get(`/user/singel-user/${decode._id}`,{
+        const res = await axios.get(`/user/single-user/${decode._id}`,{
             headers:{
                 authorization: token
             }
         });
-        dispatch({
-            type: Types.SET_USER,
-            payload:{
-                auth: true,
-                user:res.data.data[0],
-                token: token
-            }
-        })
+        if (res.data.data) {
+            dispatch({
+                type: Types.SET_USER,
+                payload:{
+                    auth: true,
+                    user:res.data.data[0],
+                    token: token
+                }
+            })
+        }
         history.push('/');
     } catch (error) {
+        console.log(error);
         dispatch({
                 type: Types.SET_ALERT,
                 payload:{

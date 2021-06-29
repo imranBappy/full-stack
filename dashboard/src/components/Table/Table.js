@@ -74,9 +74,14 @@ function User(props) {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.id === 'sName'? 
-                                value? value:'sName' 
-                            : column.format && typeof value === 'number' ? column.format(value) : value}
+                            {
+                            column.id === 'club' ? value.clubId :
+                            column.id === 'user' ? value.length :
+                            column.id === 'sName'? 
+                                value? value.username :'sName' 
+                            : value
+                            }
+                          {/* {column.format && typeof value === 'number' ? column.format(value) } */}
                             {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?betId=${row._id}&Id=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
                           </TableCell>
                         );

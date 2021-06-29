@@ -31,12 +31,12 @@ const userSchema = new Schema({
     sName:{
         type: Schema.Types.ObjectId,
         ref: 'user',
-        default: ()=> new ObjectId('608717011312708d8e6cd66d')
+        default: ()=> new ObjectId('60d8c7fa7c05af12ce47a178')
     },
     club:{
         type: Schema.Types.ObjectId,
         ref: 'club',
-        default: ()=> new ObjectId('608717011a8e9708d8e6cd66')
+        default: ()=> new ObjectId('60d8ae1798bab1f78ddf15d1')
     },
     isClubHolder:{
         type: Boolean,

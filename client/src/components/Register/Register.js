@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { alertAction } from '../../store/actions/alertAction';
@@ -6,7 +7,7 @@ import { registerAction } from '../../store/actions/authAction';
 import validateEmail from '../../utils/validateEmail';
 import validateNumber from '../../utils/validateNumber';
 import './Register.css';
-
+import { clubAction } from '../../store/actions/clubAction';
 
 const Register = (props) => {
     const histroy = useHistory()
@@ -42,9 +43,14 @@ const Register = (props) => {
         phone:'',
         username:'',
         sName:'admin',
-        club:'official',
+        club:'60d8ae1798bab1f78ddf15d1',
         password:''
     })
+
+    useEffect(()=>{
+        props.clubAction()
+    },[])
+
     const handleChange = e =>{
         const name = e.target.name, value = e.target.value
         const users = {...user, [name]: value}
@@ -133,6 +139,7 @@ const Register = (props) => {
                 }})
             }
         }
+        
     }
 
     const handleSubmit = () =>{
@@ -150,8 +157,6 @@ const Register = (props) => {
                 isValid = false;
             }
         }
-            console.log(props);
-
         if (isValid) {
             props.registerAction(user, histroy)
             setUser({
@@ -160,7 +165,7 @@ const Register = (props) => {
                 phone:'',
                 username:'',
                 sName:'admin',
-                club:'official',
+                club:'60d8ae1798bab1f78ddf15d1',
                 password:''
             })
         }else{
@@ -170,7 +175,6 @@ const Register = (props) => {
             })
         }
     }
-
     return (
         <div>
            
@@ -236,10 +240,13 @@ const Register = (props) => {
                     
                     <label htmlFor="club"><b>Select Club</b></label>
                     <select onChange={handleChange} name="club"  id="club" >
-                        <option value="Official Club">Select Club*</option>
-                        <option value="Dhaka Club">Dhaka Club</option>
-                        <option value="Barisal Club">Barisal Club</option>
-                        <option value="Mathbaria Club">Mathbaria Club</option>
+                    <option value="60d8ae1798bab1f78ddf15d1">Select Club*</option>
+                        {
+                            props.club.map(club=>(
+                                <option key={club._id} value={club._id}>{club.name}</option>
+                            ))
+                        }
+                
                     </select>
 
                     <label htmlFor="password"><b>Password</b></label>
@@ -279,6 +286,7 @@ const Register = (props) => {
 };
 const mapStateToProps = state =>({
     auth: state.auth,
-    alert: state.alert
+    alert: state.alert,
+    club: state.club.club
 })
-export default connect(mapStateToProps, {registerAction, alertAction } )(Register);
+export default connect(mapStateToProps, {registerAction, alertAction, clubAction } )(Register);

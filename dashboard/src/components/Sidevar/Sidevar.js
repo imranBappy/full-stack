@@ -27,12 +27,17 @@ const Sidevar = (props) => {
       {path:'/', name:'Dashboard'},
       {path:'/user', name:'User'},
       {path:'/game', name:'Game'},
-      {path:'/club', name:'Club'}
+      {path:'/club', name:'Club'},
+      {path:'/bet-list', name:'Bet'},
+      {path:'/deposit', name:'Deposit'},
+      {path:'/withdraw', name:'Withdraw'},
+      {path:'/game-finish', name:'Game Finish'},
+      {path:'/option', name:'Option'},
+      {path:'/admin', name:'Admin'},
     ]
     const handleLogout = () =>{
       props.logoutAction()
     }
-
     return (
         <>
           <AppBar

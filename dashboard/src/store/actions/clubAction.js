@@ -16,3 +16,18 @@ export const clubAction = club => async dispatch =>{
         console.log(error);
     }
 }
+
+export const loadAllClub = (page) => async dispatch => {
+    try {
+        const res = await axios.get(`/club/get-all-club?page=${page}`);
+        dispatch({
+            type: Types.SET_CLUB,
+            payload:{
+                club: res.data.club,
+                length: res.data.length
+            }
+        })
+    } catch (error) {
+        
+    }
+}
