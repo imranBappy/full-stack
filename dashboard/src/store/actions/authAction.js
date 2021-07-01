@@ -9,7 +9,9 @@ export const authAction = (user, history) => async dispatch =>{
             type: Types.SET_ALERT,
             payload:result.data
         })
-        localStorage.setItem('admin-token', result.data.token)
+        if ( result.data.token) {
+            localStorage.setItem('admin-token', result.data.token)
+        }
         dispatch({
             type: Types.SET_AUTH,
             payload:{

@@ -47,12 +47,12 @@ exports.loginPostController = async (req, res, next)=>{
         if (!user) return res.json({message:'User not found!', error: true})
         const matchPassword = await bcrypt.compare(password, user.password);
         if (!matchPassword) return res.json({message:'Password is wrang', error: true})
-
-        const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '1h'})
+        const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '24h'})
         res.json({
-            message:'User Login Successfull! ',
+            message:'User Login Successful! ',
             token: token,
-            error:false
+            error:false,
+            user: result
         })
     } catch (error) {
         next(error)

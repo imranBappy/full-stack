@@ -10,30 +10,24 @@ import './Navbar.css';
 const Navbar = (props) => {
     const {alert, auth} = props;
     const [style, setStyle] = useState({
-        position: 'absolute',
-        top: '-100px',
+        background: '#fff',
         check: false
     })
 
     const handleClick = () =>{
         if (style.check) {
             setStyle({
-                position: 'absolute',
-                top: '-100px',
-                transition: '0.5s',
                 background: '#fff',
                 check: false
             })
         }else{
             setStyle({
-                position: 'absolute',
-                top: '100px',
+                display: 'none',
                 transition: '0.5s',
                 background: '#fff',
                 check: true
             })
         }
-
     }
     const [time, setTime] = useState()
     useEffect(()=>{
@@ -42,9 +36,9 @@ const Navbar = (props) => {
         }, 1000);
     },[])
 
-    const logoutHandler = () =>{
-        props.logoutAction()
-    }
+    // const logoutHandler = () =>{
+    //     props.logoutAction()
+    // }
     return (
         <>
          <header style={{background:'#fff'}}>
@@ -67,14 +61,14 @@ const Navbar = (props) => {
                             </Link>
                             </li>
                             <li><Link to="/register">Signup</Link></li>
-                             
                         </ul>
                     </div>
                     <div className="icon-aria">
-                        <Link to="/">
                             <div className="icon">
                                 <img onClick={handleClick} src="https://img.icons8.com/android/24/000000/menu.png"/>
                             </div>
+                        <Link to="/">
+                            
                             <img src={logo} alt="icon"/>
                         </Link>
                     </div>
@@ -93,23 +87,27 @@ const Navbar = (props) => {
                 <div><Link to="/register">Register</Link></div>
             </div>
          }
-        
-        
          </header>
-         
          <div className="menu" style={style} >
-            <ul >
-                <li><Link to="/">Home</Link></li>
-                <li>
-                    <Link to={auth.isAuthenticated ? '/dashboard' : '/login'}>
-                        {auth.isAuthenticated ? 'Dashboard' : 'Login'}
-                    </Link>
-                </li>
-                <li>
-                    <Link onClick={ auth.isAuthenticated ? logoutHandler: ()=> 200 } to={auth.isAuthenticated ? '/' : '/register'}>
-                        {auth.isAuthenticated ? 'Logout' : 'Register'}
-                    </Link>
-                </li>
+            <ul>
+                {
+                    auth.isAuthenticated ?<>
+                    <li><Link to="/statement">Statement</Link></li>
+                    <li><Link to="/wallet">My Wallet</Link></li>
+                    <li><Link to="/setting">Setting</Link></li>
+                    </> : <>
+                    <li>
+                        <Link  to={'/register'}>
+                            {'Register'}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={'/login'}>
+                            {'Login'}
+                        </Link>
+                    </li>
+                    </>
+                }
             </ul>
         </div>
         {

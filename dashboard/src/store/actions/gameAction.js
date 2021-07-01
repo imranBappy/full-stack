@@ -70,3 +70,33 @@ export const gameLodeAction = page => async dispatch =>{
         });
     }
 }
+
+export const gameStatusAction = (game , index, gameArr, length) => async dispatch => {
+    try {
+        game.status === 'Upcoming'? game.status = 'Live' : game.status = 'Upcoming'
+        const newGame = await Axios.patch('/game/game-update', game)
+        gameArr.splice(index, 1, newGame.data.result);
+        dispatch({
+            type: Types.SET_GAME,
+            payload:{
+                game:gameArr,
+                length
+            }
+        })
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message:newGame.data.message,
+                error:newGame.data.error
+            }
+        })
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                error: true,
+                message:'Server side'
+            }
+        });
+    }
+}

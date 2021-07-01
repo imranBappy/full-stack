@@ -17,7 +17,11 @@ exports.gameGetController = async (req, res, next) =>{
     const page = req.query.page || 0;
     try {
         const gameLength = await Game.find({})
-        const game = await Game.find({}).skip(5 * Number(page)).limit(5);
+        const game = await Game.find({}).skip(5 * Number(page)).limit(5).select({
+            __v:0,
+            createdAt:0,
+            updatedAt:0
+        });
         res.json({
             data: game,
             length: gameLength.length
@@ -26,7 +30,26 @@ exports.gameGetController = async (req, res, next) =>{
         next(error)
     }
 }
-
+exports.gameUpdateController = async (req, res, next) =>{
+    try {
+        const updatedGame = await Game.findByIdAndUpdate(req.body._id,{
+            name: req.body.name,
+            status: req.body.status,
+            isActive: req.body.isActive
+        },{ returnOriginal: false },).select({
+            __v:0,
+            createdAt:0,
+            updatedAt:0
+        })
+        res.json({
+            message: 'Game Updated successful',
+            error: false,
+            result: updatedGame
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 exports.gameAllDeleteController = async (req, res, next) =>{
     try {
         await Game.deleteMany({});

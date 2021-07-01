@@ -25,7 +25,6 @@ function User(props) {
     
     const [page, setPage] = useState(Number(query.get('page')));
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    console.log(props._id);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
         history.push(`${props.path}?page=${newPage}`);
@@ -41,6 +40,7 @@ function User(props) {
     useEffect(()=>{
         changePage(page);
     }, []); 
+    
   return (
       <>
       {props.btnName&& <Link style={{ textDecoration: 'none' }} to={props.btnPath}>
@@ -67,7 +67,7 @@ function User(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {props.rows.map( row => {
+                {props.rows.map( (row, i) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                       {columns.map((column) => {
@@ -77,6 +77,15 @@ function User(props) {
                             {
                             column.id === 'club' ? value.clubId :
                             column.id === 'user' ? value.length :
+                            column.id === 'status' ?
+                            <Button 
+                              style={{ width: 110 }}
+                              onClick={()=>props.gameStatusAction(row, i, props.rows,props.length)}
+                              color={value === 'Upcoming' ? 'primary' :"secondary"} 
+                              variant="outlined" >
+                                {value}
+                              </Button>
+                            :
                             column.id === 'sName'? 
                                 value? value.username :'sName' 
                             : value

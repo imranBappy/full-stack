@@ -110,13 +110,14 @@ header{
     margin: 5px;
 }
 .menu ul li{
-    list-style: none;
     display: block;
     border-bottom: 1px solid;
     padding: 13px 5px;
 }
+.menu ul li:hover .menu ul li {
+    background: gray
+}
 .menu ul a{
-    
     text-decoration: none;
     color: black;
 }

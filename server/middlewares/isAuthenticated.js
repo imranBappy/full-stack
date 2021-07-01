@@ -8,7 +8,6 @@ const isAuthenticated = async (req, res, next) =>{
             res.user = decode._id
             next()
         }
-        
     } catch (error) {
         error.status = 401;
         next(error)
