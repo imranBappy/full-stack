@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import gameHatedata from '../../data/game';
-import { gameLodeAction, gameStatusAction } from '../../store/actions/gameAction';
+import { gameLodeAction, gameStatusAction , gameActionAction} from '../../store/actions/gameAction';
 import Table from '../Table/Table';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -31,6 +31,7 @@ const Game = (props) => {
                 path='/game'
                 action = {props.gameLodeAction}
                 gameStatusAction={props.gameStatusAction}
+                gameActionAction={props.gameActionAction}
                 btnName = 'Add Game'
                 btnPath = '/game-add'
            />
@@ -40,4 +41,4 @@ const Game = (props) => {
 const mapStateToProps = state =>({
     game: state.game
 });
-export default connect(mapStateToProps, {gameLodeAction, gameStatusAction})(Game);
+export default connect(mapStateToProps, {gameLodeAction, gameStatusAction, gameActionAction})(Game);

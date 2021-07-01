@@ -77,6 +77,15 @@ function User(props) {
                             {
                             column.id === 'club' ? value.clubId :
                             column.id === 'user' ? value.length :
+                            column.id === 'isActive' ? 
+                            <Button 
+                              style={{ width: 78 }}
+                              onClick={()=>props.gameActionAction(row, i, props.rows,props.length)}
+                              color={value ? 'primary' :"secondary"} 
+                              variant="outlined" >
+                                {value ? 'Show' : 'Hide'}
+                            </Button>:
+                            
                             column.id === 'status' ?
                             <Button 
                               style={{ width: 110 }}
