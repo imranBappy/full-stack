@@ -1,12 +1,11 @@
 import axios from 'axios';
-import store from '../store';
 import * as Types from './types';
 import setAuthHeader from '../../utils/setAuthHeader';
-export const registerAction = (user, histroy) => async dispatch => {
+export const registerAction = (user, history) => async dispatch => {
     delete user.confirmPassword
     try {
         const result = await axios.post('/user/register', user);
-        store.dispatch({
+        dispatch({
             type: Types.SET_ALERT,
             payload:{
                 message: result.data.message ? result.data.message : '',
@@ -19,7 +18,7 @@ export const registerAction = (user, histroy) => async dispatch => {
         });
      
         if (!result.data.error) {
-            histroy.push('/login');
+            history.push('/login');
         }
     } catch (err) {
         dispatch({

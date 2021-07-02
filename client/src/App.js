@@ -7,6 +7,7 @@ const App = () => {
     <>
       <Switch>
         <Layout>
+        
         <Route exact path="/" component={Home} />
         <Route path="/register" component={_Signup} />
         <Route path="/login" component={_Login} />

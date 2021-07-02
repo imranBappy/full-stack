@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Statement from '../../pages/Statement/Statement';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -7,12 +7,21 @@ import Home from '../../pages/Home/Home';
 import _Login from '../../pages/Login/_Login';
 import _Signup from '../../pages/Signup/_Signup';
 import _Wallet from '../../pages/Wallet/_Wallet';
+import Modal from '../Modal/Modal';
+
+export const ModalContext = createContext()
 
 const Layout = (props) => {
+    const [open, setOpen] = useState({
+        display:'none'
+    })
     return (
         <>
-            <Navbar/>
-            {props.children}
+            <ModalContext.Provider value={[open, setOpen]} >
+                <Navbar/>
+                <Modal/>
+                {props.children}
+            </ModalContext.Provider>
         </>
     );
 };

@@ -42,7 +42,15 @@ exports.loginPostController = async (req, res, next)=>{
     const {username, password} = req.body
     try {
         console.log(req.body);
-        const result = await User.find({username: username.trim()});
+        const result = await User.find({username: username.trim()})
+        .populate('club', 'name clubId')
+        .populate('sName', 'name username')
+        .select({
+            password: 0,
+            __v:0,
+            createdAt:0,
+            updatedAt:0
+        })
         const user = result[0];
         if (!user) return res.json({message:'User not found!', error: true})
         const matchPassword = await bcrypt.compare(password, user.password);
@@ -74,12 +82,16 @@ exports.changePasswordPutController = async (req, res, next) =>{
 exports.singleUserGetController = async (req, res, next) =>{
     const {userId} = req.params
     try {
-        const user = await User.findById(userId).select({
+        const user = await User.findById(userId)
+        .populate('club', 'name clubId')
+        .populate('sName', 'name username')
+        .select({
             password: 0,
             __v:0,
             createdAt:0,
             updatedAt:0
-        })
+        });
+
         res.json({
             data:[user]
         })

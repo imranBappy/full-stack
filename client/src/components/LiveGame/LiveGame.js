@@ -1,8 +1,7 @@
 import React from 'react';
 import './LiveGame.css';
 
-const LiveGame = () => {
-
+const LiveGame = ({game}) => {
     const open = (e) =>{
         if (e.target.className.length > 9) {
             e.target.className = 'accordion'
@@ -12,28 +11,35 @@ const LiveGame = () => {
             e.target.nextElementSibling.style = 'max-height:500px'
         }
     }
-
-    
-
     return (
         <div className='container'>
 
-            <div>
-                <button onClick={open} className="accordion">Section 1</button>
+            {
+                game.map((main)=>
+                <div>
+                <h1 onClick={open} className="accordion">{main.name}</h1>
                 <div className="panel" >
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                </div>
-
-                <button onClick={open} className="accordion">Section 1</button>
-                <div className="panel" >
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                    {
+                        main.bets.map(bet=>
+                    <div className="bet">
+                        <h4> <span>{bet.title}</span> </h4>
+                        <div className="bet-container">
+                            {
+                                bet.question? 
+                                bet.question.map(q=>
+                                    <button>{q.question} <span>{q.rate}</span> </button>
+                                    )
+                                :''
+                            }
+                        </div>
+                    </div>
+                    )
+                    }
+                    
                 </div>
             </div>
-
+            )
+            }
             
         </div>
     );

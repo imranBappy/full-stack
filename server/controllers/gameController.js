@@ -30,6 +30,26 @@ exports.gameGetController = async (req, res, next) =>{
         next(error)
     }
 }
+exports.allGameLoadGetController = async (req, res, next) =>{
+    try {
+        const game = await Game.find({isActive: true}).populate({
+            path:'bets',
+            select: 'title',
+            populate:{
+                path:'question',
+                select:'question rate',
+            }
+        }).select({
+            createdAt:0,
+            updatedAt: 0,
+            __v: 0
+        })
+        res.json({game})
+    } catch (error) {
+        next(error)
+    }
+}
+
 exports.gameUpdateController = async (req, res, next) =>{
     try {
         const updatedGame = await Game.findByIdAndUpdate(req.body._id,{

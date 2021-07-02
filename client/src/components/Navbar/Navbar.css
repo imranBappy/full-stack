@@ -56,7 +56,7 @@ div.header>nav>div.container>div.icon-aria>a>img{
     height: 60px;
 }
 
-div.header>nav>div.container>div.icon-aria>a>div.icon{
+div.header>nav>div.container>div.icon-aria>div.icon{
     display: none;
 }
 
@@ -103,7 +103,7 @@ header{
 .menu{
     z-index: 1px;
     width: 100%;
-    display: block;
+
 }
 .menu ul{
     list-style: none;

@@ -1,33 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import { logoutAction } from '../../store/actions/authAction';
 import Alert from '../Alert/Alert';
+import { ModalContext } from '../Layout/Layout';
 import './media.css';
 import './Navbar.css';
 const Navbar = (props) => {
     const {alert, auth} = props;
-    const [style, setStyle] = useState({
-        background: '#fff',
-        check: false
-    })
-
+    const [menu, setMenu] = useState(false)
+    const [, setOpen] = useContext(ModalContext)
     const handleClick = () =>{
-        if (style.check) {
-            setStyle({
-                background: '#fff',
-                check: false
-            })
-        }else{
-            setStyle({
-                display: 'none',
-                transition: '0.5s',
-                background: '#fff',
-                check: true
-            })
-        }
+        setMenu(!menu)
     }
     const [time, setTime] = useState()
     useEffect(()=>{
@@ -35,10 +21,6 @@ const Navbar = (props) => {
             setTime(new Date().toLocaleTimeString())
         }, 1000);
     },[])
-
-    // const logoutHandler = () =>{
-    //     props.logoutAction()
-    // }
     return (
         <>
          <header style={{background:'#fff'}}>
@@ -54,11 +36,13 @@ const Navbar = (props) => {
                             <img src={logo} alt="icon"/>
                         </a>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
+                        <li><Link to="/statement">Statement</Link></li>
+                        <li><Link to="/wallet">My Wallet</Link></li>
+                        <li><Link to="/setting">Setting</Link></li>
                             <li>
                                 <Link to={auth.isAuthenticated ? '/dashboard' : '/login'}>
                                 {auth.isAuthenticated ? 'Dashboard' : 'Login'}
-                            </Link>
+                                </Link>
                             </li>
                             <li><Link to="/register">Signup</Link></li>
                         </ul>
@@ -68,7 +52,6 @@ const Navbar = (props) => {
                                 <img onClick={handleClick} src="https://img.icons8.com/android/24/000000/menu.png"/>
                             </div>
                         <Link to="/">
-                            
                             <img src={logo} alt="icon"/>
                         </Link>
                     </div>
@@ -78,8 +61,8 @@ const Navbar = (props) => {
         {
              auth.isAuthenticated ? 
              <div className="login-aria">
-                <div><Link to="/login">Deposit</Link></div>
-                <div><Link to="/register">Balance: {auth.user.balance}</Link></div>
+                <div><button onClick={()=> setOpen({display: 'block'})} >Deposit</button></div>
+                <div><button >Balance: {auth.user.balance}</button></div>
             </div>
             :
             <div className="login-aria">
@@ -88,7 +71,10 @@ const Navbar = (props) => {
             </div>
          }
          </header>
-         <div className="menu" style={style} >
+         {
+             menu ? 
+         
+         <div className="menu" >
             <ul>
                 {
                     auth.isAuthenticated ?<>
@@ -109,7 +95,8 @@ const Navbar = (props) => {
                     </>
                 }
             </ul>
-        </div>
+        </div>: ''
+        }
         {
             alert.message  && <div className='container'><Alert/></div>
         }  

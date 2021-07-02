@@ -5,13 +5,12 @@ const transactionSchema = new Schema({
         type: Number,
         required: true
     },
-    number:{
-        type: String,
-        required: true
-    },
     type:{
         type: String,
         enum:['personal', 'agent'],
+    },
+    number:{
+        type: String,
         required: true
     },
     method:{
@@ -19,13 +18,18 @@ const transactionSchema = new Schema({
         required: true,
         enum:['bkash', 'rocket', 'nagad']
     },
+    trxId: String,
     transaction:{
         type: String,
         required: true,
         enum:['deposit', 'withdraw']
+    },
+    user:{
+        type: Schema.Types.ObjectId,
+        ref:'user'
     }
 },{timestamps: true})
 
-const Transaction = model('tranaction', transactionSchema);
+const Transaction = model('transaction', transactionSchema);
 
 module.exports = Transaction;

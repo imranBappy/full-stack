@@ -35,7 +35,12 @@ const gameSchema = new Schema({
         trim: true,
         required: true
     },
-
+    bets:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'bet'
+        }
+    ]
 },{timestamps: true});
 
 const Game = model('game', gameSchema);

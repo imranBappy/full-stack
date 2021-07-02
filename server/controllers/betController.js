@@ -1,9 +1,14 @@
 const Bet = require("../models/Bet")
 const Result = require("../models/Result")
+const Game = require("../models/Game")
+
 exports.betTitlePostController = async (req, res, next) =>{
     try {
         const bet = new Bet(req.body)
-        const newBet = await bet.save()
+        const newBet = await bet.save(bet)
+        await Game.findByIdAndUpdate(req.body.game,{
+            $push:{'bets': newBet._id}
+        })
         res.json({_id:newBet._id})
     } catch (error) {
         next(error)
@@ -18,7 +23,7 @@ exports.betAddPostController = async (req, res, next) =>{
             {_id: req.body.bet}, 
             { $push:{ 'question' : data._id} } 
         )
-
+        
         res.json({
             message:'Successfully question created !',
             error: false

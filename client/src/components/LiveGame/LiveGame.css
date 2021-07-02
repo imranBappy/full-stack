@@ -7,7 +7,7 @@
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 20px;
   transition: 0.4s;
 }
 
@@ -32,5 +32,33 @@
   background-color: white;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.3s ease-out;
+}
+.bet>h4{
+  margin:20px 0px 15px 0px;
+}
+.bet>h4>span{
+  border-bottom: 7px groove rgb(255 121 5 / 85%);
+  border-radius: 0 0 50px 50px;
+  padding: 4px 13px 4px 13px;
+}
+
+.bet-container{
+  display: grid;
+  grid-template-columns: minmax(140px, auto) minmax(140px, auto) ;
+  grid-column-gap: 5px;
+}
+.bet-container>button{
+  font-size:15px;
+  border: 2px solid orangered ;
+  color: black;
+  background: #fff;
+  border-radius:10px
+}
+.bet-container>button>span{
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid orangered;
+  border-radius:50%;
+  font-weight:600
 }

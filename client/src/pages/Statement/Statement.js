@@ -1,18 +1,21 @@
 import React from 'react';
 import ScrollBar from '../../components/ScrollBar/ScrollBar';
+import Profile from '../../components/Profile/Profile';
+import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
+
 const Statement = () => {
     const data = [
         {
             name: 'Profile',
-            path:'/profile'
+            path:'/statement'
         },
         {
-            name: 'Profile',
-            path:'/profile'
+            name: 'Bets',
+            path:'/bet'
         },
         {
-            name: 'Profile',
-            path:'/profile'
+            name: 'Traction',
+            path:'/traction'
         },
         {
             name: 'Profile',
@@ -30,7 +33,7 @@ const Statement = () => {
     return (
         <div>
             <ScrollBar data={data}/>
-            <h1>Statement component</h1>
+            <PrivateRoute path='/' component={Profile} />
         </div>
     );
 };

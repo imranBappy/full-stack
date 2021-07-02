@@ -53,8 +53,9 @@
         border: 2px solid;
     }
 
-    .login-aria>div>a{
-        text-decoration: none;
+    .login-aria>div>button{
+        width:250px;
+        background: #fff;
         font-size: 18px;
         padding: 10px 0px;
         color: black;
