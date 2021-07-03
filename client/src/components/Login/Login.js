@@ -22,7 +22,7 @@ const Login = (props) => {
         password:''
     })
     const handleChange = e =>{
-        const name = e.target.name, value = e.target.value
+        const name = e.target.name, value = e.target.value.trim()
         const users = {...user, [name]: value}
         setUser(users)
         if(name === 'username'){

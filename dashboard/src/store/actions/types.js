@@ -5,3 +5,5 @@ export const SET_GAME = 'SET_GAME';
 export const SET_BET = 'SET_BET';
 export const SET_CLUB = 'SET_CLUB';
 export const SET_ADMIN = 'SET_ADMIN';
+export const SET_DEPOSIT = 'SET_DEPOSIT';
+// 

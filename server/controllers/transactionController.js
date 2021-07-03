@@ -1,24 +1,24 @@
 const Transaction = require("../models/Transaction");
-
 exports.transactionPortController = async (req, res, next) =>{
     try {
-        const transaction = new Transaction(req.body)
+        const transaction = new Transaction(req.body);
         await transaction.save()
-        res.json({message: 'Deposited successfully'})
+        res.json({message: 'Deposit Request successfully'})
     } catch (error) {
         next(error)
     }
 };
 
-exports.depositGetController =  async (req, res, next) =>{
-    const {method, page} = req.query;
+exports.transactionGetController =  async (req, res, next) =>{
+    const {transaction, page} = req.query;
+    console.log(req.query);
     const pageNumber =  page || 0 ;
     try {
-        const deposit = Transaction.find({method}).skip(5 * Number(pageNumber)).limit(5).select({
+        const deposit = await Transaction.find({transaction}).skip(5 * Number(pageNumber)).limit(5).select({
             __v:0
         })
         res.json({
-            data: deposit
+            transaction: deposit
         })
     } catch (error) {
         next(error)

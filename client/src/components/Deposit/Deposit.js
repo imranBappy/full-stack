@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import validateNumber from '../../utils/validateNumber';
+import {depositRequestAction} from '../../store/actions/transactionAction';
+import {ModalContext} from '../Layout/Layout';
 import  './deposit.css';
 const Deposit = (props) => {
-    const methods = ['Bkash', 'Rocket', 'Nagad']
+    const methods = ['Bkash', 'Rocket', 'Nagad'];
+    const [, setOpen] = useContext(ModalContext)
     const [deposit, setDeposit] = useState({
         amount: 100,
         trxId: '',
@@ -69,7 +72,19 @@ const Deposit = (props) => {
     const handleSubmit = () =>{
         if (checkValid(deposit, 'deposit')) {
             if (checkValid(error)) {
-                console.log({...deposit, transaction:'deposit', user:props.user._id });
+                props.depositRequestAction({
+                    ...deposit, 
+                    accepted: false, 
+                    transaction:'deposit', 
+                    user:props.user._id 
+                });
+                setDeposit({
+                    amount: 100,
+                    trxId: '',
+                    method:'',
+                    number:'',
+                })
+                setOpen({ display:'none' })
             }
         }
     }
@@ -107,7 +122,7 @@ const Deposit = (props) => {
                 <option value="">Select Method*</option>
                     {
                         methods.map(club=>(
-                            <option key={club} value={club}>{club}</option>
+                            <option key={club} value={club.toLowerCase()}>{club}</option>
                         ))
                     }
             </select>
@@ -121,4 +136,4 @@ const Deposit = (props) => {
 const mapStateToProps = state =>({
     user: state.auth.user
 })
-export default connect(mapStateToProps)(Deposit) ;
+export default connect(mapStateToProps, {depositRequestAction})(Deposit) ;

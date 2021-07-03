@@ -1,9 +1,15 @@
-const { transactionPortController } = require('../controllers/transactionController');
+const { 
+    transactionPortController,
+    transactionGetController
+
+} = require('../controllers/transactionController');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 
 const router = require('express').Router();
 
-router.post('/', isAuthenticated, transactionPortController )
+router.post('/add', isAuthenticated, transactionPortController )
+router.get('/', isAuthenticated, transactionGetController )
+
 // router.get('/')
 
 module.exports = router;

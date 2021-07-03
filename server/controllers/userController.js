@@ -42,17 +42,16 @@ exports.loginPostController = async (req, res, next)=>{
     const {username, password} = req.body
     try {
         console.log(req.body);
-        const result = await User.find({username: username.trim()})
+        const result = await User.find({username})
         .populate('club', 'name clubId')
         .populate('sName', 'name username')
         .select({
-            password: 0,
             __v:0,
             createdAt:0,
             updatedAt:0
         })
         const user = result[0];
-        if (!user) return res.json({message:'User not found!', error: true})
+        if (!result.length) return res.json({message:'User not found!', error: true})
         const matchPassword = await bcrypt.compare(password, user.password);
         if (!matchPassword) return res.json({message:'Password is wrang', error: true})
         const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '24h'})

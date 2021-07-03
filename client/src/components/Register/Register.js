@@ -53,8 +53,12 @@ const Register = (props) => {
 
     const handleChange = e =>{
         const name = e.target.name, value = e.target.value
-        const users = {...user, [name]: value}
-        setUser(users)
+        
+        if (name === 'email' || name === 'phone' || name === 'username' || name === 'password') {
+            setUser({...user, [name]: value.trim()})
+        }else{
+            setUser({...user, [name]: value})
+        }
         if (name === 'name') {
         
             if (value.length > 2 && value.length < 20) {

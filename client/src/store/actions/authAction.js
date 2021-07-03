@@ -16,7 +16,7 @@ export const registerAction = (user, history) => async dispatch => {
             type: Types.SET_USER,
             payload: user,
         });
-     
+    
         if (!result.data.error) {
             history.push('/login');
         }
