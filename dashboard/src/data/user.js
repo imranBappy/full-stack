@@ -25,6 +25,11 @@ const columns = () =>([
     minWidth: 170,
     format: (value) => value.toLocaleString('en-US'),
   },
+  { 
+    id: 'active', 
+    label: 'Action', 
+    minWidth: 100 ,
+  },
   { id: 'club', label: 'Club', minWidth: 170 },
 ]);
 

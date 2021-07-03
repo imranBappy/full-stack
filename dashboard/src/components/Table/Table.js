@@ -3,6 +3,8 @@ import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, 
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import useQuery from '../../utils/useQuery';
+
 import './table.css';
 const useStyles = makeStyles({
   root: {
@@ -12,14 +14,11 @@ const useStyles = makeStyles({
     maxHeight: 440,
   },
 });
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 
 function User(props) {
     const classes = useStyles();
     const { columns } = props;
-    let query = useQuery();
+    let query = useQuery(useLocation);
     const history = useHistory()
     let { gameId } = useParams()
     
@@ -75,8 +74,36 @@ function User(props) {
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {
-                            column.id === 'club' ? value.clubId :
-                            column.id === 'user' ? value.length :
+                              column.id === 'club' ? value.clubId :
+                              column.id === 'user' ? value.username :
+                              column.id === 'createdAt' ? new Date(value).toLocaleString() :
+                              column.id === 'UsersUsername' ? row.user.username :
+                              column.id === 'status' && props.path === '/deposit' ?
+                            value === 'Pending'?
+                              <>
+                                <Button 
+                                  style={{ width: 100,marginRight:5 }}
+                                  color={"primary"} 
+                                  onClick={()=>props.acceptHandler({...row, status: 'Accepted'}, i, props.rows, props.length, row.status)}
+                                  variant={"outlined"}>
+                                    {value === 'Pending' ? 'Accept' :'Accepted'}
+                                </Button> 
+                                <Button 
+                                  style={{ width: 100 }}
+                                  color={'secondary'} 
+                                  onClick={()=>props.acceptHandler({...row, status: 'Rejected'}, i, props.rows,props.length, row.status)}
+                                  variant={'outlined'}>
+                                    {value=== 'Pending' ? 'Reject' :'Rejected'}
+                                </Button> 
+                              </>
+                            :<Button 
+                              style={{ width: 100 }}
+                              color={value=== 'Accepted' ? 'primary' :'secondary'} 
+                              onClick={()=>props.acceptHandler(row, null, null,null , row.status)}
+                              variant={'contained'}>
+                                {value=== 'Accepted' ? 'Accepted' :'Rejected'}
+                            </Button> 
+                            :
                             column.id === 'isActive' ? 
                             <Button 
                               style={{ width: 78 }}
@@ -85,8 +112,7 @@ function User(props) {
                               variant="outlined" >
                                 {value ? 'Show' : 'Hide'}
                             </Button>:
-                            
-                            column.id === 'status' ?
+                            column.id === 'status' && props.path=== '/game' ?
                             <Button 
                               style={{ width: 110 }}
                               onClick={()=>props.gameStatusAction(row, i, props.rows,props.length)}
@@ -94,12 +120,19 @@ function User(props) {
                               variant="outlined" >
                                 {value}
                               </Button>
+                            :column.id === 'active' && props.path === '/user' ? 
+                              <Button
+                                style={{ width: 100 }}
+                                onClick={()=>props.userAction({...row , active: !row.active}, i, props.rows,props.length)}
+                                color={value ? 'primary' :"secondary"} 
+                                variant="outlined" >
+                                  {value? 'Active': 'Inactive'}
+                              </Button>
                             :
                             column.id === 'sName'? 
-                                value? value.username :'sName' 
+                                value? value.username :'null' 
                             : value
                             }
-                          {/* {column.format && typeof value === 'number' ? column.format(value) } */}
                             {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?betId=${row._id}&Id=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
                           </TableCell>
                         );

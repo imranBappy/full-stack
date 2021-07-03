@@ -1,14 +1,15 @@
 import React from 'react';
 import './LiveGame.css';
 
-const LiveGame = ({game}) => {
+const Game = ({game, style, classNames}) => {
     const open = (e) =>{
         if (e.target.className.length > 9) {
+            console.log(true);
             e.target.className = 'accordion'
             e.target.nextElementSibling.style = 'max-height:0'
         }else{
             e.target.className = 'accordion active'
-            e.target.nextElementSibling.style = 'max-height:500px'
+            e.target.nextElementSibling.style = 'max-height:500px';
         }
     }
     return (
@@ -17,8 +18,8 @@ const LiveGame = ({game}) => {
             {
                 game.map((main)=>
                 <div>
-                <h1 onClick={open} className="accordion">{main.name}</h1>
-                <div className="panel" >
+                <h1 onClick={open} className={classNames}>{main.name}</h1>
+                <div className="panel" style={style} >
                     {
                         main.bets.map(bet=>
                     <div className="bet">
@@ -45,4 +46,4 @@ const LiveGame = ({game}) => {
     );
 };
 
-export default LiveGame;
+export default Game;

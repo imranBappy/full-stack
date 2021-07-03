@@ -28,6 +28,10 @@ const userSchema = new Schema({
         required: true,
         minlength:5,
     },
+    active:{
+        type: Boolean,
+        required: true,
+    },
     sName:{
         type: Schema.Types.ObjectId,
         ref: 'user',

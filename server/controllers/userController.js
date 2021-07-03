@@ -22,7 +22,7 @@ exports.registerPostController = async (req, res, next) =>{
             }else{
                 req.body.sName = sName[0]._id;
             }
-        const user = new User(req.body);
+        const user = new User({...req.body, active: true});
         const newUser = await user.save();
         await Club.findByIdAndUpdate(req.body.club,{
             $push:{'user': newUser._id}
@@ -33,7 +33,6 @@ exports.registerPostController = async (req, res, next) =>{
             data:[]
         })
     } catch (error) {
-        console.log(error);
         next(error)
     }
 }
@@ -41,7 +40,6 @@ exports.registerPostController = async (req, res, next) =>{
 exports.loginPostController = async (req, res, next)=>{
     const {username, password} = req.body
     try {
-        console.log(req.body);
         const result = await User.find({username})
         .populate('club', 'name clubId')
         .populate('sName', 'name username')
@@ -53,7 +51,8 @@ exports.loginPostController = async (req, res, next)=>{
         const user = result[0];
         if (!result.length) return res.json({message:'User not found!', error: true})
         const matchPassword = await bcrypt.compare(password, user.password);
-        if (!matchPassword) return res.json({message:'Password is wrang', error: true})
+        if (!matchPassword) return res.json({message:'Password is wrang', error: true});
+        if (!user.active) return res.json({message:'You account is disabled !', error: true})
         const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '24h'})
         res.json({
             message:'User Login Successful! ',
@@ -119,6 +118,25 @@ exports.allUserGetController = async (req, res, next) =>{
             users: user,
             length: arr.length
         })
+    } catch (error) {
+        next(error)
+    }
+}
+exports.userUpdateController = async (req, res, next) =>{
+    try {
+        const updateUser = await User.findByIdAndUpdate(req.body._id,{
+            club: req.body.club,
+            balance: req.body.balance,
+            active: req.body.active
+        },{new: true})
+        .populate('sName', 'username')
+        .populate('club', 'clubId')
+        .select({createdAt:0, updatedAt:0, password: 0, __v:0});
+        res.json({
+            message: `${updateUser.name} ${updateUser.active? 'Active': 'Inactive'} Successfully!`,
+            error: false,
+            user: updateUser
+        });
     } catch (error) {
         next(error)
     }

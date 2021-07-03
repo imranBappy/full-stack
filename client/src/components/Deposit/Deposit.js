@@ -74,7 +74,7 @@ const Deposit = (props) => {
             if (checkValid(error)) {
                 props.depositRequestAction({
                     ...deposit, 
-                    accepted: false, 
+                    status: 'Pending', 
                     transaction:'deposit', 
                     user:props.user._id 
                 });

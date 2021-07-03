@@ -24,9 +24,10 @@ const transactionSchema = new Schema({
         required: true,
         enum:['deposit', 'withdraw']
     },
-    accepted:{
-        type: Boolean,
-        required: true
+    status:{
+        type: String,
+        required: true,
+        enum:['Accepted', 'Pending', 'Rejected']
     },
     user:{
         type: Schema.Types.ObjectId,

@@ -6,12 +6,11 @@ import { useLocation } from 'react-router-dom';
 import gameHatedata from '../../data/game';
 import { gameLodeAction, gameStatusAction , gameActionAction} from '../../store/actions/gameAction';
 import Table from '../Table/Table';
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+import useQuery from '../../utils/useQuery';
+
 const Game = (props) => {
     
-    let query = useQuery();
+    let query = useQuery(useLocation);
     const [gameHate , setGameHate] = useState([]);
     useEffect(()=>{
         setGameHate(gameHatedata())

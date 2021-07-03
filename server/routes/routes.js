@@ -13,7 +13,6 @@ const routes = [
     {path:'/game', router: gameRoute},
     {path:'/bet', router: betRoute},
     {path:'/club', router: clubRoute},
-
 ];
 
 const setRoutes = app =>{
