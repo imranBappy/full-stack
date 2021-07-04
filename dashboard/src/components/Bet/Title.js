@@ -19,7 +19,7 @@ const Title = (props) => {
     let query = useQuery();
     
     useEffect(()=>{
-        axios.get(`/bet/single-bet-get?betId=${query.get('Id')}`).then(res=>{
+        axios.get(`/bet/single-bet-get?betId=${query.get('betId')}`).then(res=>{
             if (res.data.bet) {
                 setGame(res.data.bet)
             }
@@ -83,8 +83,8 @@ const Title = (props) => {
                 style={{ marginTop: '20px' }}
                 fullWidth color="secondary"
                 variant="contained"
-                onClick={query.get('Id') ? handleUpdate : handelSubmit}
-            > {query.get('Id')? 'Update': 'Add Bet' }</Button>
+                onClick={query.get('betId') ? handleUpdate : handelSubmit}
+            > {query.get('betId')? 'Update': 'Add Bet' }</Button>
         </>
     );
 };

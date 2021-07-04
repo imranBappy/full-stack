@@ -1,6 +1,6 @@
 const { 
     betTitlePostController, 
-    betAddPostController, 
+    resultAddPostController, 
     allBetGetController ,
     titleAllDeleteController, 
     betAllDeleteController, 
@@ -14,7 +14,7 @@ const isAdmin = require('../middlewares/isAdmin')
 const router = require('express').Router()
 
 router.post('/post-title', isAdmin, betTitlePostController,  );
-router.post('/add-bet', isAdmin, betAddPostController);
+router.post('/add-bet', isAdmin, resultAddPostController);
 router.get('/get-all-bet', isAdmin, allBetGetController);
 router.get('/get-single-bet', isAdmin, singleBetGetController );
 router.get('/single-bet-get', isAdmin, betSingleGetController );

@@ -2,11 +2,11 @@ import * as Types from './types';
 
 import Axios from 'axios';
 
-export const betAction  = (game, history) => async dispatch =>{
+export const betAction  = (bet, history) => async dispatch =>{
     try {
-        const result  = await Axios.post(`/bet/post-title`, game)
+        const result  = await Axios.post(`/bet/post-title`, bet)
         if (result.data._id) {
-            history.push(`/bet-add/${game.game}?bet=${result.data._id}`)
+            history.push(`/bet-add/${bet.game}?betId=${result.data._id}`)
             dispatch({
                 type: Types.SET_ALERT,
                 payload: {

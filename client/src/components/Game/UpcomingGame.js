@@ -4,11 +4,19 @@ import Game from './Game';
 const UpcomingGame = (props) => {
     return (
         <>
-           <Game
-            game={props.game}
-            state={{}}
-            classNames='accordion'
-           />
+           {
+            props.game.length ? 
+            <Game
+                game={props.game}
+                style={{}}
+                classNames='accordion'
+            />:
+            <p style={{
+                textAlign: 'center',
+                 color: 'gray', margin: 20,
+                 fontSize: 25
+         }} >Upcoming Game Not Found!</p>
+        }
         </>
     );
 };

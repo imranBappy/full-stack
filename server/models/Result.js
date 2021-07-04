@@ -10,6 +10,15 @@ const resultSchema = new Schema({
         type: Number,
         required: true
     },
+    status:{
+        type: String,
+        required: true,
+        enum:['Pending', 'Win', 'Loss']
+    },
+    show:{
+        type: Boolean,
+        required: true,
+    },
     game:{
         type: Schema.Types.ObjectId,
         ref:'game',
@@ -20,7 +29,7 @@ const resultSchema = new Schema({
         ref:'bet',
         required: true
     }
-});
+},{timestamps: true});
 
 const Result = model('result', resultSchema);
 module.exports = Result;

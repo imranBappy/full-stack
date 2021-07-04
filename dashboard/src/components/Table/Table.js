@@ -15,13 +15,13 @@ const useStyles = makeStyles({
   },
 });
 
-function User(props) {
+function InfoTable(props) {
     const classes = useStyles();
     const { columns } = props;
     let query = useQuery(useLocation);
     const history = useHistory()
     let { gameId } = useParams()
-    
+    console.log(props.rows);
     const [page, setPage] = useState(Number(query.get('page')));
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const handleChangePage = (event, newPage) => {
@@ -39,7 +39,6 @@ function User(props) {
     useEffect(()=>{
         changePage(page);
     }, []); 
-    
   return (
       <>
       {props.btnName&& <Link style={{ textDecoration: 'none' }} to={props.btnPath}>
@@ -133,7 +132,7 @@ function User(props) {
                                 value? value.username :'null' 
                             : value
                             }
-                            {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?betId=${row._id}&Id=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
+                            {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?resultId=${row._id}&betId=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
                           </TableCell>
                         );
                       })}
@@ -160,4 +159,4 @@ function User(props) {
   );
 }
 
-export default User ;
+export default InfoTable ;

@@ -6,6 +6,10 @@ const betSchema = new Schema({
         trim: true,
         required: true
     },
+    show:{
+        type: Boolean,
+        required: true
+    },
     question:[
         {
             type: Schema.Types.ObjectId,

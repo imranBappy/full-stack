@@ -4,8 +4,8 @@ const Game = require("../models/Game")
 
 exports.betTitlePostController = async (req, res, next) =>{
     try {
-        const bet = new Bet(req.body)
-        const newBet = await bet.save(bet)
+        const bet = new Bet({...req.body, show: true})
+        const newBet = await bet.save()
         await Game.findByIdAndUpdate(req.body.game,{
             $push:{'bets': newBet._id}
         })
@@ -15,9 +15,9 @@ exports.betTitlePostController = async (req, res, next) =>{
     }
 }
 
-exports.betAddPostController = async (req, res, next) =>{
+exports.resultAddPostController = async (req, res, next) =>{
     try {
-        const newResult = new Result(req.body)
+        const newResult = new Result({...req.body, show: true, status: 'Pending'})
         const data = await newResult.save();
         await Bet.findOneAndUpdate(
             {_id: req.body.bet}, 

@@ -17,8 +17,10 @@ const Game = ({game, style, classNames}) => {
 
             {
                 game.map((main)=>
-                <div>
-                <h1 onClick={open} className={classNames}>{main.name}</h1>
+                <div style={{marginBottom:5, border:'1px solid orangered'}}>
+                <h1 onClick={open} className={classNames}>
+                    {`${main.country1} VS ${main.country2} ${main.name}`}
+                </h1>
                 <div className="panel" style={style} >
                     {
                         main.bets.map(bet=>

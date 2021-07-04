@@ -8,44 +8,39 @@ import { Link, useLocation} from 'react-router-dom';
 import Title from './Title';
 import axios from 'axios';
 import { alertAction } from '../../store/actions/alertAction';
+import useQuery from '../../utils/useQuery';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-  
 const AddBet = (props) => {
     let { gameId } = useParams();
-    let query = useQuery();
+    let query = useQuery(useLocation);
     const [game, setGame] = useState({
         game: gameId,
         question:'',
         rate:'',
-        bet: ''
+        bet: query.get("betId") ? query.get("betId"): ''
     })
-
+    
     useEffect(() =>{
-        axios.get(`/bet/get-single-bet?betId=${query.get("betId")}`).then(res =>{
-            if (res.data.bet) {
-                setGame(res.data.bet);
-            }
-        });
+        if (query.get("resultId")) {
+            axios.get(`/bet/get-single-bet?betId=${query.get("resultId")}`).then(res =>{
+                console.log(res.data.bet);
+                if (res.data.bet) {
+                    setGame(res.data.bet);
+                }
+            });
+        }
     },[]);
 
     const [isValid, setIsValid] = useState(true)
     const handelChange = e => {
         let name = e.target.name, value = e.target.value
-        setGame({ ...game, [name]: value });
+        setGame({ ...game, [name]: value, bet:query.get("betId") ? query.get("betId"):'' });
     };
   
     const checkValid = () =>{
-        if (!game.bet) {
-            setGame({ ...game, bet: query.get("bet") ? query.get("bet") : ''});
-        }
-        
         for (const key in game) {
             const element = game[key];
             if (!element) {
-                console.log(element);
                 setIsValid(false)
                 return false
             }
@@ -61,6 +56,7 @@ const AddBet = (props) => {
     };
 
     const handelSubmit = () =>{
+        setGame({ ...game, bet:query.get("betId") ? query.get("betId"):'' });
         if (checkValid()) {
             setIsValid(true);
             props.resultAction(game);  
@@ -115,8 +111,8 @@ const AddBet = (props) => {
                             style={{ marginTop: '20px' }}
                             fullWidth color="primary"
                             variant="contained"
-                            onClick={query.get("betId")? handleUpdate : handelSubmit}
-                        > { query.get("betId")? 'Update' : 'Add question' }</Button>
+                            onClick={query.get("resultId")? handleUpdate : handelSubmit}
+                        > { query.get("resultId")? 'Update' : 'Add question' }</Button>
                     </Grid>
                 </Grid>
             </div>
