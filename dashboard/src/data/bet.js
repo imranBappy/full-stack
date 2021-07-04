@@ -14,6 +14,11 @@ const columns = () =>([
         label: 'Option', 
         minWidth: 100 ,
     },
+    { 
+        id: 'show', 
+        label: 'Show', 
+        minWidth: 100 ,
+    },
 ]);
   
   export default columns

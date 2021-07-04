@@ -49,7 +49,6 @@ export const depositAcceptAction = (deposit,index, rows, length, status) => asyn
         })
         
     } catch (error) {
-        console.log(error);
         dispatch({
             type: Types.SET_ALERT,
             payload:{

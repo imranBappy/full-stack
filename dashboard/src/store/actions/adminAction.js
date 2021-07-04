@@ -12,7 +12,10 @@ export const adminAddAction = (admin) => async dispatch => {
             }
         });
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 };
 
@@ -26,6 +29,9 @@ export const loadAdminAction = () => async dispatch => {
             }
         });
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }

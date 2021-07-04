@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Table from '../Table/Table';
 import { connect } from 'react-redux';
-import { loadAllBet } from '../../store/actions/betAction';
+import { loadAllBet, betActionAction } from '../../store/actions/betAction';
 import bet from '../../data/bet';
 import { Button } from '@material-ui/core';
 
@@ -26,7 +26,12 @@ const Bet = (props) => {
             props.bet.length ? 
             props.bet.map((bet,i) =><div key={bet._id} >
                 <h1 align="center" >{bet.title}</h1>
-                <Button color="primary" variant="outlined" style={{marginRight: 10, width: 110}} >Acton</Button>
+                <Button 
+                    onClick={()=> props.betActionAction({...bet, show: !bet.show}, i, props.bet)}
+                    color={bet.show ? 'primary' : 'secondary' }
+                    variant="outlined" 
+                    style={{marginRight: 10, width: 110}} 
+                    >{bet.show ? 'Active' : 'Inactive' }</Button>
                 <Table
                     _id={bet._id}
                     columns = {columns}
@@ -55,4 +60,4 @@ const Bet = (props) => {
 const mapStateToProps = state =>({
     bet:state.bet.bet
 })
-export default connect(mapStateToProps, {loadAllBet})(Bet);
+export default connect(mapStateToProps, {loadAllBet, betActionAction})(Bet);

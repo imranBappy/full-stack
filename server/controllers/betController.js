@@ -110,12 +110,20 @@ exports.betSingleGetController = async (req, res, next) => {
 }
 exports.betUpdateController = async (req, res, next) => {
     try {
-        await Bet.findByIdAndUpdate(req.body._id,{
-            title: req.body.title
+        const bet = await Bet.findByIdAndUpdate(req.body._id,{
+            title: req.body.title,
+            show: req.body.show
+        },{new: true})
+        .populate('question', 'question rate')
+        .select({
+            __v: 0,
+            updatedAt:0,
+            createdAt: 0,
         })
         res.json({
             message: 'Bet updated successfully',
-            error: false
+            error: false,
+            bet
         })
     } catch (error) {
         next(error);

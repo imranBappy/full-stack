@@ -16,7 +16,10 @@ export const betAction  = (bet, history) => async dispatch =>{
             })
         }
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }
 
@@ -31,7 +34,10 @@ export const resultAction = (question) => async dispatch => {
             }
         })
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }
 
@@ -45,6 +51,42 @@ export const loadAllBet = (gameId) => async dispatch => {
             }
         })
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
+    }
+}
+
+export const betActionAction = (bet, index, bets) => async dispatch => {
+    try {
+        const response = await Axios.put(`/bet/bet-update`, bet);
+        if (response.data.error) return dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: response.data.message,
+                error: response.data.error
+            }
+        });
+        bets.splice(index, 1, response.data.bet);
+        dispatch({
+            type: Types.SET_BET,
+            payload: {
+                bet: bets
+            }
+        })
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: response.data.message,
+                error: response.data.error
+            }
+        });
+        
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }

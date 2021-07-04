@@ -13,7 +13,10 @@ export const clubAction = club => async dispatch =>{
             }
          })
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }
 
@@ -28,6 +31,9 @@ export const loadAllClub = (page) => async dispatch => {
             }
         })
     } catch (error) {
-        
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:'Server side error'
+        })
     }
 }

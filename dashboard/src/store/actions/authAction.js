@@ -40,7 +40,7 @@ export const authAction = (user, history) => async dispatch =>{
 }
 
 export const logoutAction = ()=> dispatch =>{
-    dispatch({
+        dispatch({
             type: Types.SET_AUTH,
             payload:{
                 auth: false,
