@@ -34,7 +34,10 @@ export const authAction = (user, history) => async dispatch =>{
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }

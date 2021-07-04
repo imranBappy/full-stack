@@ -18,7 +18,10 @@ export const betAction  = (bet, history) => async dispatch =>{
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }
@@ -36,7 +39,10 @@ export const resultAction = (question) => async dispatch => {
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }
@@ -53,7 +59,10 @@ export const loadAllBet = (gameId) => async dispatch => {
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }
@@ -86,7 +95,39 @@ export const betActionAction = (bet, index, bets) => async dispatch => {
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
+        })
+    }
+}
+export const resultShowAction = (result, resultIndex, bet, index, bets) => async dispatch => {
+    try {
+        const res = await Axios.put(`/bet/result-update`,result )
+        bet.question.splice(resultIndex,1, res.data.result)
+        bets.splice(index,1, bet);
+        dispatch({
+            type: Types.SET_BET,
+            payload: {
+                bet: bets
+            }
+        });
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: res.data.message,
+                error:res.data.error
+            }
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }

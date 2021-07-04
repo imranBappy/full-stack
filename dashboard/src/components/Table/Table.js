@@ -69,7 +69,7 @@ function InfoTable(props) {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                       {columns.map((column) => {
-                        const value = row[column.id];
+                        const value = row[column.id]
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {
@@ -78,7 +78,7 @@ function InfoTable(props) {
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :
                               column.id === 'UsersUsername' ? row.user.username :
                               column.id === 'status' && props.path === '/deposit' ?
-                            value === 'Pending'?
+                              value === 'Pending'?
                               <>
                                 <Button 
                                   style={{ width: 100,marginRight:5 }}
@@ -123,6 +123,17 @@ function InfoTable(props) {
                               <Button
                                 style={{ width: 100 }}
                                 onClick={()=>props.userAction({...row , active: !row.active}, i, props.rows,props.length)}
+                                color={value ? 'primary' :"secondary"} 
+                                variant="outlined" >
+                                  {value? 'Active': 'Inactive'}
+                              </Button>
+                            :column.id === 'show' && props.path === '/bet' ? 
+                            <Button
+                                onClick={()=>props.resultShowAction(
+                                  {...row, show: !row.show},
+                                  i, props.bet, props.index, props.bets,
+                                  )}
+                                style={{ width: 100 }}
                                 color={value ? 'primary' :"secondary"} 
                                 variant="outlined" >
                                   {value? 'Active': 'Inactive'}

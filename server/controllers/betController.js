@@ -36,7 +36,7 @@ exports.resultAddPostController = async (req, res, next) =>{
 exports.allBetGetController = async (req, res, next) =>{
     try {
         const {gameId} = req.query;
-        const allBet = await Bet.find({game: gameId}).populate('question', 'question rate ')
+        const allBet = await Bet.find({game: gameId}).populate('question', 'question rate show')
         res.json({
             data: allBet
         })
@@ -79,13 +79,15 @@ exports.singleBetGetController = async (req, res, next) =>{
 }
 exports.resultUpdateController = async (req, res, next) =>{
     try {
-        await Result.findByIdAndUpdate(req.body._id,{
+        const updatedResult = await Result.findByIdAndUpdate(req.body._id,{
             question: req.body.question,
-            rate: req.body.rate   
-        })
+            rate: req.body.rate,
+            show: req.body.show
+        },{new: true})
         res.json({
             message: 'Question updated successfully',
-            error: false
+            error: false,
+            result:updatedResult
         })
     } catch (error) {
         console.log(error);
@@ -114,7 +116,7 @@ exports.betUpdateController = async (req, res, next) => {
             title: req.body.title,
             show: req.body.show
         },{new: true})
-        .populate('question', 'question rate')
+        .populate('question', 'question rate show')
         .select({
             __v: 0,
             updatedAt:0,

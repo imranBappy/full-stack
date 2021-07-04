@@ -14,7 +14,10 @@ export const adminAddAction = (admin) => async dispatch => {
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 };
@@ -31,7 +34,10 @@ export const loadAdminAction = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: Types.SET_ALERT,
-            payload:'Server side error'
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
         })
     }
 }
