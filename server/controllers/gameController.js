@@ -34,10 +34,10 @@ exports.allGameLoadGetController = async (req, res, next) =>{
     try {
         const game = await Game.find({isActive: true}).populate({
             path:'bets',
-            select: 'title',
+            select: 'title show',
             populate:{
                 path:'question',
-                select:'question rate',
+                select:'question rate show',
             }
         }).select({
             createdAt:0,
