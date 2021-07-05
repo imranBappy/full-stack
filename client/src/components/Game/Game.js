@@ -1,7 +1,7 @@
 import React from 'react';
 import './LiveGame.css';
 
-const Game = ({game, style, classNames}) =>{
+const Game = ({game, style, classNames,  handleModel}) =>{
     const open = (e) =>{
         if (e.target.className.length > 9) {
             console.log(true);
@@ -34,7 +34,11 @@ const Game = ({game, style, classNames}) =>{
                                                 bet.question && bet.question.map(q=>{
                                                     return (
                                                         <>
-                                                            {q.show && <button key={q._id}>{q.question} <span>{q.rate}</span> </button>}
+                                                            {q.show && <button 
+                                                                onClick={()=>handleModel(main._id, bet._id, q._id ) }
+                                                                key={q._id}>{q.question} 
+                                                                <span>{q.rate}</span> 
+                                                                </button>}
                                                         </>
                                                     )
                                                 }) 

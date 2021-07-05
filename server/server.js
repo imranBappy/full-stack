@@ -7,20 +7,30 @@ const app = express();
 
 // setMiddleware
 setMiddleware(app);
-
+app.use((req,res,next)=>{
+ console.log(`method = ${req.method}
+link = ${req.headers.referer}
+origin = ${req.headers.origin}/${req.url}
+`);
+    next()
+})
 // setRoute
 
 setRoutes(app);
 mongoose.set('useFindAndModify', false);
 
 app.use((req,res,next)=>{
+    console.log(`method = ${req.method}
+    link = ${req.headers.referer}
+    origin = ${req.headers.origin}/${req.url}
+    `);
     const error = new Error('404 Page Not Found!');
     error.status = 404;
     next(error);
 });
 
 app.use((error, req, res, next)=>{
-    console.log(error);
+    // console.log(error)
     switch (error.status) {
         case 404:
             return res.json({

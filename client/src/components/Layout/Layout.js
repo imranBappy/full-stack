@@ -10,18 +10,28 @@ import _Wallet from '../../pages/Wallet/_Wallet';
 import Modal from '../Modal/Modal';
 
 export const ModalContext = createContext()
+export const BetContext = createContext()
 
 const Layout = (props) => {
     const [open, setOpen] = useState({
-        display:'none'
+        display:'none',
+        component:'deposit'
+    });
+    const [bet, setBet] = useState({
+        amount:100,
+        game:'',
+        bet:'',
+        result:'',
     })
     return (
         <>
-            <ModalContext.Provider value={[open, setOpen]} >
-                <Navbar/>
-                <Modal/>
-                {props.children}
-            </ModalContext.Provider>
+            <BetContext.Provider value={[bet, setBet]}>
+                <ModalContext.Provider value={[open, setOpen]} >
+                    <Navbar/>
+                    <Modal/>
+                    {props.children}
+                </ModalContext.Provider>
+            </BetContext.Provider>
         </>
     );
 };

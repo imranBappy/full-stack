@@ -1,11 +1,12 @@
 import React from 'react';
 import './LiveGame.css';
 import Game from './Game';
-const LiveGame = ({game}) => {
+const LiveGame = ({game, handleModel}) => {
     return (
         <>{
             game.length ? 
             <Game
+                handleModel={handleModel}
                 game={game}
                 style={{maxHeight:500}}
                 classNames='accordion active'

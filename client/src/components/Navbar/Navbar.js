@@ -20,7 +20,8 @@ const Navbar = (props) => {
         setInterval(() => {
             setTime(new Date().toLocaleTimeString())
         }, 1000);
-    },[])
+    },[]);
+    
     return (
         <>
          <header style={{background:'#fff'}}>
@@ -61,7 +62,7 @@ const Navbar = (props) => {
         {
              auth.isAuthenticated ? 
              <div className="login-aria">
-                <div><button onClick={()=> setOpen({display: 'block'})} >Deposit</button></div>
+                <div><button onClick={()=> setOpen({display: 'block', component:'deposit'})} >Deposit</button></div>
                 <div><button >Balance: {auth.user.balance}</button></div>
             </div>
             :

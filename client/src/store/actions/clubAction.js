@@ -10,6 +10,11 @@ export const clubAction = () => async dispatch =>{
             }
         })
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: Types.SET_ALERT,
+            payload: {
+                message:'There was an error', error: true
+            }
+        })
     }
 }

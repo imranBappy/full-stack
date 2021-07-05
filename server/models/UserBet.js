@@ -4,9 +4,18 @@ const userBetSchema = new Schema({
         type: Number,
         required: true
     },
+    win:{
+        type: Boolean,
+        required: true
+    },
     game:{
         type: Schema.Types.ObjectId,
         ref:'game',
+        required: true
+    },
+    bet:{
+        type: Schema.Types.ObjectId,
+        ref:'bet',
         required: true
     },
     result:{
@@ -22,6 +31,6 @@ const userBetSchema = new Schema({
 
 },{timestamps: true})
 
-const UserBet = model('bet', userBetSchema);
+const UserBet = model('userBet', userBetSchema);
 module.exports = UserBet;
 
