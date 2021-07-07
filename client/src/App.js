@@ -16,10 +16,6 @@ const App = () => {
         <PrivateRoute path="/dashboard">
           <Dashboard/>
         </PrivateRoute>
-        {/* 
-        <Route path="*">
-          <h1>Page not found</h1>
-        </Route> */}
         </Layout>
       </Switch>
     </>

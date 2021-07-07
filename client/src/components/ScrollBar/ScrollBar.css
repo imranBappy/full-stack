@@ -28,14 +28,15 @@
     min-width: 100px;
     margin: 2px;
 }
-.scroll-bar>ul>li>button{
+.scroll-bar>ul>li>a>button{
     width: 100%;
     padding: 5px;
-    background: gray;
-    border: 1 px solid;
+    color: #000;
+    background: #fff;
+    border: 2px solid orangered;
     border-radius: 5px;
 }
-.scroll-bar>ul>li>button>a{
+.scroll-bar>ul>li>a{
   text-decoration: none;
   color:black
 }
@@ -43,10 +44,8 @@
     .scroll-bar{
         list-style: none;
         overflow: auto;
-        /* background-color: #7d5252!important ;  */
     }
     .scroll-bar>ul>li{
         color:red
     }
-    
 }

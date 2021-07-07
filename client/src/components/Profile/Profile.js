@@ -16,7 +16,7 @@ const Profile = ({profile}) => {
                 <p> {profile.sName? `${profile.sName.name} ( ${profile.sName.username} ) `  : 'sName: null'} </p>
                 <p> {profile.club? `${profile.club.name} ( ${profile.club.clubId} ) `  : 'Club: null'}</p>
 
-                <p><button>Update</button></p>
+                <p><button>Profile</button></p>
             </div>
         </div>
     );

@@ -8,9 +8,10 @@ const ScrollBar = (props) => {
             <ul>
                 {
                     props.data.map((i, n)=><li key={i.path+n}>
-                            <button>
-                                <Link to={i.path}>{i.name}</Link>
-                            </button>
+                            
+                                <Link to={i.path}>
+                                <button>{i.name}</button>
+                                </Link>
                         </li>
                     )
                 }

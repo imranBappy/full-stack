@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import  './Table.css';
 import useQuery from '../../utils/useQuery';
 import { useLocation, useHistory} from 'react-router-dom';
-const Table = ({columns, rows, action}) => {
+const Table = ({columns, rows, action, path}) => {
+    console.log({columns, rows});
     const query = useQuery(useLocation);
     const history = useHistory()
     const [page, setPage] = useState(0);
     useEffect(()=>{
         if (query.get('page'))setPage(Number(query.get('page')));
-        action(page)
     },[])
     const handlePage = (type) =>{
         console.log(type);
@@ -51,7 +51,7 @@ const Table = ({columns, rows, action}) => {
                                                 column.id === 'bet' ? value.title :
                                                 column.id === 'result' ? value.question :
                                                 column.id === 'rate' ? row.result.rate :
-                                                column.id === 'status' ? row.result.status  :
+                                                column.id === 'status' && path ==='/bet' ? row.result.status  :
                                                 value
                                                 }</td>)
                                         })
@@ -60,8 +60,9 @@ const Table = ({columns, rows, action}) => {
                             )
                         })
                     }
-                </table>
-                <div className='pagination'>
+                    <tr>
+                        <td colspan={columns.length} className="pagination-td">
+                        <div className='pagination'>
                     <div>
                         <p className='page'>{page+1}-5 of 9</p>
                     </div>
@@ -71,12 +72,17 @@ const Table = ({columns, rows, action}) => {
                         onClick={()=>handlePage('previous')}
                         className="previous">Previous</button>
                      </div>
-                    <div>
-                        <button 
-                        onClick={()=>handlePage('next')}
-                        className="next">Next</button>
-                    </div>  
-                 </div>
+                        <div>
+                            <button 
+                            onClick={()=>handlePage('next')}
+                            className="next">Next</button>
+                        </div>  
+                        </div>
+                    </td>
+                   
+                    </tr>
+                </table>
+               
             </div>
         </>
     );

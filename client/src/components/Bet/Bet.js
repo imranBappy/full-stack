@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import Table from '../Table/Table';
 import columns from '../../data/bet';
 import useQuery from '../../utils/useQuery';
@@ -7,44 +8,10 @@ import { connect } from 'react-redux';
 import {betGetAction} from '../../store/actions/betAction';
 const Bet = (props) => {
     const query = useQuery(useLocation);
-    const rows = [
-        {
-            createdAt:'7/6/2021, 4:09:26 PM',
-            amount:100,
-            game:'Argentina VS Brazil- World Cup Football 2021',
-            bet:'To win the match',
-            result:'Brazil',
-            rate: 1.5,
-            status:'Loss'
-        },
-        {
-            createdAt:'7/6/2021, 4:09:26 PM',
-            amount:100,
-            game:'Argentina VS Brazil- World Cup Football 2021',
-            bet:'To win the match',
-            result:'Brazil',
-            rate: 1.5,
-            status:'Loss'
-        },
-        {
-            createdAt:'7/6/2021, 4:09:26 PM',
-            amount:100,
-            game:'Argentina VS Brazil- World Cup Football 2021',
-            bet:'To win the match',
-            result:'Brazil',
-            rate: 1.5,
-            status:'Loss'
-        },
-        {
-            createdAt:'7/6/2021, 4:09:26 PM',
-            amount:100,
-            game:'Argentina VS Brazil- World Cup Football 2021',
-            bet:'To win the match',
-            result:'Brazil',
-            rate: 1.5,
-            status:'Loss'
-        }
-    ];
+    useEffect(() =>{
+        props.betGetAction(query.get('page'))
+    },[])
+    
     return (
         <div  class="container">
             <Table

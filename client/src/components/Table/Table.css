@@ -17,6 +17,10 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+  .pagination-td{
+    padding:0;
+    margin:0
+  }
   .pagination{
     width: 100%;
     display: grid;
@@ -25,7 +29,7 @@ table {
   }
  
   .pagination>div>button{
-      padding:5px;
+      padding:8px 0px;
   }
   .page{
     padding: 15px;

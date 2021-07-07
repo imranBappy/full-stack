@@ -12,6 +12,7 @@ const Navbar = (props) => {
     const {alert, auth} = props;
     const [menu, setMenu] = useState(false)
     const [, setOpen] = useContext(ModalContext)
+
     const handleClick = () =>{
         setMenu(!menu)
     }
@@ -21,7 +22,7 @@ const Navbar = (props) => {
             setTime(new Date().toLocaleTimeString())
         }, 1000);
     },[]);
-    
+
     return (
         <>
          <header style={{background:'#fff'}}>
@@ -38,7 +39,7 @@ const Navbar = (props) => {
                         </a>
                         <ul>
                         <li><Link to="/statement">Statement</Link></li>
-                        <li><Link to="/wallet">My Wallet</Link></li>
+                        <li onclick={()=>{setOpen({display: 'block', component:'Withdraw'})}}><Link to="/">Withdraw</Link></li>
                         <li><Link to="/setting">Setting</Link></li>
                             <li>
                                 <Link to={auth.isAuthenticated ? '/dashboard' : '/login'}>
@@ -80,7 +81,9 @@ const Navbar = (props) => {
                 {
                     auth.isAuthenticated ?<>
                     <li><Link to="/statement">Statement</Link></li>
-                    <li><Link to="/wallet">My Wallet</Link></li>
+                    <li name="Withdraw">
+                        <Link name="Withdraw" to="/">Withdraw</Link>
+                    </li>
                     <li><Link to="/setting">Setting</Link></li>
                     </> : <>
                     <li>

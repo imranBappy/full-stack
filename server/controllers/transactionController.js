@@ -2,20 +2,33 @@ const Transaction = require("../models/Transaction");
 const User = require("../models/User");
 exports.transactionPortController = async (req, res, next) =>{
     try {
-        const transaction = new Transaction(req.body);
+        const transaction = new Transaction({...req.body, status:'Pending'});
+        const user = await User.findById(req.body.user)
+        if (req.body.transaction === 'withdraw') {
+            await User.findByIdAndUpdate(user._id, {
+                balance: user.balance  - Number(req.body.amount)
+            });
+        }
         await transaction.save()
-        res.json({message: 'Deposit Request successfully'})
+        res.json({message: `${req.body.transaction} Request successfully`})
     } catch (error) {
         next(error)
     }
 };
 
 exports.transactionGetController =  async (req, res, next) =>{
-    const {transaction, page} = req.query;
-    const pageNumber =  page || 0 ;
+   
     try {
-        const length = await Transaction.find({transaction}).count({})
-        const deposit = await Transaction.find({transaction}).populate('user', 'username balance')
+        const {transaction, page, user} = req.query;
+        const pageNumber =  page || 0 ;
+        let createTransaction = {}
+        if (user) {
+            createTransaction = {user};
+        }else if(transaction){
+            createTransaction = {transaction};
+        }
+        const length = await Transaction.find(createTransaction).count({})
+        const deposit = await Transaction.find(createTransaction).populate('user', 'username balance')
         .sort('-createdAt')
         .skip(5 * Number(pageNumber)).limit(5)
         .select({
@@ -40,12 +53,14 @@ exports.transactionUpdateController = async (req, res, next) =>{
         },{new: true})
         .populate('user', 'username balance')
         .select({__v:0, updatedAt:0, });
+        const user =  await User.findById(userId)
         let updateBalance = 0;
         if (status === 'Accepted') {
-            updateBalance = updateTransaction.amount + Number(balance)
+            updateBalance =Number(user.balance) + updateTransaction.amount
         }else if(status === 'Rejected'){
-            updateBalance = Number(balance)
+            updateBalance = Number(user.balance)
         }
+        console.log(user, updateTransaction);
         await User.findByIdAndUpdate(userId, {
             balance: updateBalance
         });

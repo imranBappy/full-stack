@@ -7,6 +7,6 @@ const isAuthenticated = require('../middlewares/isAuthenticated');
 const router = require('express').Router();
 
 router.post('/add', isAuthenticated, transactionPortController )
-router.get('/', isAuthenticated, transactionGetController )
+router.get('/', transactionGetController )
 router.patch('/update-transaction/:trxId', isAuthenticated, transactionUpdateController)
 module.exports = router;

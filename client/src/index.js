@@ -45,7 +45,7 @@ if (token) {
           type: Types.SET_USER,
           payload:{
             auth: true,
-            user: res.data.data? res.data.data[0] : {},
+            user: res.data.data.length ? res.data.data[0] : {},
             token
           }
         })

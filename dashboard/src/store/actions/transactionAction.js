@@ -31,7 +31,7 @@ export const depositAcceptAction = (deposit,index, rows, length, status) => asyn
                 error: false
             }
         });
-        const updateTransaction = await axios.patch(`/transaction/update-transaction/${deposit._id}?status=${deposit.status}&userId=${deposit.user._id}&balance=${deposit.user.balance}`);
+        const updateTransaction = await axios.patch(`/transaction/update-transaction/${deposit._id}?status=${deposit.status}&userId=${deposit.user._id}`);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
