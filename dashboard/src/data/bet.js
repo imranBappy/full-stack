@@ -19,6 +19,16 @@ const columns = () =>([
         label: 'Show', 
         minWidth: 100 ,
     },
+    { 
+        id: 'user', 
+        label: 'Bets', 
+        minWidth: 100 ,
+    },
+    { 
+        id: 'status', 
+        label: 'Status', 
+        minWidth: 100 ,
+    },
 ]);
   
   export default columns

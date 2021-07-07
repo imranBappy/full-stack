@@ -13,7 +13,7 @@ const Profile = ({profile}) => {
                 <p>Balance: {profile.balance}</p>
                 <p> {profile.phone}</p>
                 <p> {profile.email}</p>
-                <p> {profile.sName.name} <span>({profile.sName.username}) </span></p>
+                <p> {profile.sName? `${profile.sName.name} ( ${profile.sName.username} ) `  : 'sName: null'} </p>
                 <p> {profile.club.name} <span>({profile.club.clubId})</span></p>
 
                 <p><button>Update</button></p>

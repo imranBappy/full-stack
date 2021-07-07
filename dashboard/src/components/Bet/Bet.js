@@ -4,16 +4,19 @@ import { useParams, Link } from 'react-router-dom';
 import Table from '../Table/Table';
 import { connect } from 'react-redux';
 import { loadAllBet, betActionAction, resultShowAction } from '../../store/actions/betAction';
+import { betStatusAction } from '../../store/actions/userBetAction';
 import bet from '../../data/bet';
 import { Button } from '@material-ui/core';
 
 const Bet = (props) => {
     let { gameId } = useParams();
-    const [columns, setColumns] = useState([])
+    const [columns, setColumns] = useState([]);
     useEffect(()=>{
         setColumns(bet())
-        props.loadAllBet(gameId)
+        props.loadAllBet(gameId);
+       
     },[]);
+   
     return (
         <>
             {props.bet.length && <Link style={{ textDecoration: 'none' }} to={`/bet-add/${gameId}`}>
@@ -33,6 +36,7 @@ const Bet = (props) => {
                     style={{marginRight: 10, width: 110}} 
                     >{bet.show ? 'Active' : 'Inactive' }</Button>
                 <Table
+                    acceptHandler={props.betStatusAction}
                     resultShowAction={props.resultShowAction}
                     bets={props.bet}
                     index={i}
@@ -62,6 +66,7 @@ const Bet = (props) => {
     );
 };
 const mapStateToProps = state =>({
-    bet:state.bet.bet
+    bet:state.bet.bet,
+    game: state.game.game
 })
-export default connect(mapStateToProps, {loadAllBet, betActionAction, resultShowAction})(Bet);
+export default connect(mapStateToProps, {loadAllBet, betActionAction, resultShowAction, betStatusAction})(Bet);

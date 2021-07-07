@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const isAdmin = require('../middlewares/isAdmin')
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const {
     clubPortController,
@@ -9,7 +8,7 @@ const {
 
 
 
-router.post('/add-club', isAdmin, clubPortController );
+router.post('/add-club', isAuthenticated, clubPortController );
 router.get('/get-ranking-club' , rankingClubGetController );
 router.get('/get-all-club', clubGetController );
 

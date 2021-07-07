@@ -4,10 +4,9 @@ const {
     loginPostController, 
     changePasswordPutController, 
     singleUserGetController ,
-    userUpdateController
+    userUpdateController,
 } = require('../controllers/userController');
 const isAuthenticated = require('../middlewares/isAuthenticated');
-const isAdmin = require('../middlewares/isAdmin');
 const router = require('express').Router();
 
 router.post('/register', registerPostController );
@@ -15,7 +14,8 @@ router.post('/login', loginPostController );
 router.put('/login', isAuthenticated, changePasswordPutController);
 router.patch('/update-user', isAuthenticated, userUpdateController);
 router.get('/single-user/:userId',isAuthenticated, singleUserGetController)
-router.get('/',isAdmin, allUserGetController)
+router.get('/',isAuthenticated, allUserGetController)
+
 
 
 

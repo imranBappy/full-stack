@@ -1,15 +1,15 @@
 const { adminPostController, adminGetController, adminPutController, adminPostLoginController, singleAdminGetController } = require('../controllers/adminController')
 const { dashboardGetController } = require('../controllers/dashboard')
-const isAdmin = require('../middlewares/isAdmin')
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 const router = require('express').Router()
 
-router.get('/', isAdmin, dashboardGetController )
-router.post('/add', isAdmin, adminPostController )
+router.get('/', isAuthenticated, dashboardGetController )
+router.post('/add', isAuthenticated, adminPostController )
 router.post('/login', adminPostLoginController )
-router.get('/all-admin',isAdmin,  adminGetController )
-router.get('/single-user/:userId',isAdmin, singleAdminGetController )
-router.put('/change',isAdmin, adminPutController )
+router.get('/all-admin',isAuthenticated,  adminGetController )
+router.get('/single-user/:userId',isAuthenticated, singleAdminGetController )
+router.put('/change',isAuthenticated, adminPutController )
 
 
 

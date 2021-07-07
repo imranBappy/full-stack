@@ -39,6 +39,7 @@ function InfoTable(props) {
     useEffect(()=>{
         changePage(page);
     }, []); 
+    console.log(props.path)
   return (
       <>
       {props.btnName&& <Link style={{ textDecoration: 'none' }} to={props.btnPath}>
@@ -73,34 +74,43 @@ function InfoTable(props) {
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {
+                              column.id === 'user' && props.path === '/bet' ? value.length:
                               column.id === 'club' ? value.clubId :
+                              column.id === 'user' && props.path === '/club' ? value.length :
                               column.id === 'user' ? value.username :
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :
                               column.id === 'UsersUsername' ? row.user.username :
-                              column.id === 'status' && props.path === '/deposit' ?
+                              (column.id === 'status' && props.path === '/bet') ||(column.id === 'status' && props.path === '/deposit') ?
                               value === 'Pending'?
                               <>
                                 <Button 
                                   style={{ width: 100,marginRight:5 }}
                                   color={"primary"} 
-                                  onClick={()=>props.acceptHandler({...row, status: 'Accepted'}, i, props.rows, props.length, row.status)}
+                                  onClick={()=>props.acceptHandler({...row, status: 'Accepted'}, i, props.rows, props.length, row.status, props.bet, props.index ,props.bets)}
                                   variant={"outlined"}>
-                                    {value === 'Pending' ? 'Accept' :'Accepted'}
+                                    {
+                                      props.path === '/bet' ? value === 'Pending' ? 'Win' :'Wined' :  
+                                      value === 'Pending' ? 'Accept' :'Accepted'
+                                    }
                                 </Button> 
                                 <Button 
                                   style={{ width: 100 }}
                                   color={'secondary'} 
-                                  onClick={()=>props.acceptHandler({...row, status: 'Rejected'}, i, props.rows,props.length, row.status)}
+                                  onClick={()=>props.acceptHandler({...row, status: 'Rejected'}, i, props.rows,props.length, row.status, props.bet, props.index ,props.bets)}
                                   variant={'outlined'}>
-                                    {value=== 'Pending' ? 'Reject' :'Rejected'}
+                                    {
+                                      props.path === '/bet' ? value === 'Pending' ? 'Loss' :'Lossed' :  
+                                      value === 'Pending' ? 'Reject' :'Rejected'
+                                    }
                                 </Button> 
                               </>
                             :<Button 
                               style={{ width: 100 }}
-                              color={value=== 'Accepted' ? 'primary' :'secondary'} 
+                              color={value=== 'Accepted' || value=== 'Win'? 'primary' :'secondary'} 
                               onClick={()=>props.acceptHandler(row, null, null,null , row.status)}
                               variant={'contained'}>
-                                {value=== 'Accepted' ? 'Accepted' :'Rejected'}
+                                {props.path==='/bet' ? value === 'Win' ? 'Wined': 'Lossed'
+                                : value=== 'Accepted' ? 'Accepted' :'Rejected'}
                             </Button> 
                             :
                             column.id === 'isActive' ? 
@@ -139,8 +149,13 @@ function InfoTable(props) {
                                   {value? 'Active': 'Inactive'}
                               </Button>
                             :
-                            column.id === 'sName'? 
-                                value? value.username :'null' 
+                              column.id === 'sName'? value? value.username :'null' :
+                              column.id === 'game' ? `${value.country1} VS ${value.country2}- ${value.name}`:
+                              column.id === 'bet' ? value.title:
+                              column.id === 'result' ? value.question:
+                              column.id === 'rate' && props.path === '/bet-list'? row.result.rate:
+                              column.id === 'status' ? row.result.status
+                              
                             : value
                             }
                             {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?resultId=${row._id}&betId=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }

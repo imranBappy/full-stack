@@ -24,10 +24,10 @@ export const allDepositGetAction = (page) => async dispatch =>{
 
 export const depositAcceptAction = (deposit,index, rows, length, status) => async dispatch =>{
     try {
-        if (deposit.status === status || deposit.status === status) return dispatch({
+        if (deposit.status === status) return dispatch({
             type: Types.SET_ALERT,
             payload:{
-                message: `Al ready deposit ${deposit.status}`,
+                message: `Al ready deposit ${status}`,
                 error: false
             }
         });

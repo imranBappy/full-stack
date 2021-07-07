@@ -36,7 +36,7 @@ exports.resultAddPostController = async (req, res, next) =>{
 exports.allBetGetController = async (req, res, next) =>{
     try {
         const {gameId} = req.query;
-        const allBet = await Bet.find({game: gameId}).populate('question', 'question rate show')
+        const allBet = await Bet.find({game: gameId}).populate('question', 'question rate show status user')
         res.json({
             data: allBet
         })
@@ -131,3 +131,7 @@ exports.betUpdateController = async (req, res, next) => {
         next(error);
     }
 }
+
+// 1 bet bet je je user bet course oi gula ekta array te rakhte hobe
+// oi bet er status change kora dite hobe
+// user array looping kore bet rate diye caulculate kore update korte hobe

@@ -5,16 +5,15 @@ const {
     gameUpdateController,
     allGameLoadGetController
 } = require('../controllers/gameController');
-const isAdmin = require('../middlewares/isAdmin');
-
+const isAuthenticated = require('../middlewares/isAuthenticated');
 const router = require('express').Router()
 
-router.post('/add', isAdmin, gamePostController )
-router.get('/get-all', isAdmin, gameGetController )
+router.post('/add', isAuthenticated, gamePostController )
+router.get('/get-all', isAuthenticated, gameGetController )
 router.get('/get-game', allGameLoadGetController )
 
-router.patch('/game-update', isAdmin, gameUpdateController)
-router.delete('/delete-all',isAdmin, gameAllDeleteController)
+router.patch('/game-update', isAuthenticated, gameUpdateController)
+router.delete('/delete-all',isAuthenticated, gameAllDeleteController)
 
 
 

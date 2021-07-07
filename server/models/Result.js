@@ -19,6 +19,12 @@ const resultSchema = new Schema({
         type: Boolean,
         required: true,
     },
+    user:[
+        {
+            type: Schema.Types.ObjectId,
+            ref:'user',
+        }
+    ],
     game:{
         type: Schema.Types.ObjectId,
         ref:'game',
