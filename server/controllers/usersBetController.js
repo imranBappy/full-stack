@@ -34,6 +34,7 @@ exports.betGetController = async (req, res, next) =>{
         .populate('game', 'name country1 country2')
         .populate('bet', 'title')
         .populate('result', 'question rate status')
+        .sort('-createdAt')
         .skip(5* Number(page)).limit(5)
         res.json({bet, length: betsLength.length});
     } catch (error) {
@@ -68,6 +69,26 @@ exports.userBetStatusUpdateController = async (req, res, next) =>{
             message: 'Bet Wined successfully!',
             error: false
         })
+    } catch (error) {
+        next(error)   
+    }
+}
+
+exports.userBetGetController = async (req, res, next) =>{
+    try {
+        const page = req.query.page || 0 ;
+        const userBetLength = await UserBet.find({user:req.user});
+        const userBets = await UserBet.find({user:req.user})
+            .populate('game', 'name country1 country2')
+            .populate('bet', 'title')
+            .populate('result', 'question rate status')
+            .skip( 5 * Number(page))
+            .sort('-createdAt')
+            .select({
+                __v:0,
+                updatedAt:0
+            });
+        res.json({bet:userBets, length: userBetLength.length})
     } catch (error) {
         next(error)   
     }
