@@ -15,6 +15,7 @@ const Bet = (props) => {
     return (
         <div  class="container">
             <Table
+                path="/bet"
                 action={props.betGetAction}
                 rows={props.bet.bet}
                 columns={columns()}

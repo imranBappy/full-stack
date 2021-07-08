@@ -22,6 +22,7 @@ const Traction = (props) => {
     return (
         <div className="container">
             <Table
+                path="/traction"
                 action={action}
                 rows={props.transition}
                 columns={columns()}

@@ -15,12 +15,12 @@ const Table = ({columns, rows, action, path}) => {
         console.log(type);
         if (type==='next') {
             setPage(Number(page) + 1);
-            history.push(`/statement/bet?page=${Number(page) + 1}`);
+            history.push(`/statement${path}?page=${Number(page) + 1}`);
             action(Number(page) + 1)
         }else{
             if (page){
                 setPage(Number(page) - 1)
-                history.push(`/statement/bet?page=${Number(page) - 1}`);
+                history.push(`/statement${path}?page=${Number(page) - 1}`);
                 action(Number(page) - 1)
             }
         }
