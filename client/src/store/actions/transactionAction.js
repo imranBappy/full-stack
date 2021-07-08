@@ -1,11 +1,11 @@
 import * as Types from './types';
 import axios from 'axios';
-export const depositRequestAction = (deposit, user) => async dispatch => {
+export const TransactionInputRequestAction = (TransactionInput, user) => async dispatch => {
     try {
         
-        const res = await axios.post('/transaction/add', {...deposit, user: user._id});
-        if (deposit.transaction === 'withdraw' && res.data.error === false) {
-            user.balance = user.balance - Number(deposit.amount)
+        const res = await axios.post('/transaction/add', {...TransactionInput, user: user._id});
+        if (TransactionInput.transaction === 'withdraw' && res.data.error === false) {
+            user.balance = user.balance - Number(TransactionInput.amount)
         }
 
         dispatch({

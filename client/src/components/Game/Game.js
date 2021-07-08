@@ -1,7 +1,9 @@
 import React from 'react';
 import './LiveGame.css';
-
-const Game = ({game, style, classNames,  handleModel}) =>{
+import {connect} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+const Game = ({game, style, classNames,  handleModel, auth}) =>{
+    const history = useHistory()
     const open = (e) =>{
         if (e.target.className.length > 9) {
             console.log(true);
@@ -10,6 +12,13 @@ const Game = ({game, style, classNames,  handleModel}) =>{
         }else{
             e.target.className = 'accordion active'
             e.target.nextElementSibling.style = 'max-height:500px';
+        }
+    }
+    const handleBet=(...rest) =>{
+        if (auth)  {
+            handleModel(...rest)
+        }else{
+            history.push('/login')
         }
     }
     return (
@@ -35,7 +44,7 @@ const Game = ({game, style, classNames,  handleModel}) =>{
                                                     return (
                                                         <>
                                                             {q.show && <button 
-                                                                onClick={()=>handleModel(main._id, bet._id, q._id ) }
+                                                                onClick={()=>handleBet(main._id, bet._id, q._id ) }
                                                                 key={q._id}>{q.question} 
                                                                 <span>{q.rate}</span> 
                                                                 </button>}
@@ -60,5 +69,7 @@ const Game = ({game, style, classNames,  handleModel}) =>{
         </div>
     );
 };
-
-export default Game;
+const mapStateToProps = (state) =>({
+    auth: state.auth.isAuthenticated
+})
+export default connect(mapStateToProps)(Game);

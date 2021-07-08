@@ -2,13 +2,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import validateNumber from '../../utils/validateNumber';
-import {depositRequestAction} from '../../store/actions/transactionAction';
+import {TransactionInputRequestAction} from '../../store/actions/transactionAction';
 import {ModalContext} from '../Layout/Layout';
-import  './deposit.css';
-const Deposit = (props) => {
+import  './TransactionInput.css';
+const TransactionInput = (props) => {
     const methods = ['Bkash', 'Rocket', 'Nagad'];
     const [, setOpen] = useContext(ModalContext)
-    const [deposit, setDeposit] = useState({
+    const [TransactionInput, setTransactionInput] = useState({
         amount: 100,
         type:'personal',
         method:'',
@@ -23,7 +23,7 @@ const Deposit = (props) => {
     });
     useEffect(() =>{ 
         if(props.user.balance < 100) {
-            setDeposit({...deposit, message:'There is not enough balance'})
+            setTransactionInput({...TransactionInput, message:'There is not enough balance'})
             setError({...error, amount: 'There is not enough balance'});
         }
      },[])
@@ -35,15 +35,15 @@ const Deposit = (props) => {
                 if(Number(value)) number = typeof Number(value)          
                 if(number === 'number' || value === ''){
                     if(props.user.balance >= Number(value)) {
-                        setDeposit({...deposit, [name]: value});
+                        setTransactionInput({...TransactionInput, [name]: value});
                         setError({...error, [name]: ''});
                     }else{
-                        setDeposit({...deposit,[name]: value})
+                        setTransactionInput({...TransactionInput,[name]: value})
                         setError({...error, [name]: 'There is not enough balance'});
 
                     }
                     if (!(Number(value)>= 100)) {
-                        setDeposit({...deposit, [name]: value})
+                        setTransactionInput({...TransactionInput, [name]: value})
                         setError({...error, [name]: 'You can withdraw at least 100 Taka'});
 
                     }
@@ -51,28 +51,28 @@ const Deposit = (props) => {
                 break;
             case 'number':
                 if (validateNumber(value)) {
-                    setDeposit({...deposit, [name]: value});
+                    setTransactionInput({...TransactionInput, [name]: value});
                     setError({...error, [name]: ''});
                 }else{
-                    setDeposit({...deposit, [name]: value});
+                    setTransactionInput({...TransactionInput, [name]: value});
                     setError({...error, [name]: `You ${name} is wrong`});
                 }
                 break;
             case 'trxId':
                 if (value.length >= 8) {
-                    setDeposit({...deposit, [name]: value});
+                    setTransactionInput({...TransactionInput, [name]: value});
                     setError({...error, [name]: ''});
                 }else{
-                    setDeposit({...deposit, [name]: value});
+                    setTransactionInput({...TransactionInput, [name]: value});
                     setError({...error, [name]: `You ${name} ID is wrong`});
                 }
                 break;
             case 'method':
                     if (value) {
-                        setDeposit({...deposit, [name]: value});
+                        setTransactionInput({...TransactionInput, [name]: value});
                         setError({...error, [name]: ''});
                     }else{
-                        setDeposit({...deposit, [name]: value});
+                        setTransactionInput({...TransactionInput, [name]: value});
                         setError({...error, [name]: `Please select method`});
                     }
                     break;
@@ -83,7 +83,7 @@ const Deposit = (props) => {
     const checkValid = (obb, type) =>{
         for (const key in obb) {
             const value = obb[key];
-                if (type ==='deposit') {
+                if (type ==='TransactionInput') {
                     if (!value) return false;
                 }else{
                     if (value) return false;
@@ -92,10 +92,10 @@ const Deposit = (props) => {
         return true;
     }
     const handleSubmit = () =>{
-        if (checkValid(deposit, 'deposit')) {
+        if (checkValid(TransactionInput, 'TransactionInput')) {
             if (checkValid(error)) {
-                props.depositRequestAction(deposit, props.user);
-                setDeposit({
+                props.TransactionInputRequestAction(TransactionInput, props.user);
+                setTransactionInput({
                     amount: 100,
                     trxId: '',
                     method:'',
@@ -107,13 +107,13 @@ const Deposit = (props) => {
     }
 
     return (
-        <div>
+        <div className='container'>
             <input 
                 onChange={handelChange}
                 placeholder='Please Enter you amount' 
                 type="number"
                 name="amount"
-                value={deposit.amount} 
+                value={TransactionInput.amount} 
             />
             {
                 error.amount && <p className='error' >{error.amount}</p>
@@ -122,17 +122,17 @@ const Deposit = (props) => {
                     onChange={handelChange} 
                     placeholder='Please Enter you Number' 
                     name='number'
-                    value={deposit.number} 
+                    value={TransactionInput.number} 
                     type="text" 
                 />
             {error.number && <p className='error' >{error.number}</p>}
             {
-                props.transaction === 'deposit' &&<>
+                props.transaction === 'TransactionInput' &&<>
                 <input 
                 onChange={handelChange} 
                 placeholder='Please Enter you TrxID' 
                 type="text" 
-                value={deposit.trxId} 
+                value={TransactionInput.trxId} 
                 name='trxId'
                 />
                 {
@@ -167,4 +167,4 @@ const Deposit = (props) => {
 const mapStateToProps = state =>({
     user: state.auth.user
 })
-export default connect(mapStateToProps, {depositRequestAction})(Deposit) ;
+export default connect(mapStateToProps, {TransactionInputRequestAction})(TransactionInput) ;

@@ -3,7 +3,7 @@ import authReducer from "./authReducer";
 import clubReducer from "./clubReducer";
 import gameReducer from './gameReducer';
 import betReducer from './betReducer';
-import tractionReducer from './tractionReducer';
+import TransactionReducer from './TransactionReducer';
 const { combineReducers } = require("redux");
 
 const reducer = combineReducers({
@@ -12,7 +12,7 @@ const reducer = combineReducers({
     club: clubReducer,
     game: gameReducer,
     bet: betReducer,
-    transaction: tractionReducer
+    transaction: TransactionReducer
 })
 
 export default reducer

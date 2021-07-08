@@ -3,9 +3,9 @@ import * as Types from '../actions/types';
 const init ={
     transaction:[], length: 0
 }
-const depositReducer = (state = init, action) =>{
+const TransactionInputReducer = (state = init, action) =>{
     switch (action.type) {
-        case Types.SET_DEPOSIT:
+        case Types.SET_TransactionInput:
             return{
                 transaction: action.payload.transaction,
                 length: action.payload.length
@@ -15,4 +15,4 @@ const depositReducer = (state = init, action) =>{
     }
 }
 
-export default depositReducer;
+export default TransactionInputReducer;

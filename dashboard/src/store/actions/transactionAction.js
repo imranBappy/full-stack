@@ -1,10 +1,10 @@
 import * as Types from './types';
 import axios from 'axios';
-export const allDepositGetAction = (page, transaction) => async dispatch =>{
+export const allTransactionInputGetAction = (page, transaction) => async dispatch =>{
     try {
         const res = await axios.get(`/transaction?transaction=${transaction}&page=${page}`);
         dispatch({
-            type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
+            type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_TransactionInput,
             payload:{
                 transaction: res.data.transaction,
                 length: res.data.length,
@@ -21,16 +21,16 @@ export const allDepositGetAction = (page, transaction) => async dispatch =>{
     }
 }
 
-export const depositAcceptAction = (deposit,index, rows, length, status, path) => async dispatch =>{
+export const TransactionInputAcceptAction = (TransactionInput,index, rows, length, status, path) => async dispatch =>{
     try {
-        if (deposit.status === status) return dispatch({
+        if (TransactionInput.status === status) return dispatch({
             type: Types.SET_ALERT,
             payload:{
-                message: `Al ready deposit ${status}`,
+                message: `Al ready TransactionInput ${status}`,
                 error: false
             }
         });
-        const updateTransaction = await axios.patch(`/transaction/update-transaction/${deposit._id}?status=${deposit.status}&userId=${deposit.user._id}`);
+        const updateTransaction = await axios.patch(`/transaction/update-transaction/${TransactionInput._id}?status=${TransactionInput.status}&userId=${TransactionInput.user._id}`);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -40,7 +40,7 @@ export const depositAcceptAction = (deposit,index, rows, length, status, path) =
         })
         rows.splice(index, 1,updateTransaction.data.transaction )
         dispatch({
-            type: path==='/withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
+            type: path==='/withdraw'? Types.SET_WITHDRAW: Types.SET_TransactionInput,
             payload:{
                 transaction: rows,
                 length,

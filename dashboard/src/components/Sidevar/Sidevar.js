@@ -29,7 +29,7 @@ const Sidevar = (props) => {
       {path:'/game', name:'Game'},
       {path:'/club', name:'Club'},
       {path:'/bet-list', name:'Bet'},
-      {path:'/deposit', name:'Deposit'},
+      {path:'/TransactionInput', name:'TransactionInput'},
       {path:'/withdraw', name:'Withdraw'},
       {path:'/option', name:'Option'},
       {path:'/admin', name:'Admin'},

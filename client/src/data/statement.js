@@ -8,8 +8,12 @@ const data = () =>([
         path:'/statement/bet?page=0'
     },
     {
-        name: 'Traction',
-        path:'/statement/traction?page=0'
+        name: 'Transaction',
+        path:'/statement/Transaction?page=0'
+    },
+    {
+        name: 'Withdraw',
+        path:'/statement/withdraw'
     }
 ]);
 export default data

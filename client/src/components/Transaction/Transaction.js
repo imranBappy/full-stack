@@ -8,7 +8,7 @@ import {transitionGetAction} from '../../store/actions/transactionAction';
 import Table from '../Table/Table';
 import jwt_decide from 'jwt-decode';
 
-const Traction = (props) => {
+const Transaction = (props) => {
     const user = jwt_decide(props.auth.token)
     const query = useQuery(useLocation);
     useEffect(()=>{
@@ -21,7 +21,7 @@ const Traction = (props) => {
     return (
         <div className="container">
             <Table
-                path="/traction"
+                path="/Transaction"
                 action={action}
                 rows={props.transition.transition}
                 length={props.transition.length}
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
     transition: state.transaction
 })
-export default connect(mapStateToProps, {transitionGetAction})(Traction);
+export default connect(mapStateToProps, {transitionGetAction})(Transaction);

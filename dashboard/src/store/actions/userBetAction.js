@@ -36,7 +36,7 @@ export const betStatusAction = (result, resultIndex, allResult, c, status, singl
         if (result.status === status) return dispatch({
             type: Types.SET_ALERT,
             payload:{
-                message: `Al ready deposit ${status}`,
+                message: `Al ready TransactionInput ${status}`,
                 error: false
             }
         });

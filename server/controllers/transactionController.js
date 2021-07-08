@@ -28,7 +28,7 @@ exports.transactionGetController =  async (req, res, next) =>{
             createTransaction = {transaction};
         }
         const length = await Transaction.find(createTransaction).count({})
-        const deposit = await Transaction.find(createTransaction).populate('user', 'username balance')
+        const TransactionInput = await Transaction.find(createTransaction).populate('user', 'username balance')
         .sort('-createdAt')
         .skip(5 * Number(pageNumber)).limit(5)
         .select({
@@ -36,7 +36,7 @@ exports.transactionGetController =  async (req, res, next) =>{
             updatedAt:0
         });
         res.json({
-            transaction: deposit,
+            transaction: TransactionInput,
             length
         })
     } catch (error) {
@@ -55,7 +55,7 @@ exports.transactionUpdateController = async (req, res, next) =>{
         .populate('user', 'username balance')
         .select({__v:0, updatedAt:0, });
         if (transaction.transaction === 'withdraw')return res.json({
-            message: `Deposit successfully ${updateTransaction.status}`,
+            message: `TransactionInput successfully ${updateTransaction.status}`,
             error: false,
             transaction: updateTransaction
         });
@@ -70,7 +70,7 @@ exports.transactionUpdateController = async (req, res, next) =>{
             balance: updateBalance
         });
         res.json({
-            message: `Deposit successfully ${updateTransaction.status}`,
+            message: `TransactionInput successfully ${updateTransaction.status}`,
             error: false,
             transaction: updateTransaction
         });

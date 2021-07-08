@@ -61,7 +61,6 @@ export const loginAction = (user, history) => async dispatch =>{
 
         history.push('/');
     } catch (error) {
-        console.log(error);
         dispatch({
                 type: Types.SET_ALERT,
                 payload:{
@@ -77,7 +76,7 @@ export const logoutAction = () => dispatch =>{
     if (token) {
         localStorage.removeItem('token');
     }
-    dispatch({
+        dispatch({
             type: Types.SET_USER,
             payload:{
                 auth: false,
@@ -85,4 +84,11 @@ export const logoutAction = () => dispatch =>{
                 token: ''
             }
         })
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Logout successfully',
+                error: false
+            }
+    })
 }

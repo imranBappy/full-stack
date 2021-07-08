@@ -1,7 +1,7 @@
 const init = {
     transition:[], length: 0
 }
-const tractionReducer = (state = init, action) =>{
+const TransactionReducer = (state = init, action) =>{
     switch (action.type) {
         case 'SET_TRANSACTION': return {
             transition: action.payload.transaction,
@@ -10,4 +10,4 @@ const tractionReducer = (state = init, action) =>{
         default: return state
     }
 }
-export default tractionReducer
+export default TransactionReducer

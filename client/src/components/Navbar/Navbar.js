@@ -37,16 +37,19 @@ const Navbar = (props) => {
                         <a href="/">
                             <img src={logo} alt="icon"/>
                         </a>
-                        <ul>
-                        <li><Link to="/statement">Statement</Link></li>
-                        <li onclick={()=>{setOpen({display: 'block', component:'Withdraw'})}}><Link to="/">Withdraw</Link></li>
-                        <li><Link to="/setting">Setting</Link></li>
+                        <ul> 
+                            <li><Link to="/">Home</Link></li>
+
                             <li>
-                                <Link to={auth.isAuthenticated ? '/dashboard' : '/login'}>
-                                {auth.isAuthenticated ? 'Dashboard' : 'Login'}
+                                <Link to={auth.isAuthenticated ? '/statement' : '/login'}>
+                                {auth.isAuthenticated ? 'Profile' : 'Login'}
                                 </Link>
                             </li>
-                            <li><Link to="/register">Signup</Link></li>
+                            {
+                                !auth.isAuthenticated && <li><Link to="/Register">Register</Link></li>
+                            }
+                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>
                         </ul>
                     </div>
                     <div className="icon-aria">
@@ -63,7 +66,7 @@ const Navbar = (props) => {
         {
              auth.isAuthenticated ? 
              <div className="login-aria">
-                <div><button onClick={()=> setOpen({display: 'block', component:'deposit'})} >Deposit</button></div>
+                <div><button onClick={()=> setOpen({display: 'block', component:'TransactionInput'})} >TransactionInput</button></div>
                 <div><button >Balance: {auth.user.balance}</button></div>
             </div>
             :
@@ -81,10 +84,9 @@ const Navbar = (props) => {
                 {
                     auth.isAuthenticated ?<>
                     <li><Link to="/statement">Statement</Link></li>
-                    <li name="Withdraw">
-                        <Link name="Withdraw" to="/">Withdraw</Link>
-                    </li>
                     <li><Link to="/setting">Setting</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>
                     </> : <>
                     <li>
                         <Link  to={'/register'}>
@@ -96,6 +98,8 @@ const Navbar = (props) => {
                             {'Login'}
                         </Link>
                     </li>
+                    <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>
                     </>
                 }
             </ul>

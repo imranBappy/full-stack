@@ -82,7 +82,7 @@ function InfoTable(props) {
                               column.id === 'user' ? value.username :
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :
                               column.id === 'UsersUsername' ? row.user.username :
-                              (column.id === 'status' && props.path === '/bet') ||(column.id === 'status' && props.path === '/deposit') ||(column.id === 'status' && props.path === '/withdraw')?
+                              (column.id === 'status' && props.path === '/bet') ||(column.id === 'status' && props.path === '/TransactionInput') ||(column.id === 'status' && props.path === '/withdraw')?
                               value === 'Pending'?
                               <>
                                 <Button 

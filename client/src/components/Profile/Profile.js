@@ -1,11 +1,12 @@
 import React from 'react';
 import userAbater from '../../img/dddd.jpg';
 import {connect} from 'react-redux';
+import {logoutAction} from '../../store/actions/authAction';
 import './Profile.css'
-const Profile = ({profile}) => {
-    console.log(profile);
+const Profile = (props) => {
+    const {profile} = props
     return (
-        <div>
+        <div className="container">
             <div className="card">
                 <img src={userAbater} alt="profile-pic" style={{with: '80%'}}/>
                 <h1>{profile.name} <span style={{fontSize:20}} >({profile.username})</span> </h1>
@@ -16,7 +17,7 @@ const Profile = ({profile}) => {
                 <p> {profile.sName? `${profile.sName.name} ( ${profile.sName.username} ) `  : 'sName: null'} </p>
                 <p> {profile.club? `${profile.club.name} ( ${profile.club.clubId} ) `  : 'Club: null'}</p>
 
-                <p><button>Profile</button></p>
+                <p><button onClick={props.logoutAction} >Logout</button></p>
             </div>
         </div>
     );
@@ -24,4 +25,4 @@ const Profile = ({profile}) => {
 const mapStateToProps = state =>({
     profile: state.auth.user
 })
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps,{logoutAction})(Profile);

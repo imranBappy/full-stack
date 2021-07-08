@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {allDepositGetAction, depositAcceptAction} from '../../store/actions/transactionAction';
+import {allTransactionInputGetAction, TransactionInputAcceptAction} from '../../store/actions/transactionAction';
 import Table from '../Table/Table';
-import columns from '../../data/deposit';
+import columns from '../../data/TransactionInput';
 import useQuery from '../../utils/useQuery';
 import { useLocation } from 'react-router-dom';
 const Withdraw = (props) => {
     let query = useQuery(useLocation);
 
     useEffect(()=>{
-        props.allDepositGetAction(query.get('page'), 'withdraw')
+        props.allTransactionInputGetAction(query.get('page'), 'withdraw')
     },[])
     const acceptHandler = (...rest) =>{
-        props.depositAcceptAction(...rest)
+        props.TransactionInputAcceptAction(...rest)
     }
     return (
         <div>
@@ -24,7 +24,7 @@ const Withdraw = (props) => {
                 length={props.withdraw.length}
                 path='/withdraw'
                 acceptHandler={acceptHandler}
-                action = {props.allDepositGetAction}
+                action = {props.allTransactionInputGetAction}
            />
         </div>
     );
@@ -33,4 +33,4 @@ const Withdraw = (props) => {
 const mapStateToProps = state =>({
     withdraw: state.withdraw
 })
-export default connect(mapStateToProps, {allDepositGetAction, depositAcceptAction})(Withdraw);
+export default connect(mapStateToProps, {allTransactionInputGetAction, TransactionInputAcceptAction})(Withdraw);
