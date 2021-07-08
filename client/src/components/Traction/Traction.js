@@ -11,7 +11,6 @@ import jwt_decide from 'jwt-decode';
 const Traction = (props) => {
     const user = jwt_decide(props.auth.token)
     const query = useQuery(useLocation);
-    console.log(props.transition);
     useEffect(()=>{
         props.transitionGetAction(query.get('page'), user._id)
     },[]);
@@ -24,7 +23,8 @@ const Traction = (props) => {
             <Table
                 path="/traction"
                 action={action}
-                rows={props.transition}
+                rows={props.transition.transition}
+                length={props.transition.length}
                 columns={columns()}
             />
         </div>
@@ -32,6 +32,6 @@ const Traction = (props) => {
 };
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    transition: state.transaction.transition
+    transition: state.transaction
 })
 export default connect(mapStateToProps, {transitionGetAction})(Traction);

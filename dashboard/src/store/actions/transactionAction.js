@@ -1,11 +1,10 @@
 import * as Types from './types';
 import axios from 'axios';
-export const allDepositGetAction = (page) => async dispatch =>{
+export const allDepositGetAction = (page, transaction) => async dispatch =>{
     try {
-        const res = await axios.get(`/transaction?transaction=deposit&page=${page}`);
-        
+        const res = await axios.get(`/transaction?transaction=${transaction}&page=${page}`);
         dispatch({
-            type: Types.SET_DEPOSIT,
+            type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
             payload:{
                 transaction: res.data.transaction,
                 length: res.data.length,
@@ -22,7 +21,7 @@ export const allDepositGetAction = (page) => async dispatch =>{
     }
 }
 
-export const depositAcceptAction = (deposit,index, rows, length, status) => async dispatch =>{
+export const depositAcceptAction = (deposit,index, rows, length, status, path) => async dispatch =>{
     try {
         if (deposit.status === status) return dispatch({
             type: Types.SET_ALERT,
@@ -41,7 +40,7 @@ export const depositAcceptAction = (deposit,index, rows, length, status) => asyn
         })
         rows.splice(index, 1,updateTransaction.data.transaction )
         dispatch({
-            type: Types.SET_DEPOSIT,
+            type: path==='/withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
             payload:{
                 transaction: rows,
                 length,

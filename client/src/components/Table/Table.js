@@ -3,20 +3,32 @@ import React, { useEffect, useState } from 'react';
 import  './Table.css';
 import useQuery from '../../utils/useQuery';
 import { useLocation, useHistory} from 'react-router-dom';
-const Table = ({columns, rows, action, path}) => {
-    console.log({columns, rows});
+const Table = ({columns, rows, action, path, length}) => {
     const query = useQuery(useLocation);
     const history = useHistory()
     const [page, setPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(0)
+    
     useEffect(()=>{
-        if (query.get('page'))setPage(Number(query.get('page')));
-    },[])
+        if (query.get('page')){
+            setPage(Number(query.get('page')));
+            setTotalPage(Number(query.get('page')))
+            if (rows.length === 5) {
+                setTotalPage((page+1)*5)
+            }else{
+                console.log((Number(query.get('page'))*5) + rows.length);
+                setTotalPage((page*5)+rows.length)
+            }
+        }
+    },[rows]);
+    
     const handlePage = (type) =>{
-        console.log(type);
         if (type==='next') {
-            setPage(Number(page) + 1);
-            history.push(`/statement${path}?page=${Number(page) + 1}`);
-            action(Number(page) + 1)
+            if (totalPage !== length) {
+                setPage(Number(page) + 1);
+                history.push(`/statement${path}?page=${Number(page) + 1}`);
+                action(Number(page) + 1)
+            }
         }else{
             if (page){
                 setPage(Number(page) - 1)
@@ -27,6 +39,7 @@ const Table = ({columns, rows, action, path}) => {
     };
     return (
         <>
+            {length ? 
             <div className="table">
                 <table>
                     <tr>
@@ -68,22 +81,25 @@ const Table = ({columns, rows, action, path}) => {
                     </div>
                     <div>
                         <button 
-                        disabled={page? false: true }
+                        style={page===0 ? {opacity:.7}: {opacity:1}}
                         onClick={()=>handlePage('previous')}
                         className="previous">Previous</button>
                      </div>
                         <div>
                             <button 
+                            style={totalPage=== length ? {opacity:.7}: {opacity:1}}
                             onClick={()=>handlePage('next')}
                             className="next">Next</button>
                         </div>  
                         </div>
                     </td>
-                   
                     </tr>
                 </table>
                
             </div>
+            :
+                <h1 style={{ textAlign: 'center', color:'gray'}} >Data Not Found</h1>
+            }
         </>
     );
 };

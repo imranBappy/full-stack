@@ -18,6 +18,7 @@ const Bet = (props) => {
                 path="/bet"
                 action={props.betGetAction}
                 rows={props.bet.bet}
+                length={props.bet.length}
                 columns={columns()}
             />
         </div>

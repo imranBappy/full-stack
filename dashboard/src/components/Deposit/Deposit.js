@@ -10,14 +10,13 @@ import { useLocation } from 'react-router-dom';
 const Deposit = (props) => {
     let query = useQuery(useLocation);
     useEffect(() =>{
-        props.allDepositGetAction(query.get('page'))
+        props.allDepositGetAction(query.get('page'), 'deposit');
     },[]);
     const acceptHandler = (...rest) =>{
         props.depositAcceptAction(...rest)
     }
     return (
         <div>
-            <h1>This is Deposit</h1>
             <Table
                 columns = {columns()}
                 rows = {props.deposit.transaction}

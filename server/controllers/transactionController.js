@@ -47,20 +47,25 @@ exports.transactionGetController =  async (req, res, next) =>{
 exports.transactionUpdateController = async (req, res, next) =>{
     try {
     const { trxId } = req.params;
-    const { status ,userId,balance } = req.query;
+    const { status ,userId } = req.query;
+        const transaction = await Transaction.findById(trxId)
         const updateTransaction = await Transaction.findByIdAndUpdate(trxId, {
             status: status
         },{new: true})
         .populate('user', 'username balance')
         .select({__v:0, updatedAt:0, });
+        if (transaction.transaction === 'withdraw')return res.json({
+            message: `Deposit successfully ${updateTransaction.status}`,
+            error: false,
+            transaction: updateTransaction
+        });
         const user =  await User.findById(userId)
         let updateBalance = 0;
         if (status === 'Accepted') {
-            updateBalance =Number(user.balance) + updateTransaction.amount
+            updateBalance = Number(user.balance) + updateTransaction.amount
         }else if(status === 'Rejected'){
             updateBalance = Number(user.balance)
         }
-        console.log(user, updateTransaction);
         await User.findByIdAndUpdate(userId, {
             balance: updateBalance
         });

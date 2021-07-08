@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 function InfoTable(props) {
     const classes = useStyles();
     const { columns } = props;
+    const myLocation = useLocation()
     let query = useQuery(useLocation);
     const history = useHistory()
     let { gameId } = useParams()
@@ -29,8 +30,9 @@ function InfoTable(props) {
         history.push(`${props.path}?page=${newPage}`);
         changePage(newPage);
     };
+
     const changePage = (p) =>{
-        props.action(p);
+        props.action(p, myLocation.pathname.split('/')[1]);
     };
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
@@ -80,13 +82,13 @@ function InfoTable(props) {
                               column.id === 'user' ? value.username :
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :
                               column.id === 'UsersUsername' ? row.user.username :
-                              (column.id === 'status' && props.path === '/bet') ||(column.id === 'status' && props.path === '/deposit') ?
+                              (column.id === 'status' && props.path === '/bet') ||(column.id === 'status' && props.path === '/deposit') ||(column.id === 'status' && props.path === '/withdraw')?
                               value === 'Pending'?
                               <>
                                 <Button 
                                   style={{ width: 100,marginRight:5 }}
                                   color={"primary"} 
-                                  onClick={()=>props.acceptHandler({...row, status: 'Accepted'}, i, props.rows, props.length, row.status, props.bet, props.index ,props.bets)}
+                                  onClick={()=>props.acceptHandler({...row, status: 'Accepted'}, i, props.rows, props.length, row.status, props.bet, props.index ,props.bets, props.path )}
                                   variant={"outlined"}>
                                     {
                                       props.path === '/bet' ? value === 'Pending' ? 'Win' :'Wined' :  
@@ -96,7 +98,7 @@ function InfoTable(props) {
                                 <Button 
                                   style={{ width: 100 }}
                                   color={'secondary'} 
-                                  onClick={()=>props.acceptHandler({...row, status: 'Rejected'}, i, props.rows,props.length, row.status, props.bet, props.index ,props.bets)}
+                                  onClick={()=>props.acceptHandler({...row, status: 'Rejected'}, i, props.rows,props.length, row.status, props.bet, props.index ,props.bets, props.path)}
                                   variant={'outlined'}>
                                     {
                                       props.path === '/bet' ? value === 'Pending' ? 'Loss' :'Lossed' :  
@@ -154,8 +156,7 @@ function InfoTable(props) {
                               column.id === 'bet' ? value.title:
                               column.id === 'result' ? value.question:
                               column.id === 'rate' && props.path === '/bet-list'? row.result.rate:
-                              column.id === 'status' ? row.result.status
-                              
+                              column.id === 'status' && props.path === '/bet-list'? row.result.status
                             : value
                             }
                             {column.id === 'option' && <Link to={props.path === '/bet' ? `/bet-add/${gameId}?resultId=${row._id}&betId=${props._id}` :`/bet/${row._id}`} ><Button variant='outlined' >Option</Button></Link> }
