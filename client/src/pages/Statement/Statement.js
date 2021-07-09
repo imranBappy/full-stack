@@ -6,6 +6,9 @@ import Bet from '../../components/Bet/Bet';
 import data from '../../data/statement';
 import Transaction from '../../components/Transaction/Transaction';
 import TransactionInput from '../../components/TransactionInput/TransactionInput';
+import BalanceTransfer from '../../components/BalanceTransfer/BalanceTransfer';
+import Setting from '../../components/Setting/Setting';
+import BalanceTransferFrom from '../../components/BalanceTransfer/BalanceTransferFrom';
 const Statement = () => {
     return (
         <div>
@@ -16,7 +19,18 @@ const Statement = () => {
             <PrivateRoute path='/statement/withdraw'>
                 <TransactionInput transaction ='withdraw' />
             </PrivateRoute>
-
+            <PrivateRoute path='/statement/deposit'>
+                <TransactionInput transaction ='deposit' />
+            </PrivateRoute>
+            <PrivateRoute path='/statement/transfer'>
+                <BalanceTransfer />
+            </PrivateRoute>
+            <PrivateRoute path='/statement/send-transfer'>
+                <BalanceTransferFrom/>
+            </PrivateRoute>
+            <PrivateRoute path='/statement/setting'>
+                <Setting />
+            </PrivateRoute>
         </div>
     );
 };

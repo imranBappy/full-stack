@@ -20,7 +20,7 @@ import AddClub from '../Club/AddClub';
 import Admin from '../Admin/Admin';
 import AddAdmin from '../Admin/AddAdmin';
 import BetList from '../BetList/BetList';
-import TransactionInput from '../TransactionInput/TransactionInput';
+import Deposit from '../Deposit/Deposit';
 import Withdraw from '../Withdraw/Withdraw';
 import GameFinish from '../GameFinish/GameFinish';
 import Option from '../Option/Option';
@@ -70,8 +70,8 @@ function Dashboard(props) {
         <PrivateRoute path='/bet-list'>
           <BetList/>
         </PrivateRoute>
-        <PrivateRoute path='/TransactionInput'>
-          <TransactionInput/>
+        <PrivateRoute path='/deposit'>
+          <Deposit/>
         </PrivateRoute>
         <PrivateRoute path='/withdraw'>
           <Withdraw/>

@@ -5,9 +5,8 @@ const LiveEffect = () => {
     return (
         <div>
             <div className="container">
-                <div>
+                <div className="live-effect-container">
                     <span className='live-text' >Live</span>
-                    {/* <h1>Live Effect</h1> */}
                     <span className='live-effect' ></span>
                 </div>
             </div>

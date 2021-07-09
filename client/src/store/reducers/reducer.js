@@ -4,6 +4,8 @@ import clubReducer from "./clubReducer";
 import gameReducer from './gameReducer';
 import betReducer from './betReducer';
 import TransactionReducer from './TransactionReducer';
+import balanceTransferReducer from './balanceTransferReducer';
+
 const { combineReducers } = require("redux");
 
 const reducer = combineReducers({
@@ -12,7 +14,8 @@ const reducer = combineReducers({
     club: clubReducer,
     game: gameReducer,
     bet: betReducer,
-    transaction: TransactionReducer
+    transaction: TransactionReducer,
+    transfer:balanceTransferReducer
 })
 
 export default reducer

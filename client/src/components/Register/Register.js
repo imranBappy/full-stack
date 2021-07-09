@@ -180,9 +180,9 @@ const Register = (props) => {
         }
     }
     return (
-        <div>
+        <div className="container">
            
-                <div className="container">
+                <div className="register">
                     <h1 style={{marginBottom:5}} >Register</h1>
                     <p>Please fill in this form to create an account.</p>
                     <hr/>
@@ -250,7 +250,6 @@ const Register = (props) => {
                                 <option key={club._id} value={club._id}>{club.name}</option>
                             ))
                         }
-                
                     </select>
 
                     <label htmlFor="password"><b>Password</b></label>

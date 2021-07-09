@@ -5,6 +5,7 @@ const gameRoute = require('./gameRoute');
 const betRoute = require('./betRoute');
 const clubRoute = require('./clubRoute');
 const usersBetRoutes = require('./usersBetRoutes');
+const balanceTransferRoutes = require('./balanceTransferRoutes');
 
 
 const routes = [
@@ -15,6 +16,8 @@ const routes = [
     {path:'/bet', router: betRoute},
     {path:'/club', router: clubRoute},
     {path:'/usersbet', router: usersBetRoutes},
+    {path:'/transfer', router: balanceTransferRoutes},
+
 ];
 
 const setRoutes = app =>{

@@ -19,7 +19,7 @@ const Modal = () => {
             <div id="myModal" style={open} class="modal">
                 <div class="modal-content">
                     <span onClick={closeModal} class="close">&times;</span>
-                    {open.component === 'TransactionInput' && <TransactionInput transaction ='TransactionInput' />}
+                    {open.component === 'TransactionInput' && <TransactionInput transaction ='deposit' />}
                     {open.component === 'bet' && <BetInput/>}
                 </div>
             </div>

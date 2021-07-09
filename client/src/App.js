@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Layout, {Statement, PrivateRoute, Dashboard, Home, _Login, _Signup, _Wallet} from './components/Layout/Layout';
+import Layout, {Statement, PrivateRoute, Home, _Login, _Signup} from './components/Layout/Layout';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
 
 const App = () => {
   return (
@@ -13,9 +15,13 @@ const App = () => {
           <PrivateRoute path='/statement' >
             <Statement/>
           </PrivateRoute>
-          <PrivateRoute path="/dashboard">
-            <Dashboard/>
-          </PrivateRoute>
+
+          <Route path="/about">
+            <About/>
+          </Route>
+          <Route path="/contact">
+            <Contact/>
+          </Route>
         </Layout>
       
     </>

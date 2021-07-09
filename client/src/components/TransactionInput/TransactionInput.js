@@ -22,7 +22,7 @@ const TransactionInput = (props) => {
         method:'',
     });
     useEffect(() =>{ 
-        if(props.user.balance < 100) {
+        if(props.user.balance < 100 &&props.transaction === 'withdraw') {
             setTransactionInput({...TransactionInput, message:'There is not enough balance'})
             setError({...error, amount: 'There is not enough balance'});
         }

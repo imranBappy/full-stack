@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import { logoutAction } from '../../store/actions/authAction';
 import Alert from '../Alert/Alert';
@@ -9,6 +9,8 @@ import { ModalContext } from '../Layout/Layout';
 import './media.css';
 import './Navbar.css';
 const Navbar = (props) => {
+    const location = useLocation();
+    console.log();
     const {alert, auth} = props;
     const [menu, setMenu] = useState(false)
     const [, setOpen] = useContext(ModalContext)
@@ -42,7 +44,7 @@ const Navbar = (props) => {
 
                             <li>
                                 <Link to={auth.isAuthenticated ? '/statement' : '/login'}>
-                                {auth.isAuthenticated ? 'Profile' : 'Login'}
+                                {auth.isAuthenticated ? 'Dashboard' : 'Login'}
                                 </Link>
                             </li>
                             {
@@ -53,9 +55,9 @@ const Navbar = (props) => {
                         </ul>
                     </div>
                     <div className="icon-aria">
-                            <div className="icon">
-                                <img onClick={handleClick} src="https://img.icons8.com/android/24/000000/menu.png"/>
-                            </div>
+                        <div className="icon">
+                            <img onClick={handleClick} src="https://img.icons8.com/android/24/000000/menu.png"/>
+                        </div>
                         <Link to="/">
                             <img src={logo} alt="icon"/>
                         </Link>
@@ -64,9 +66,10 @@ const Navbar = (props) => {
             </nav>
         </div>
         {
+            location.pathname === '/' ?
              auth.isAuthenticated ? 
              <div className="login-aria">
-                <div><button onClick={()=> setOpen({display: 'block', component:'TransactionInput'})} >TransactionInput</button></div>
+                <div onClick={()=> setOpen({display: 'block', component:'TransactionInput'})} ><button >Deposit</button></div>
                 <div><button >Balance: {auth.user.balance}</button></div>
             </div>
             :
@@ -74,17 +77,16 @@ const Navbar = (props) => {
                 <div><Link to="/login">Login</Link></div>
                 <div><Link to="/register">Register</Link></div>
             </div>
+            :''
          }
          </header>
          {
              menu ? 
-         
          <div className="menu" >
             <ul>
                 {
                     auth.isAuthenticated ?<>
-                    <li><Link to="/statement">Statement</Link></li>
-                    <li><Link to="/setting">Setting</Link></li>
+                    <li><Link to="/statement">Dashboard</Link></li>
                     <li><Link to="/about">About</Link></li>
                             <li><Link to="/contact">Contact</Link></li>
                     </> : <>

@@ -5,8 +5,8 @@
     grid-template-columns:  repeat(6, auto);
 }
 .scroll-bar>ul>li{
-    min-width: 100px;
-    margin: 2px;
+    min-width: 110px;
+    margin-right: 2px;
 }
 .scroll-bar>ul>li>a>button{
     width: 100%;

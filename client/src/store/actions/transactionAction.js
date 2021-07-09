@@ -2,7 +2,6 @@ import * as Types from './types';
 import axios from 'axios';
 export const TransactionInputRequestAction = (TransactionInput, user) => async dispatch => {
     try {
-        
         const res = await axios.post('/transaction/add', {...TransactionInput, user: user._id});
         if (TransactionInput.transaction === 'withdraw' && res.data.error === false) {
             user.balance = user.balance - Number(TransactionInput.amount)

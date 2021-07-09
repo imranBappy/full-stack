@@ -38,7 +38,9 @@ const Home = (props) => {
                         <LiveEffect/>
                         <LiveGame handleModel={handleModel} game={live} />
                         <div className="container">
-                            <span className='upcoming-text'>Upcoming</span>
+                           <div style={{padding:'13px 0px'}}>
+                                <span className='upcoming-text'>Upcoming</span>
+                           </div>
                         </div>
                         <UpcomingGame game={upcoming} />
                     </div>

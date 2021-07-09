@@ -60,6 +60,8 @@ const Table = ({columns, rows, action, path, length}) => {
                                             const value = row[column.id]
                                             return (<td>{
                                                 column.id === 'createdAt' ? new Date(value).toLocaleString():
+                                                column.id === 'name' && path === '/transfer' ? row.to.name:
+                                                column.id === 'username' && path === '/transfer' ? row.to.username:
                                                 column.id === 'game' ? value.name :
                                                 column.id === 'bet' ? value.title :
                                                 column.id === 'result' ? value.question :

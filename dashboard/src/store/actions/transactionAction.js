@@ -1,10 +1,11 @@
 import * as Types from './types';
 import axios from 'axios';
-export const allTransactionInputGetAction = (page, transaction) => async dispatch =>{
+export const allTransactionGetAction = (page, transaction) => async dispatch =>{
     try {
         const res = await axios.get(`/transaction?transaction=${transaction}&page=${page}`);
+        console.log(transaction);
         dispatch({
-            type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_TransactionInput,
+            type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
             payload:{
                 transaction: res.data.transaction,
                 length: res.data.length,
@@ -21,16 +22,16 @@ export const allTransactionInputGetAction = (page, transaction) => async dispatc
     }
 }
 
-export const TransactionInputAcceptAction = (TransactionInput,index, rows, length, status, path) => async dispatch =>{
+export const transactionAcceptAction = (transaction,index, rows, length, status, path) => async dispatch =>{
     try {
-        if (TransactionInput.status === status) return dispatch({
+        if (transaction.status === status) return dispatch({
             type: Types.SET_ALERT,
             payload:{
-                message: `Al ready TransactionInput ${status}`,
+                message: `Al ready transaction ${status}`,
                 error: false
             }
         });
-        const updateTransaction = await axios.patch(`/transaction/update-transaction/${TransactionInput._id}?status=${TransactionInput.status}&userId=${TransactionInput.user._id}`);
+        const updateTransaction = await axios.patch(`/transaction/update-transaction/${transaction._id}?status=${transaction.status}&userId=${transaction.user._id}`);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -40,7 +41,7 @@ export const TransactionInputAcceptAction = (TransactionInput,index, rows, lengt
         })
         rows.splice(index, 1,updateTransaction.data.transaction )
         dispatch({
-            type: path==='/withdraw'? Types.SET_WITHDRAW: Types.SET_TransactionInput,
+            type: path==='/withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
             payload:{
                 transaction: rows,
                 length,

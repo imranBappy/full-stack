@@ -6,7 +6,7 @@ import betReducer from "./betReducer";
 import clubReducer from "./clubReducer";
 import gameReducer from "./gameReducer";
 import userReducer from "./userReducer";
-import TransactionInputReducer from "./TransactionInputReducer";
+import depositReducer from "./depositReducer";
 import userBetReducer from './userBetReducer';
 import withReducer from './withReducer';
 
@@ -19,7 +19,7 @@ const reducers = combineReducers({
     bet: betReducer,
     club: clubReducer,
     admin: adminReducer,
-    TransactionInput: TransactionInputReducer,
+    deposit: depositReducer,
     userBet: userBetReducer,
     withdraw:withReducer
 })

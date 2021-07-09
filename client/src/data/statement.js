@@ -9,11 +9,15 @@ const data = () =>([
     },
     {
         name: 'Transaction',
-        path:'/statement/Transaction?page=0'
+        path:'/statement/transaction?page=0'
     },
     {
-        name: 'Withdraw',
-        path:'/statement/withdraw'
+        name: 'Transfer',
+        path:'/statement/transfer?page=0'
+    },
+    {
+        name: 'Setting',
+        path:'/statement/setting'
     }
 ]);
 export default data

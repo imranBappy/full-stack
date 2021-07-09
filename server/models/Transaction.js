@@ -22,7 +22,7 @@ const transactionSchema = new Schema({
     transaction:{
         type: String,
         required: true,
-        enum:['TransactionInput', 'withdraw']
+        enum:['deposit', 'withdraw']
     },
     status:{
         type: String,

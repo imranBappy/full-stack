@@ -50,7 +50,7 @@ button:hover {
 }
 
 /* Add padding to container elements */
-.container {
+.register {
   padding: 16px;
 }
 
@@ -83,7 +83,7 @@ button:hover {
 }
 
 @media only screen and (max-width: 800px){
-  .container{
+  .register{
     width: 100%;
   }
 }
