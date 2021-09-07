@@ -22,7 +22,6 @@ function InfoTable(props) {
     let query = useQuery(useLocation);
     const history = useHistory()
     let { gameId } = useParams()
-    console.log(props.rows);
     const [page, setPage] = useState(Number(query.get('page')));
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const handleChangePage = (event, newPage) => {
@@ -30,7 +29,6 @@ function InfoTable(props) {
         history.push(`${props.path}?page=${newPage}`);
         changePage(newPage);
     };
-
     const changePage = (p) =>{
         props.action(p, myLocation.pathname.split('/')[1]);
     };
@@ -76,7 +74,7 @@ function InfoTable(props) {
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {
-                              column.id === 'user' && props.path === '/bet' ? value.length:
+                              column.id === 'user' && props.path === '/bet' ? value ? value.length : 0 :
                               column.id === 'club' ? value.clubId :
                               column.id === 'user' && props.path === '/club' ? value.length :
                               column.id === 'user' ? value.username :
@@ -150,7 +148,23 @@ function InfoTable(props) {
                                 variant="outlined" >
                                   {value? 'Active': 'Inactive'}
                               </Button>
-                            :
+                            :column.id === 'action' && props.path === '/add-admin' ? 
+                            <Button
+                            onClick={()=>{props.adminDeleteAction(row)}}
+                                style={{ width: 100 }}
+                                color={"secondary"} 
+                                variant="outlined" >
+                                  Delete
+                              </Button>:
+                              column.id === 'isAdmin' && props.path === '/add-admin' ? 
+                              <Button
+                                  onClick={()=>props.adminEditAction(row)}
+                                  style={{ width: 100 }}
+                                  color={"primary"} 
+                                  variant="outlined" >
+                                    {value? 'Admin': 'Editor'}
+                                </Button>:
+                            // 
                               column.id === 'sName'? value? value.username :'null' :
                               column.id === 'game' ? `${value.country1} VS ${value.country2}- ${value.name}`:
                               column.id === 'bet' ? value.title:

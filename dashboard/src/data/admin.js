@@ -13,6 +13,10 @@ const columns = () =>([
         id: 'isAdmin', 
         label: 'isAdmin',
     },
+    { 
+        id: 'action', 
+        label: 'Action',
+    },
 ]);
   
   export default columns

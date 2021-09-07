@@ -41,3 +41,59 @@ export const loadAdminAction = () => async dispatch => {
         })
     }
 }
+
+export const adminDeleteAction = (admin,) => async dispatch => {
+    try {
+        const res = await axios.delete(`/admin/delete?_id=${admin._id}`);
+        dispatch({
+            type: Types.SET_ADMIN,
+            payload:{
+                admin: res.data.data
+            }
+        });
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Admin Successfully deleted',
+                error: false
+            }
+        })
+
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
+        })
+    }
+}
+
+export const adminEditAction = (admin) => async dispatch => {
+    try {
+        const res = await axios.put(`/admin/change?_id=${admin._id}&admin=${admin.isAdmin? 0 : 1}`);
+        dispatch({
+            type: Types.SET_ADMIN,
+            payload:{
+                admin: res.data.data
+            }
+        });
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Admin Successfully deleted',
+                error: false
+            }
+        })
+
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Server was a side error',
+                error: true
+            }
+        })
+    }
+}

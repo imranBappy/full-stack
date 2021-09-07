@@ -92,3 +92,36 @@ export const logoutAction = () => dispatch =>{
             }
     })
 }
+export const changePassAction = (pass) => async dispatch =>{
+    try {
+        const result = await axios.put('/user/login', pass);
+        const token = localStorage.getItem('token')
+        if (token) {
+            localStorage.removeItem('token');
+        }
+    
+            dispatch({
+                type: Types.SET_USER,
+                payload:{
+                    auth: false,
+                    user:{},
+                    token: ''
+                }
+            })
+            dispatch({
+                type: Types.SET_ALERT,
+                payload:{
+                    message: result.data.message,
+                    error: false
+                }
+        })
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload:{
+                message: 'Server Error',
+                error: false
+            }
+    })
+    }
+}

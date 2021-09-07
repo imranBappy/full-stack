@@ -67,8 +67,18 @@ exports.loginPostController = async (req, res, next)=>{
 
 exports.changePasswordPutController = async (req, res, next) =>{
     try {
-        const hash = await bcrypt.hash(req.body.password, 10)
-        await User.findOneAndUpdate({username: req.body.username},{$set:{password: hash}})
+        const user = await User.findById(req.user)
+        const result = await bcrypt.compare( req.body.pass ,user.password)
+        if (result) {
+            if (req.body.newPass.length < 5) {
+                return res.json({
+                    message: 'Please input valid password',
+                    error: true
+                })
+            }
+        }
+        const hash = await bcrypt.hash(req.body.newPass, 10)
+        await User.findOneAndUpdate({_id: req.user},{$set:{password: hash}})
         res.json({
             message: 'Password Changed Successfully!'
         })

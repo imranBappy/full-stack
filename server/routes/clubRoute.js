@@ -3,7 +3,8 @@ const isAuthenticated = require('../middlewares/isAuthenticated');
 const {
     clubPortController,
     rankingClubGetController,
-    clubGetController
+    clubGetController,
+    clubUpdatePutController
  } = require('../controllers/clubController');
 
 
@@ -11,7 +12,7 @@ const {
 router.post('/add-club', isAuthenticated, clubPortController );
 router.get('/get-ranking-club' , rankingClubGetController );
 router.get('/get-all-club', clubGetController );
-
+router.put('/update', isAuthenticated, clubUpdatePutController );
 
 
 module.exports = router

@@ -15,7 +15,6 @@ const App = () => {
           <PrivateRoute path='/statement' >
             <Statement/>
           </PrivateRoute>
-
           <Route path="/about">
             <About/>
           </Route>

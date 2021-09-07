@@ -21,6 +21,7 @@ function User(props) {
     const page = Number(query.get('page')) ||0 ;
     useEffect(()=>{
       props.getUserAction(page);
+      
     },[]);
   return (
           <>

@@ -1,4 +1,4 @@
-const { adminPostController, adminGetController, adminPutController, adminPostLoginController, singleAdminGetController } = require('../controllers/adminController')
+const { adminPostController, adminGetController,adminDeleteController, adminPutController, adminPostLoginController, singleAdminGetController } = require('../controllers/adminController')
 const { dashboardGetController } = require('../controllers/dashboard')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
@@ -10,6 +10,8 @@ router.post('/login', adminPostLoginController )
 router.get('/all-admin',isAuthenticated,  adminGetController )
 router.get('/single-user/:userId',isAuthenticated, singleAdminGetController )
 router.put('/change',isAuthenticated, adminPutController )
+router.delete('/delete',isAuthenticated, adminDeleteController )
+
 
 
 

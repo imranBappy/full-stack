@@ -11,7 +11,7 @@ const Bet = (props) => {
     useEffect(() =>{
         props.betGetAction(query.get('page'))
     },[])
-    
+    console.log('bet')
     return (
         <div  class="container">
             <Table

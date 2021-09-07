@@ -77,18 +77,56 @@ exports.userBetStatusUpdateController = async (req, res, next) =>{
 exports.userBetGetController = async (req, res, next) =>{
     try {
         const page = req.query.page || 0 ;
+        
         const userBetLength = await UserBet.find({user:req.user});
         const userBets = await UserBet.find({user:req.user})
             .populate('game', 'name country1 country2')
             .populate('bet', 'title')
             .populate('result', 'question rate status')
-            .skip( 5 * Number(page))
+            .skip( 5 * Number(page)).limit(5)
             .sort('-createdAt')
             .select({
                 __v:0,
                 updatedAt:0
             });
         res.json({bet:userBets, length: userBetLength.length})
+    } catch (error) {
+        next(error)   
+    }
+}
+
+exports.userClubBetGetController = async (req, res, next) =>{
+    const page = req.query.page || 0;
+    try {
+        let newBet = []
+        const betsLength = await UserBet.find({})
+        const bet = await UserBet.find({})
+        .populate({
+            path:'user',
+            select:'username',
+            populate:{
+                path:'club',
+                select:'clubId'
+            }
+        })
+        .populate('game', 'name country1 country2')
+        .populate('bet', 'title')
+        .populate('result', 'question rate status')
+        .sort('-createdAt')
+        // .skip(5* Number(page)).limit(10)
+
+        for (let i = 0; i < bet.length; i++) {
+            const obj = bet[i];
+            
+                    if (obj['user'].club.clubId ===req.query.club) {
+                        newBet = [...newBet, obj]
+                    }
+               
+        }
+        const result = newBet.splice(5 * Number(page),5)
+        console.log({result, length: newBet});
+
+        res.json({result, length: betsLength.length});
     } catch (error) {
         next(error)   
     }

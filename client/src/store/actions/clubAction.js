@@ -18,3 +18,22 @@ export const clubAction = () => async dispatch =>{
         })
     }
 }
+export const clubUpdateAction = (club) => async dispatch =>{
+    try {
+        const res = await axios.put(`http://localhost:4000/club/update?club=${club}`);
+        console.log(res.data)
+        dispatch({
+            type: Types.SET_ALERT,
+            payload: {
+                message:res.data.message, error: res.data.error
+            }
+        })
+    } catch (error) {
+        dispatch({
+            type: Types.SET_ALERT,
+            payload: {
+                message:'There was an error', error: true
+            }
+        })
+    }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import './ScrollBar.css';
 import { useLocation } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 const ScrollBar = (props) => {
     const location = useLocation();
     return (
@@ -11,8 +12,9 @@ const ScrollBar = (props) => {
                 {
                     props.data.map((i, n)=>{
                         const path = i.path.split('?')
+                        console.log(path[0]);
                         return(
-                            <li key={i.path+n}>
+                            <li style={props.user.isClubHolder ? {}  :  path[0] ==='/statement/club-holder'?{display: 'none'}:{} } key={i.path+n}>
                                 <Link to={i.path}>
                                     <button
                                         style={location.pathname === path[0] ? {background:'orangered'}: {background:'white'}}
@@ -28,5 +30,7 @@ const ScrollBar = (props) => {
        </div>
     );
 };
-
-export default ScrollBar;
+const mapStateToProps = state =>({
+    user: state.auth.user
+})
+export default connect(mapStateToProps)(ScrollBar) ;

@@ -8,7 +8,7 @@ const Table = ({columns, rows, action, path, length}) => {
     const history = useHistory()
     const [page, setPage] = useState(0);
     const [totalPage, setTotalPage] = useState(0)
-    
+    // console.log(rows);
     useEffect(()=>{
         if (query.get('page')){
             setPage(Number(query.get('page')));
@@ -16,7 +16,6 @@ const Table = ({columns, rows, action, path, length}) => {
             if (rows.length === 5) {
                 setTotalPage((page+1)*5)
             }else{
-                console.log((Number(query.get('page'))*5) + rows.length);
                 setTotalPage((page*5)+rows.length)
             }
         }
@@ -53,6 +52,7 @@ const Table = ({columns, rows, action, path, length}) => {
                     </tr>
                     {
                         rows.map((row) =>{
+                            // console.log(row);
                             return (
                                 <tr>
                                     {
@@ -62,12 +62,15 @@ const Table = ({columns, rows, action, path, length}) => {
                                                 column.id === 'createdAt' ? new Date(value).toLocaleString():
                                                 column.id === 'name' && path === '/transfer' ? row.to.name:
                                                 column.id === 'username' && path === '/transfer' ? row.to.username:
+                                                column.id === 'username' && path === '/club-holder' ? row.user.username:
+                                                column.id === 'status' && path ==='/club-holder' ? row.result.status  :
                                                 column.id === 'game' ? value.name :
                                                 column.id === 'bet' ? value.title :
                                                 column.id === 'result' ? value.question :
                                                 column.id === 'rate' ? row.result.rate :
                                                 column.id === 'status' && path ==='/bet' ? row.result.status  :
                                                 value
+                                                
                                                 }</td>)
                                         })
                                     }

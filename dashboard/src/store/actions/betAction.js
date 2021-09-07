@@ -77,7 +77,9 @@ export const betActionAction = (bet, index, bets) => async dispatch => {
                 error: response.data.error
             }
         });
+        console.log(index, 1, response.data.bet);
         bets.splice(index, 1, response.data.bet);
+        console.log(bets);
         dispatch({
             type: Types.SET_BET,
             payload: {

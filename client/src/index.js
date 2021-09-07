@@ -15,7 +15,6 @@ const token = localStorage.getItem('token');
 
       
 if (token) {
-    
     store.dispatch({
       type: Types.SET_USER,
       payload:{

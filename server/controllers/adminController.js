@@ -79,5 +79,37 @@ exports.adminGetController = async (req, res, next) =>{
     }
 }
 exports.adminPutController = async (req, res, next) =>{
-    
+    try {
+        await Admin.findByIdAndUpdate(req.query._id,{$set:{isAdmin: !!Number(req.query.admin) }})
+        const allAdmin = await Admin.find({}).select({
+            password: 0,
+            __v:0,
+            createdAt:0,
+            updatedAt:0
+        })
+
+        res.json({
+            data: allAdmin
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+}
+exports.adminDeleteController = async (req, res, next) =>{
+    try {
+        await Admin.findByIdAndDelete(req.query._id)
+        const allAdmin = await Admin.find({}).select({
+            password: 0,
+            __v:0,
+            createdAt:0,
+            updatedAt:0
+        })
+
+        res.json({
+            data: allAdmin
+        })
+    } catch (error) {
+        next(error)
+    }
 }

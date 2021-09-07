@@ -52,9 +52,8 @@ app.use((error, req, res, next)=>{
 
 
 
-
 const port = process.env.PORT || 4000
-const mongoURI = process.env.MONGODB_URI || `mongodb://localhost:27017/bdGames`;
+const mongoURI = `mongodb+srv://${process.env.BD_USER}:${process.env.DB_PASS}@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`
 
 app.listen(port,()=>{
     mongoose.connect(mongoURI,{useNewUrlParser:true, useUnifiedTopology:true}, ()=>{
@@ -62,3 +61,5 @@ app.listen(port,()=>{
         console.log(`http://localhost:${port}`);
     })
 })
+
+var connectionString = `mongodb+srv://day20:sKia5oUhAVLZPjYL@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`

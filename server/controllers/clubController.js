@@ -18,6 +18,9 @@ exports.clubPortController = async (req, res, next) =>{
                 error: true
             })
         }
+        await User.findOneAndUpdate({username: req.body.clubHolder},{$set:{
+            isClubHolder: true
+        }})
 
         const newClub =  new Club(req.body);
         await newClub.save();
@@ -56,6 +59,19 @@ exports.rankingClubGetController = async (req, res, next) =>{
         })
         res.json({
             club
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+exports.clubUpdatePutController = async (req, res, next) =>{
+    try {
+        await User.findByIdAndUpdate(req.user,{$set:{
+            club:req.query.club
+        }})
+        res.json({
+            message:"Updated Successfully",
+            error:false,
         })
     } catch (error) {
         next(error)

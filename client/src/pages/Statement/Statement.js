@@ -7,9 +7,12 @@ import data from '../../data/statement';
 import Transaction from '../../components/Transaction/Transaction';
 import TransactionInput from '../../components/TransactionInput/TransactionInput';
 import BalanceTransfer from '../../components/BalanceTransfer/BalanceTransfer';
-import Setting from '../../components/Setting/Setting';
+import Password from '../../components/Password/Password';
 import BalanceTransferFrom from '../../components/BalanceTransfer/BalanceTransferFrom';
-const Statement = () => {
+import ChangeClub from './../../components/ChangeClub/ChangeClub';
+import ClubHolder from '../../components/ClubHolder/ClubHolder';
+import { connect } from 'react-redux';
+const Statement = (props) => {
     return (
         <div>
             <ScrollBar data={data()}/>
@@ -28,11 +31,19 @@ const Statement = () => {
             <PrivateRoute path='/statement/send-transfer'>
                 <BalanceTransferFrom/>
             </PrivateRoute>
-            <PrivateRoute path='/statement/setting'>
-                <Setting />
+            <PrivateRoute path='/statement/password'>
+                <Password />
+            </PrivateRoute>
+            <PrivateRoute path='/statement/club'>
+                <ChangeClub />
+            </PrivateRoute>
+            <PrivateRoute path='/statement/club-holder'>
+                <ClubHolder/>
             </PrivateRoute>
         </div>
     );
 };
-
-export default Statement;
+const mapStateToProps = state =>({
+    user: state.auth.user
+})
+export default connect(mapStateToProps)(Statement) ;

@@ -2,12 +2,11 @@
 import React, { useEffect } from 'react';
 import Table from '../Table/Table';
 import {connect} from 'react-redux';
-import { loadAdminAction } from '../../store/actions/adminAction';
+import { adminEditAction, loadAdminAction } from '../../store/actions/adminAction';
 import columns from '../../data/admin';
+import { adminDeleteAction } from './../../store/actions/adminAction';
 const Admin = (props) => {
-    const action = () =>{
-        
-    }
+    
     useEffect(() => {
         props.loadAdminAction()
     }, []);
@@ -18,9 +17,11 @@ const Admin = (props) => {
                 rows = {props.admin}
                 length={props.admin.length}
                 path='/add-admin'
-                action = {action}
+                action = {() =>{}}
                 btnName = {'Add Admin'}
                 btnPath = {`/add-admin`}
+                adminDeleteAction={props.adminDeleteAction}
+                adminEditAction={props.adminEditAction}
             />
         </div>
     );
@@ -28,4 +29,4 @@ const Admin = (props) => {
 const mapStateToProps = (state) =>({
     admin: state.admin.admin
 })
-export default connect(mapStateToProps, {loadAdminAction})(Admin) ;
+export default connect(mapStateToProps, {loadAdminAction,adminEditAction, adminDeleteAction})(Admin) ;

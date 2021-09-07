@@ -3,7 +3,9 @@ import * as Types from './types';
 
 export const getUserAction = page => async dispatch =>{
     try {
-        const user = await axios.get(`/user/?page=${page}`);
+        console.log({page});
+        const user = await axios.get(`/user?page=${page}`);
+        console.log(user.data.users);
         if (user.data) {
             dispatch({
                 type: Types.SET_USER,
