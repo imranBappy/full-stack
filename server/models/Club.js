@@ -14,6 +14,10 @@ const clubSchema = new Schema({
             ref: 'user'
         }
     ],
+    balance:{
+        type:Number,
+        required: true,
+    },
     clubId:{
         type: String,
         trim: true,

@@ -1,8 +1,11 @@
 const User = require('../models/User');
 const UserBet = require('../models/UserBet');
 const Result = require('../models/Result');
+const Rate = require('../models/Rate');
+const Club = require('../models/Club');
+
+
 exports.betPostController = async (req, res, next) =>{
-    // console.log(req.body);
     try {
         const user = await User.findById(req.user);
         if (!(user.balance >= req.body.amount)) return res.json({
@@ -17,6 +20,46 @@ exports.betPostController = async (req, res, next) =>{
         await User.findByIdAndUpdate(user._id,{
             balance: user.balance - Number(req.body.amount),
         });
+
+        // sRate
+        if (!user.sName) return res.json({
+            message: 'Bet send successfully!', error: false
+        });
+        const sUser = await User.find({_id:user.sName})
+        if (!sUser[0]) return res.json({
+            message: 'Bet send successfully!', error: false
+        });
+        
+        const rate = await Rate.findById('6138b5e469f2164564901407');
+        let balance = req.body.amount * rate.sponsor ;
+        let sponsorRateBalance = balance - req.body.amount
+        await User.findByIdAndUpdate(sUser[0]._id,{
+            balance: sUser[0].balance + sponsorRateBalance
+        });
+        // club rate
+
+        if (!user.club) return res.json({
+            message: 'Bet send successfully!', error: false
+        });
+
+        const club = await Club.findById(user.club)
+        if (!club) return res.json({
+            message: 'Bet send successfully!', error: false
+        });
+
+        const clubHolder = await User.find({username:club.clubHolder})
+        if (!clubHolder[0] && !clubHolder.isClubHolder) return res.json({
+            message: 'Bet send successfully!', error: false
+        })
+
+
+        let clubBalance = req.body.amount * rate.club ;
+        let clubRateBalance = clubBalance - req.body.amount
+        await User.findByIdAndUpdate(clubHolder[0]._id,{
+            balance: clubHolder[0].balance + clubRateBalance
+        });
+        await Club.findByIdAndUpdate(user.club,{balance:club.balance + clubRateBalance })
+       
         res.json({
             message: 'Bet send successfully!', error: false
         })
@@ -124,7 +167,6 @@ exports.userClubBetGetController = async (req, res, next) =>{
                
         }
         const result = newBet.splice(5 * Number(page),5)
-        console.log({result, length: newBet});
 
         res.json({result, length: betsLength.length});
     } catch (error) {

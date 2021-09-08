@@ -22,7 +22,7 @@ exports.clubPortController = async (req, res, next) =>{
             isClubHolder: true
         }})
 
-        const newClub =  new Club(req.body);
+        const newClub =  new Club({...req.body, balance:0});
         await newClub.save();
         res.json({
             message: 'Club Created Successfully',
@@ -50,13 +50,15 @@ exports.clubGetController = async (req, res, next) =>{
 }
 exports.rankingClubGetController = async (req, res, next) =>{
     try {
-        const club = await Club.find({}).select({
+        const club = await Club.find({})
+        .select({
             __v:0,
             createdAt:0,
             updatedAt:0,
             clubHolder:0,
             user: 0,
         })
+        club.sort(function(a, b){return b.balance - a.balance});
         res.json({
             club
         })
@@ -72,6 +74,27 @@ exports.clubUpdatePutController = async (req, res, next) =>{
         res.json({
             message:"Updated Successfully",
             error:false,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.singleClub = async (req, res, next) =>{
+    try {
+        console.log(req.params.id);
+        const club = await Club.findOne({clubHolder: req.params.id})
+        .select({
+            __v:0,
+            createdAt:0,
+            updatedAt:0,
+            clubHolder:0,
+            // user: 0,
+        })
+        console.log(club);
+       
+        res.json({
+            club
         })
     } catch (error) {
         next(error)

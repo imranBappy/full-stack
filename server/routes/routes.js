@@ -6,6 +6,7 @@ const betRoute = require('./betRoute');
 const clubRoute = require('./clubRoute');
 const usersBetRoutes = require('./usersBetRoutes');
 const balanceTransferRoutes = require('./balanceTransferRoutes');
+const optionRoutes = require('./optionRoutes');
 
 
 const routes = [
@@ -17,7 +18,7 @@ const routes = [
     {path:'/club', router: clubRoute},
     {path:'/usersbet', router: usersBetRoutes},
     {path:'/transfer', router: balanceTransferRoutes},
-
+    {path:'/option', router: optionRoutes},
 ];
 
 const setRoutes = app =>{

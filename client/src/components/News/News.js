@@ -1,7 +1,22 @@
 /* eslint-disable jsx-a11y/no-distracting-elements */
 import React from 'react';
 import './News.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import  axios  from 'axios';
+
 const News = () => {
+    const [news, setNews] = useState('')
+    useEffect(()=>{
+        axios.get('/option/news')
+        .then(res =>res)
+        .then(data=>{
+            if (data.data.data) {
+            setNews(data.data.data.news)
+                
+            }
+        })
+    },[])
     return (
         <>
         <div >
@@ -12,7 +27,7 @@ const News = () => {
                     </div>
                     <div className="right">
                         <marquee direction="left">
-                            This is head line
+                            {news}
                         </marquee>
                     </div>
                 </div>

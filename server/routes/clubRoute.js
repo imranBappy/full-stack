@@ -4,7 +4,8 @@ const {
     clubPortController,
     rankingClubGetController,
     clubGetController,
-    clubUpdatePutController
+    clubUpdatePutController,
+    singleClub
  } = require('../controllers/clubController');
 
 
@@ -12,6 +13,8 @@ const {
 router.post('/add-club', isAuthenticated, clubPortController );
 router.get('/get-ranking-club' , rankingClubGetController );
 router.get('/get-all-club', clubGetController );
+router.get('/:id', singleClub );
+
 router.put('/update', isAuthenticated, clubUpdatePutController );
 
 
