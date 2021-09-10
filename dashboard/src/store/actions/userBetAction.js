@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const userBetGetAction = (page) => async dispatch => {
     try {
-        const bet = await axios.get(`/usersbet?page=${page}`);
+        const bet = await axios.get(`https://day20.herokuapp.com/usersbet?page=${page}`);
         dispatch({
             type: Types.SET_USER_BET,
             payload:{
@@ -25,7 +25,7 @@ export const userBetGetAction = (page) => async dispatch => {
 export const betStatusAction = (result, resultIndex, allResult, c, status, singleBet, betIndex, allBet) => async dispatch => {
     try {
         result.status === 'Accepted' ? result.status = 'Win' : result.status = 'Loss'
-        const res = await axios.patch(`/usersbet/result-status-update?resultId=${result._id}&status=${result.status}`)
+        const res = await axios.patch(`https://day20.herokuapp.com/usersbet/result-status-update?resultId=${result._id}&status=${result.status}`)
         if (res.data.error) return dispatch({
             type: Types.SET_ALERT,
             payload:{

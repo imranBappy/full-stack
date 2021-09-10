@@ -11,7 +11,7 @@ const {
 
 
 router.post('/add-club', isAuthenticated, clubPortController );
-router.get('/get-ranking-club' , rankingClubGetController );
+router.get('/get-ranking-club', rankingClubGetController );
 router.get('/get-all-club', clubGetController );
 router.get('/:id', singleClub );
 

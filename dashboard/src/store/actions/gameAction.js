@@ -3,7 +3,7 @@ import * as Types from './types';
 
 export const gameAddAction = (game, history, data) => async dispatch =>{
     try {
-        const result = await Axios.post('/game/add', game);
+        const result = await Axios.post('https://day20.herokuapp.com/game/add', game);
         if(result.data.error)return dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -42,7 +42,7 @@ export const gameAddAction = (game, history, data) => async dispatch =>{
 
 export const gameLodeAction = page => async dispatch =>{
      try {
-        const loadGame = await Axios.get(`/game/get-all?page=${page}`)
+        const loadGame = await Axios.get(`https://day20.herokuapp.com/game/get-all?page=${page}`)
         if(loadGame.data.error){
             return dispatch({
                 type: Types.SET_ALERT,
@@ -74,7 +74,7 @@ export const gameLodeAction = page => async dispatch =>{
 export const gameStatusAction = (game , index, gameArr, length) => async dispatch => {
     try {
         game.status === 'Upcoming'? game.status = 'Live' : game.status = 'Upcoming'
-        const newGame = await Axios.patch('/game/game-update', game)
+        const newGame = await Axios.patch('https://day20.herokuapp.com/game/game-update', game)
         gameArr.splice(index, 1, newGame.data.result);
         dispatch({
             type: Types.SET_GAME,
@@ -104,7 +104,7 @@ export const gameActionAction = (game , index, gameArr, length) => async dispatc
     
     try {
         game.isActive ? game.isActive = false : game.isActive = true
-        const newGame = await Axios.patch('/game/game-update', game)
+        const newGame = await Axios.patch('https://day20.herokuapp.com/game/game-update', game)
         gameArr.splice(index, 1, newGame.data.result);
         dispatch({
             type: Types.SET_GAME,

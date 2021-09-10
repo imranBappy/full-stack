@@ -1,4 +1,5 @@
 {
+  "homepage": "https://admin.day20.net",
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
@@ -45,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "https://day20.herokuapp.com"
 }

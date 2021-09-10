@@ -39,7 +39,6 @@ function InfoTable(props) {
     useEffect(()=>{
         changePage(page);
     }, []); 
-    console.log(props.path)
   return (
       <>
       {props.btnName&& <Link style={{ textDecoration: 'none' }} to={props.btnPath}>

@@ -31,7 +31,7 @@ function Dashboard(props) {
   const classes = useStyles();
   const [open] = useContext(DrawerContext)
   return (
-    <div className={classes.root}>
+    <div style={{overflow: 'auto'}} className={classes.root}>
       
       <CssBaseline />
       <Sidevar/>

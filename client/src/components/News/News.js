@@ -8,7 +8,7 @@ import  axios  from 'axios';
 const News = () => {
     const [news, setNews] = useState('')
     useEffect(()=>{
-        axios.get('/option/news')
+        axios.get('https://day20.herokuapp.com/option/news')
         .then(res =>res)
         .then(data=>{
             if (data.data.data) {

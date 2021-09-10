@@ -12,7 +12,7 @@ const Option = () => {
     const [news, setNews] = useState('');
     const newSubmit = () =>{
         console.log(news);
-        axios.post('/option/news',{news})
+        axios.post('https://day20.herokuapp.com/option/news',{news})
         .then(res =>res)
         .then(data=>{
             store.dispatch({
@@ -25,7 +25,7 @@ const Option = () => {
         })
     }
     useEffect(()=>{
-        axios.get('/option/news')
+        axios.get('https://day20.herokuapp.com/option/news')
         .then(res =>res)
         .then(data=>{
             setNews(data.data.data.news)

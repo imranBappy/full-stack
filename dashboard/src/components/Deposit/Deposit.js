@@ -11,7 +11,6 @@ const Transaction = (props) => {
     let query = useQuery(useLocation);
     useEffect(() =>{
         props.allTransactionGetAction(query.get('page'), 'deposit');
-        console.log({deposit: 'deposit'});
     },[]);
     const acceptHandler = (...rest) =>{
         props.transactionAcceptAction(...rest)

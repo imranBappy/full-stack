@@ -8,6 +8,7 @@ import Alert from '../Alert/Alert';
 import { ModalContext } from '../Layout/Layout';
 import './media.css';
 import './Navbar.css';
+import menuIcon from '../../img/menu.webp'
 const Navbar = (props) => {
     const location = useLocation();
     console.log();
@@ -56,7 +57,7 @@ const Navbar = (props) => {
                     </div>
                     <div className="icon-aria">
                         <div className="icon">
-                            <img onClick={handleClick} src="https://img.icons8.com/android/24/000000/menu.png"/>
+                            <img onClick={handleClick} src={menuIcon}/>
                         </div>
                         <Link to="/">
                             <img src={logo} alt="icon"/>

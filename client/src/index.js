@@ -3,7 +3,7 @@ import jwt_decide from 'jwt-decode';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -24,7 +24,7 @@ if (token) {
       }
     })
     const decode = jwt_decide(token);
-    Axios.get(`/user/single-user/${decode._id}`,{
+    Axios.get(`https://day20.herokuapp.com/user/single-user/${decode._id}`,{
       	headers:{
           authorization: token
         }
@@ -64,11 +64,11 @@ if (token) {
 setAuthToken(token);
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store} >
         <App />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

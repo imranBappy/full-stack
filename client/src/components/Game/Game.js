@@ -26,7 +26,7 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
 
             {
                 game.map((main)=>
-                <div key={main._id} style={{marginBottom:10, border:'1px solid orangered'}}>
+                <div key={main._id} style={{marginBottom:10, border:'none'}}>
                 <h1 onClick={open} className={classNames}>
                     {`${main.country1} VS ${main.country2} ${main.name}`}
                 </h1>

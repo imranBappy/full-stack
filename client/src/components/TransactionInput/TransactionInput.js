@@ -5,6 +5,7 @@ import validateNumber from '../../utils/validateNumber';
 import {TransactionInputRequestAction} from '../../store/actions/transactionAction';
 import {ModalContext} from '../Layout/Layout';
 import  './TransactionInput.css';
+import axios from 'axios';
 const TransactionInput = (props) => {
     const methods = ['Bkash', 'Rocket', 'Nagad'];
     const [, setOpen] = useContext(ModalContext)
@@ -12,9 +13,11 @@ const TransactionInput = (props) => {
         amount: 100,
         type:'personal',
         method:'',
-        number:'',
+        number:'',trxId:'',
         transaction: props.transaction
     });
+    const [number, setNumber] = useState([])
+
     const [error, setError] = useState({
         amount: '',
         number:'',
@@ -26,6 +29,12 @@ const TransactionInput = (props) => {
             setTransactionInput({...TransactionInput, message:'There is not enough balance'})
             setError({...error, amount: 'There is not enough balance'});
         }
+        axios.get('/option/number').then(res=>res)
+        .then(data=>{
+            // console.log(data);
+            setNumber(data.data.data)
+            console.log(data.data.data);
+        })
      },[])
     const handelChange = e => {
         const name = e.target.name, value = e.target.value.trim();
@@ -108,6 +117,14 @@ const TransactionInput = (props) => {
 
     return (
         <div className='container'>
+            <ul style={{listStyle:'none'}}>
+                {
+                    number.map(n=><li>
+                        {n.method} {n.type} {n.number}
+                    </li>)
+                }
+            </ul>
+            <br />
             <input 
                 onChange={handelChange}
                 placeholder='Please Enter you amount' 
@@ -127,7 +144,7 @@ const TransactionInput = (props) => {
                 />
             {error.number && <p className='error' >{error.number}</p>}
             {
-                props.transaction === 'TransactionInput' &&<>
+                props.transaction === 'deposit' &&<>
                 <input 
                 onChange={handelChange} 
                 placeholder='Please Enter you TrxID' 

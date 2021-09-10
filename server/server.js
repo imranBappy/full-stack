@@ -15,7 +15,9 @@ origin = ${req.headers.origin}/${req.url}
     next()
 })
 // setRoute
-
+app.get('/', (req, res)=>{
+    res.send('hello world')
+})
 setRoutes(app);
 mongoose.set('useFindAndModify', false);
 
@@ -56,10 +58,5 @@ const port = process.env.PORT || 4000
 const mongoURI = `mongodb+srv://${process.env.BD_USER}:${process.env.DB_PASS}@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`
 
 app.listen(port,()=>{
-    mongoose.connect(mongoURI,{useNewUrlParser:true, useUnifiedTopology:true}, ()=>{
-        console.log(`Database is connected`);
-        console.log(`http://localhost:${port}`);
-    })
+    mongoose.connect(`mongodb+srv://day20:sKia5oUhAVLZPjYL@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`,{useNewUrlParser:true, useUnifiedTopology:true})
 })
-
-var connectionString = `mongodb+srv://day20:sKia5oUhAVLZPjYL@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`

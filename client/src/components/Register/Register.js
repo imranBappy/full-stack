@@ -169,7 +169,7 @@ const Register = (props) => {
                 phone:'',
                 username:'',
                 sName:'admin',
-                club:'60d8ae1798bab1f78ddf15d1',
+                club:'60ea8f82fcabd2314dca0779',
                 password:''
             })
         }else{
@@ -244,7 +244,7 @@ const Register = (props) => {
                     
                     <label htmlFor="club"><b>Select Club</b></label>
                     <select onChange={handleChange} name="club"  id="club" >
-                    <option value="60d8ae1798bab1f78ddf15d1">Select Club*</option>
+                    <option value="60ea8f82fcabd2314dca0779">Select Club*</option>
                         {
                             props.club.map(club=>(
                                 <option key={club._id} value={club._id}>{club.name}</option>
