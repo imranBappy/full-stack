@@ -121,6 +121,12 @@ body{
         font-weight: 200;
         padding: 11px 20px !important;
     }
+    div.header>nav>div.container {
+        grid-template-columns: 35% 30% 35%;
+    }
+    .container{
+        padding: 5px 10px;
+    }
 }
 .bet>h4>span{
     background-color: none!important;
@@ -138,4 +144,13 @@ body{
 .bet>h4>span
 {
     background-color: #24073800!important;
+}
+button{
+    border: 2px solid #6f12b3;
+}
+.btn-active{
+    background: #6f12b3 !important;
+}
+.login-aria button{
+    border: none
 }

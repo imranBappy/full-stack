@@ -29,13 +29,14 @@ const TransactionInput = (props) => {
             setTransactionInput({...TransactionInput, message:'There is not enough balance'})
             setError({...error, amount: 'There is not enough balance'});
         }
-        axios.get('/option/number').then(res=>res)
-        .then(data=>{
-            // console.log(data);
-            setNumber(data.data.data)
-            console.log(data.data.data);
-        })
-     },[])
+        console.log(props.user.balance > -1);
+        if (props.user.balance > -1) {
+          axios.get('/option/number').then(res=>res)
+            .then(data=>{
+                setNumber(data.data.data)
+            })  
+        }
+     },[props.user.balance])
     const handelChange = e => {
         const name = e.target.name, value = e.target.value.trim();
         switch(name){

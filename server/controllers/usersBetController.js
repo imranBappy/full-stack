@@ -3,7 +3,7 @@ const UserBet = require('../models/UserBet');
 const Result = require('../models/Result');
 const Rate = require('../models/Rate');
 const Club = require('../models/Club');
-
+const isNumber = require('../utils/isNumber')
 
 exports.betPostController = async (req, res, next) =>{
     try {
@@ -18,7 +18,7 @@ exports.betPostController = async (req, res, next) =>{
         const bet = new UserBet({...req.body, user: user._id, win: false})
         await bet.save();
         await User.findByIdAndUpdate(user._id,{
-            balance: user.balance - Number(req.body.amount),
+            balance: isNumber(user.balance - Number(req.body.amount))
         });
 
         // sRate
@@ -34,7 +34,7 @@ exports.betPostController = async (req, res, next) =>{
         let balance = req.body.amount * rate.sponsor ;
         let sponsorRateBalance = balance - req.body.amount
         await User.findByIdAndUpdate(sUser[0]._id,{
-            balance: sUser[0].balance + sponsorRateBalance
+            balance: isNumber(sUser[0].balance + sponsorRateBalance) 
         });
         // club rate
 
@@ -56,10 +56,10 @@ exports.betPostController = async (req, res, next) =>{
         let clubBalance = req.body.amount * rate.club ;
         let clubRateBalance = clubBalance - req.body.amount
         await User.findByIdAndUpdate(clubHolder[0]._id,{
-            balance: clubHolder[0].balance + clubRateBalance
+            balance: isNumber(clubHolder[0].balance + clubRateBalance)
         });
-        await Club.findByIdAndUpdate(user.club,{balance:club.balance + clubRateBalance })
-       
+
+        const res = await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
         res.json({
             message: 'Bet send successfully!', error: false
         })
@@ -98,7 +98,7 @@ exports.userBetStatusUpdateController = async (req, res, next) =>{
             const userBets = await UserBet.find({user: user._id, result: result._id});
             let userBalance = user.balance;
             for (let j = 0; j < userBets.length; j++) {
-                userBalance += Number(userBets[j].amount) * Number(result.rate);
+                userBalance += isNumber(Number(userBets[j].amount) * Number(result.rate)) 
             };
             if (status === 'Win') {
                 await User.findByIdAndUpdate(user._id,{

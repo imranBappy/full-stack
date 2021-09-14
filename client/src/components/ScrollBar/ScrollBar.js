@@ -12,12 +12,11 @@ const ScrollBar = (props) => {
                 {
                     props.data.map((i, n)=>{
                         const path = i.path.split('?')
-                        console.log(path[0]);
                         return(
                             <li style={props.user.isClubHolder ? {}  :  path[0] ==='/statement/club-holder'?{display: 'none'}:{} } key={i.path+n}>
                                 <Link to={i.path}>
-                                    <button
-                                        style={location.pathname === path[0] ? {background:'orangered'}: {background:'white'}}
+                                    <button style={path[0] ==='/statement/club'?{minWidth:130}:{}}
+                                        className={location.pathname === path[0] ? 'btn-active': ''}
                                     >{i.name}</button>
                                 </Link>
                             </li>

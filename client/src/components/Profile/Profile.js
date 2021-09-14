@@ -17,7 +17,7 @@ const Profile = (props) => {
                 <p> {profile.sName? `${profile.sName.name} ( ${profile.sName.username} ) `  : 'sName: null'} </p>
                 <p> {profile.club? `${profile.club.name} ( ${profile.club.clubId} ) `  : 'Club: null'}</p>
 
-                <p><button onClick={props.logoutAction} >Logout</button></p>
+                <p><button style={{border:'2px solid #7f27b9 '}} onClick={props.logoutAction} >Logout</button></p>
             </div>
         </div>
     );
