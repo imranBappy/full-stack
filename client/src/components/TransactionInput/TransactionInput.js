@@ -44,14 +44,20 @@ const TransactionInput = (props) => {
                 let number
                 if(Number(value)) number = typeof Number(value)          
                 if(number === 'number' || value === ''){
-                    if(props.user.balance >= Number(value)) {
+                    if (props.transaction === 'deposit') {
                         setTransactionInput({...TransactionInput, [name]: value});
                         setError({...error, [name]: ''});
                     }else{
-                        setTransactionInput({...TransactionInput,[name]: value})
-                        setError({...error, [name]: 'There is not enough balance'});
-
+                        if(props.user.balance >= Number(value)) {
+                            setTransactionInput({...TransactionInput, [name]: value});
+                            setError({...error, [name]: ''});
+                        }else{
+                            setTransactionInput({...TransactionInput,[name]: value})
+                            setError({...error, [name]: 'There is not enough balance'});
+    
+                        }
                     }
+                    
                     if (!(Number(value)>= 100)) {
                         setTransactionInput({...TransactionInput, [name]: value})
                         setError({...error, [name]: 'You can withdraw at least 100 Taka'});
@@ -115,7 +121,7 @@ const TransactionInput = (props) => {
             }
         }
     }
-
+    console.log(`Transaction = ${props.transaction}`)
     return (
         <div className='container'>
             <ul style={{listStyle:'none'}}>

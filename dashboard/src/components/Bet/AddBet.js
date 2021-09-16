@@ -2,9 +2,8 @@
 import { Button, Grid, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { resultAction } from '../../store/actions/betAction';
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation, useParams} from 'react-router-dom';
 import Title from './Title';
 import axios from 'axios';
 import { alertAction } from '../../store/actions/alertAction';

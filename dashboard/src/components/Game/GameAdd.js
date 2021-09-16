@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, FormControl, Grid, InputLabel, Select, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { gameAddAction } from '../../store/actions/gameAction';
+import axios from 'axios';
+
 const gameType = ['Football', 'Cricket', 'Basketball'];
 
 const GameAdd = (props) => {
@@ -45,12 +48,26 @@ const GameAdd = (props) => {
         }
         
     }
+    let { id } = useParams();
+
+    useEffect(()=>{
+        if (id) {
+        axios.get(`http://localhost:4000/game/single/${id}`)
+        .then(res=>{
+            setGame(res.data.game)
+        })
+        }
+    },[])
+    // mutipoll server 
+    // image store
+    // image ki data base store kora jay
     return (
         <>
             <div >
                 <Grid container justify="center">
                     <Grid item xs={12} md={6}>
                         <TextField
+                            value={game.name}
                             variant="outlined"
                             margin="normal"
                             required
@@ -59,7 +76,7 @@ const GameAdd = (props) => {
                             label="Tournament Name"
                             name="name"
                             onChange={handelChange}
-                        />
+                            />
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -69,6 +86,7 @@ const GameAdd = (props) => {
                             label="Country1"
                             name="country1"
                             onChange={handelChange}
+                            value={game.country1}
                         />
                         <TextField
                             variant="outlined"
@@ -79,6 +97,7 @@ const GameAdd = (props) => {
                             label="Country2"
                             name="country2"
                             onChange={handelChange}
+                            value={game.country2}
                         />
                         <TextField
                             variant="outlined"

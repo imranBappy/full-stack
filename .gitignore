@@ -8,3 +8,5 @@ server/.env
 
 client/build
 dashboard/build
+
+.vscode

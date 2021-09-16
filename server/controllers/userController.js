@@ -16,6 +16,15 @@ exports.registerPostController = async (req, res, next) =>{
                 data:[]
             })
         };
+        const email = await User.find({email: req.body.email})
+        if (email.length !== 0 ) {
+            return res.json({
+                message:'Email already exist!',
+                error: true,
+                data:[]
+            })
+        };
+
         const sName = await User.find({username: req.body.sName.trim()})
             if (sName.length === 0 ) {
                 req.body.sName = '60d8c7fa7c05af12ce47a178'

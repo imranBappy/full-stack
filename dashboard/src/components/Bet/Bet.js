@@ -15,16 +15,19 @@ const Bet = (props) => {
         setColumns(bet())
         props.loadAllBet(gameId);
        
-    },[]);
-   
+    },[])
+    
     return (
         <>
             {props.bet.length && <Link style={{ textDecoration: 'none' }} to={`/bet-add/${gameId}`}>
                 <Button variant='outlined' color='primary' >
                   {'Add Bet'}
                 </Button>
-            </Link>}
-
+                </Link>
+            }
+            <Link to={`/game-edit/${gameId}`} >
+                <Button variant='outlined' color='primary'>Edit</Button>
+            </Link>
         {  
             props.bet.length ? 
             props.bet.map((bet,i) =><div key={bet._id} >

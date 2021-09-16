@@ -28,7 +28,7 @@ const clubSchema = new Schema({
     clubHolder:{
         type: String,
         ref:'user'
-    }
+    },
 },{timestamps: true} );
 
 const Club = model('club', clubSchema);

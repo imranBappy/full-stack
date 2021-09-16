@@ -8,6 +8,7 @@ import _Signup from '../../pages/Signup/_Signup';
 import _Wallet from '../../pages/Wallet/_Wallet';
 import Modal from '../Modal/Modal';
 import { Switch } from 'react-router-dom';
+import Footer from './../Footer/Footer';
 
 export const ModalContext = createContext()
 export const BetContext = createContext()
@@ -32,6 +33,7 @@ const Layout = (props) => {
                         <Modal/>
                         {props.children}
                     </ModalContext.Provider>
+                <Footer/>
                 </BetContext.Provider>
             </Switch>
         </>

@@ -76,7 +76,22 @@ exports.gameAllDeleteController = async (req, res, next) =>{
         res.json({
             message : 'Game deleted successfully!'
         })
-        
+    } catch (error) {
+        next(error)
+    }
+}
+exports.singleGameGetController = async (req, res, next)=>{
+    try {
+        const game = await Game.findById(req.params.id).select({
+            updatedAt:0,
+            createdAt:0,
+            status:0,
+            bets:0,
+            __v:0
+        })
+        res.json({
+            game
+        })
     } catch (error) {
         next(error)
     }

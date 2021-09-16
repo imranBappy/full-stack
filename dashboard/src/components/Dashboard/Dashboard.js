@@ -52,6 +52,9 @@ function Dashboard(props) {
         <PrivateRoute path='/game-add'>
           <GameAdd/>
         </PrivateRoute>
+        <PrivateRoute path='/game-edit/:id'>
+          <GameAdd/>
+        </PrivateRoute>
         <PrivateRoute path='/game'>
           <Game/>
         </PrivateRoute>
