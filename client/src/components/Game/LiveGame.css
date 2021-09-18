@@ -62,3 +62,26 @@
   border-radius:50%;
   font-weight:600
 }
+.game__logo{
+  width: 30px;
+  background-color:#3d105d !important;
+}
+#game__title{
+  padding: 12px
+}
+.game__title__info{
+  display: inline-block;
+  background-color:#3d105d !important;
+}
+.accordion{
+  position: relative;
+}
+.accordion{
+  padding-left: 50px;
+}
+.accordion>img.game__logo{
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  top: 15px;
+}

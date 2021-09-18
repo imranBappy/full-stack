@@ -61,6 +61,9 @@ const GameAdd = (props) => {
     // mutipoll server 
     // image store
     // image ki data base store kora jay
+    const updateHandler = () =>{
+        
+    }
     return (
         <>
             <div >
@@ -99,7 +102,15 @@ const GameAdd = (props) => {
                             onChange={handelChange}
                             value={game.country2}
                         />
-                        <TextField
+                        {props.edit ? 
+                        <Button
+                            style={{ marginTop: '20px' }}
+                            fullWidth color="secondary"
+                            variant="contained"
+                            onClick={updateHandler}
+                        >Update</Button> :
+                <>
+                <TextField
                             variant="outlined"
                             margin="normal"
                             required
@@ -163,6 +174,10 @@ const GameAdd = (props) => {
                             variant="contained"
                             onClick={handelSubmit}
                         >Submit</Button>
+                </>
+                        
+                    }
+                        
                     </Grid>
                 </Grid>
             </div>

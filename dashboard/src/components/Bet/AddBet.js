@@ -21,7 +21,7 @@ const AddBet = (props) => {
     
     useEffect(() =>{
         if (query.get("resultId")) {
-            axios.get(`https://day20.herokuapp.com/bet/get-single-bet?betId=${query.get("resultId")}`).then(res =>{
+            axios.get(`http://localhost:4000/bet/get-single-bet?betId=${query.get("resultId")}`).then(res =>{
                 console.log(res.data.bet);
                 if (res.data.bet) {
                     setGame(res.data.bet);
@@ -64,7 +64,7 @@ const AddBet = (props) => {
     const handleUpdate = () =>{
         if (checkValid()) {
             setIsValid(true);
-            axios.put(`https://day20.herokuapp.com/bet/result-update`, game).then(res=>{
+            axios.put(`http://localhost:4000/bet/result-update`, game).then(res=>{
                 props.alertAction(res.data)
             })
         }

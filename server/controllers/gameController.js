@@ -13,6 +13,7 @@ exports.gamePostController = async (req, res, next) =>{
     }
 }
 // query
+
 exports.gameGetController = async (req, res, next) =>{
     const page = req.query.page || 0;
     try {
@@ -21,7 +22,8 @@ exports.gameGetController = async (req, res, next) =>{
             __v:0,
             createdAt:0,
             updatedAt:0
-        });
+        })
+        .sort('-createdAt')
         res.json({
             data: game,
             length: gameLength.length
@@ -44,14 +46,15 @@ exports.allGameLoadGetController = async (req, res, next) =>{
             updatedAt: 0,
             __v: 0
         })
+       
         res.json({game})
     } catch (error) {
         next(error)
     }
 }
-
 exports.gameUpdateController = async (req, res, next) =>{
     try {
+        console.log(req.body)
         const updatedGame = await Game.findByIdAndUpdate(req.body._id,{
             name: req.body.name,
             status: req.body.status,
@@ -61,6 +64,7 @@ exports.gameUpdateController = async (req, res, next) =>{
             createdAt:0,
             updatedAt:0
         })
+
         res.json({
             message: 'Game Updated successful',
             error: false,

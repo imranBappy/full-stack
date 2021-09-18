@@ -2,11 +2,15 @@ import React from 'react';
 import './LiveGame.css';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import cricket from '../../img/cricket.png'
+import football from '../../img/football.png'
+import basketball from '../../img/basketball.png'
+
 const Game = ({game, style, classNames,  handleModel, auth}) =>{
     const history = useHistory()
     const open = (e) =>{
+        if (e.target.className === 'game__logo') return 0;
         if (e.target.className.length > 9) {
-            console.log(true);
             e.target.className = 'accordion'
             e.target.nextElementSibling.style = 'max-height:0'
         }else{
@@ -14,6 +18,7 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             e.target.nextElementSibling.style = 'max-height:500px';
         }
     }
+    
     const handleBet=(...rest) =>{
         if (auth)  {
             handleModel(...rest)
@@ -23,11 +28,15 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
     }
     return (
         <div className='container'>
-
             {
                 game.map((main)=>
                 <div key={main._id} style={{marginBottom:10, border:'none'}}>
-                <h1 onClick={open} className={classNames}>
+                <h1 onClick={open} className={`${classNames}`}>
+
+                    <img className="game__logo" src={
+                        main.type === "Cricket" ? cricket :
+                        main.type === "Football"? football :  basketball
+                    } alt="" /> 
                     {`${main.country1} VS ${main.country2} ${main.name}`}
                 </h1>
                 <div className="panel" style={style} >

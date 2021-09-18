@@ -53,7 +53,7 @@ function Dashboard(props) {
           <GameAdd/>
         </PrivateRoute>
         <PrivateRoute path='/game-edit/:id'>
-          <GameAdd/>
+          <GameAdd edit = {true}/>
         </PrivateRoute>
         <PrivateRoute path='/game'>
           <Game/>
