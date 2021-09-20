@@ -74,14 +74,71 @@
   background-color:#3d105d !important;
 }
 .accordion{
-  position: relative;
-}
-.accordion{
   padding-left: 50px;
+  position: relative;
 }
 .accordion>img.game__logo{
   position: absolute;
   z-index: 1;
   left: 14px;
   top: 15px;
+}
+
+/* animation */
+.animation__container{
+  width: 99%;
+  height:170px;
+  box-shadow: rgb(183 183 183 / 10%) 0px 4px 6px -1px, rgb(134 134 134 / 6%) 0px 2px 4px -1px;
+  margin:20px 20px 50px 20px;
+  border-radius: 5px;
+}
+.header__animation{
+  display: flex;
+}
+.header__animation>div.logo__animation{
+  display:inline-block;
+  width: 40px;
+  height: 40px;
+  background-color:hsl(200, 20%, 70%);
+  border-radius: 50%;
+  margin: 10px 0px 0px 10px;
+}
+.title__animation{
+  width: 100%;
+  height: 20px;
+  margin:20px 20px 0px 10px ;
+}
+.skeletor{
+  opacity: .7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+
+.bet__title__animation{
+  margin:20px 0px 15px 10px;
+  width:200px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.btn__animation__container{
+  display:flex;
+  margin:10px
+}
+.btn__animation__container>div{
+  width: 50%;
+  height: 40px;
+  border-radius:5px
+}
+.btn__animation__container>div:first-child{
+  margin-right:10px;
+}
+
+@keyframes skeleton-loading {
+  0%{
+    background-color:hsl(200, 20%, 70%)
+  }
+  100%{
+    background-color:hsl(200, 20%, 95%)
+  }
 }

@@ -11,11 +11,28 @@ const UpcomingGame = (props) => {
                 style={{}}
                 classNames='accordion'
             />:
-            <p style={{
-                textAlign: 'center',
-                 color: 'gray', margin: 20,
-                 fontSize: 25
-         }} >Upcoming Game Not Found!</p>
+            <>
+            <div className="animation__container container">
+              <div className="header__animation">
+                  <div className="logo__animation skeletor">
+
+                  </div>
+                  <div className="title__animation skeletor">
+                      
+                  </div>
+              </div>
+              <div className="header__body">
+              <h4 className="bet__title__animation skeletor">  </h4>
+              <div className="btn__animation__container">
+                  <div className="skeletor">
+                  </div>
+                  <div className="skeletor">
+                  </div>
+              </div>
+              </div>
+          </div>
+         <br />
+            </>
         }
         </>
     );

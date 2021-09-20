@@ -26,9 +26,10 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             history.push('/login')
         }
     }
+   
     return (
         <div className='container'>
-            {
+              {
                 game.map((main)=>
                 <div key={main._id} style={{marginBottom:10, border:'none'}}>
                 <h1 onClick={open} className={`${classNames}`}>
@@ -74,6 +75,8 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             </div>
             )
             }
+          
+            
             
         </div>
     );
