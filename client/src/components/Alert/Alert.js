@@ -11,11 +11,9 @@ const Alert = (props) => {
             error: false
         })
     }
-    
-    // d4edda
     return (
         <div>
-            <div  style={error?{color:'red', background:'#f8d7da'}:{color:'green', background:'#d4edda'}} className="alert">
+            <div  style={error?{color:'red', background:'red', margin:"10px 0px"}:{color:'green', background:'green', margin:"10px 0px"}} className="alert">
                 <span className="closebtn" onClick={checkAlert} >&times;</span> 
                 {message}
             </div>

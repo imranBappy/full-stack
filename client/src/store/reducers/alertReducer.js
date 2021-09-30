@@ -6,7 +6,7 @@ const init = {
 }
 
 const alertReducer = (state = init, action) =>{
-
+    document.documentElement.scrollTop = 0;
     switch(action.type){
         case Types.SET_ALERT:
             return{

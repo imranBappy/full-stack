@@ -5,6 +5,9 @@
     color:aliceblue !important;
     background-color: #1c072b ;
 }
+html, body {
+    scroll-behavior: smooth;
+  }
 select,
 input{
     border: 2px solid #6f12b3 !important;

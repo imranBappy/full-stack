@@ -77,7 +77,7 @@ button:hover {
   background: #f1f1f1;
 }
 .error{
-  color: red; 
+  color: red !important; 
   font-size:13px;
   margin-bottom:10px
 }
@@ -86,4 +86,9 @@ button:hover {
   .register{
     width: 100%;
   }
+}
+
+.register input,
+.register select{
+  background: #1c072b !important;
 }

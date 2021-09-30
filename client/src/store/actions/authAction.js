@@ -2,9 +2,9 @@ import axios from 'axios';
 import * as Types from './types';
 import setAuthHeader from '../../utils/setAuthHeader';
 export const registerAction = (user, history) => async dispatch => {
-    delete user.confirmPassword
     try {
-        const result = await axios.post('https://day20.herokuapp.com/user/register', user);
+        const result = await axios.post('http://localhost:4000/user/register', user);
+        console.log(result);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -12,10 +12,6 @@ export const registerAction = (user, history) => async dispatch => {
                 error: result.data.error ? true: false
             }
         })
-        dispatch({
-            type: Types.SET_USER,
-            payload: user,
-        });
     
         if (!result.data.error) {
             history.push('/login');

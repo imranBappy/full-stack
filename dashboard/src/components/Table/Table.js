@@ -74,7 +74,7 @@ function InfoTable(props) {
                           <TableCell key={column.id} align={column.align}>
                             {
                               column.id === 'user' && props.path === '/bet' ? value ? value.length : 0 :
-                              column.id === 'club' ? value.clubId :
+                              column.id === 'club' ? value.clubId ? value.clubId: 'null' :
                               column.id === 'user' && props.path === '/club' ? value.length :
                               column.id === 'user' ? value.username :
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :
