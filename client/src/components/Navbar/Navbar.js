@@ -28,7 +28,7 @@ const Navbar = (props) => {
 
     return (
         <>
-         <header style={{background:'#fff'}}>
+         <header>
              <div className="header">
             <nav>
                 <div className="container">

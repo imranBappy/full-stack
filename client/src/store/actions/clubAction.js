@@ -2,7 +2,7 @@ import axios from "axios"
 import * as Types from './types';
 export const clubAction = () => async dispatch =>{
     try {
-        const res = await axios.get('https://day20.herokuapp.com/club/get-ranking-club')
+        const res = await axios.get('https://server.hosttesting.xyz/club/get-ranking-club')
         dispatch({
             type: Types.SET_CLUB,
             payload:{
@@ -20,7 +20,7 @@ export const clubAction = () => async dispatch =>{
 }
 export const clubUpdateAction = (club) => async dispatch =>{
     try {
-        const res = await axios.put(`https://day20.herokuapp.com/club/update?club=${club}`);
+        const res = await axios.put(`https://server.hosttesting.xyz/club/update?club=${club}`);
         console.log(res.data)
         dispatch({
             type: Types.SET_ALERT,

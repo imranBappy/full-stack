@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { alertAction } from '../../store/actions/alertAction';
 import { registerAction } from '../../store/actions/authAction';
 import axios from 'axios';
+// import loadingImg from '../../img/logo.png'
+import loadingImg from '../../img/loading.gif'
 
 import validateEmail from '../../utils/validateEmail';
 import validateNumber from '../../utils/validateNumber';
@@ -14,7 +16,9 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth
 import { initializeApp } from 'firebase/app';
 import 'firebase/auth'
 const Register = (props) => {
+    console.log(loadingImg);
     const histroy = useHistory()
+    const [isRegister, setRegister] = useState(false)
     initializeApp({
         apiKey: "AIzaSyBwcFFGN83oBm0LlZgR5qsA2mIoEkcv7Wk",
         authDomain: "fir-adb93.firebaseapp.com",
@@ -186,24 +190,23 @@ const Register = (props) => {
 // return 
       
         if (isValid) {
+                setRegister(true)
+
             var recaptcha = new RecaptchaVerifier('recaptcha', {
                 'size': 'invisible',
                 'callback': (response) => {}
             }, auth);
 // 01926219353
-
-             axios.post(`http://localhost:4000/user/register?check=true`, user)
+            axios.post(`https://server.hosttesting.xyz/user/register?check=true`, user)
             .then(res=>{
-                console.log('res = ', res.data);
-                console.log(!res.data.error);
+
                 if (!res.data.error) {
-                    console.log(200);
                     signInWithPhoneNumber(auth, user.phone, recaptcha)
                     .then( e => {
                     const otp = prompt('Enter the OTP... ') // null , ''
                     if (!otp) return props.alertAction({
                         message:'Authentication Failed',
-                        error: true
+                        error: true,
                     })
                     e.confirm(otp).then( result => {
                     console.log('r = ', result);
@@ -224,12 +227,16 @@ const Register = (props) => {
                         message:'Authentication Failed',
                         error: true
                     })
+                    setRegister(false)
+
                     }
                 }).catch(function (error) {
                     props.alertAction({
                         message:'Authentication Failed',
                         error: true
                     })
+                    setRegister(false)
+
                 });
         
                 })
@@ -238,14 +245,16 @@ const Register = (props) => {
                         message:'Authentication Failed',
                         error: true
                     })
+                    setRegister(false)
+
                 });
 
                 }else{
-                props.alertAction({
-                    message:res.data.message,
-                    error: true
-                })
-
+                    props.alertAction({
+                        message:res.data.message,
+                        error: true
+                    })
+                setRegister(false)
                 }
             })
             .catch(e=>{
@@ -253,6 +262,7 @@ const Register = (props) => {
                 message:'Please fill up this from',
                 error: true
             })
+            setRegister(false)
             })
             
 // 01926219353
@@ -364,7 +374,11 @@ const Register = (props) => {
                     <hr/>
                     <p>By creating an account you agree to our <a href="/">Terms & Privacy</a>.</p>
 
-                    <button onClick={handleSubmit} type="submit" className="registerbtn">Register</button>
+                    <button onClick={handleSubmit} type="submit" className={`registerbtn ${ loadingImg ? '' : 're-btn-container'}`}>
+                    
+                    {isRegister ? <img className='register-loading' src={loadingImg}/> : 'Register' }
+                    
+                    </button>
                 </div>
                 
                 <div className="container signin">

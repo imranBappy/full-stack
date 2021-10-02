@@ -2,7 +2,7 @@ import * as Types from './types';
 import axios from 'axios';
 export const TransactionInputRequestAction = (TransactionInput, user) => async dispatch => {
     try {
-        const res = await axios.post('https://day20.herokuapp.com/transaction/add', {...TransactionInput, user: user._id});
+        const res = await axios.post('https://server.hosttesting.xyz/transaction/add', {...TransactionInput, user: user._id});
         if (TransactionInput.transaction === 'withdraw' && res.data.error === false) {
             user.balance = user.balance - Number(TransactionInput.amount)
         }
@@ -27,7 +27,7 @@ export const TransactionInputRequestAction = (TransactionInput, user) => async d
 
 export const transitionGetAction = (page, user) => async dispatch => {
     try {
-        const res = await axios.get(`https://day20.herokuapp.com/transaction?page=${page}&user=${user}`);
+        const res = await axios.get(`https://server.hosttesting.xyz/transaction?page=${page}&user=${user}`);
         if (res.data.error)dispatch({
             type: 'SET_ALERT',
             payload: {
