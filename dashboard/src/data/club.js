@@ -23,6 +23,11 @@ const columns = () =>([
         id: 'balance',
         label: 'Balance',
         maxWidth: 100
+    },
+    {
+        id: 'rate',
+        label: 'Rate',
+        maxWidth: 100
     }
 ]);
   

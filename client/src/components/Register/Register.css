@@ -25,7 +25,7 @@ hr {
 
 /* Set a style for all buttons */
 button {
-  background-color: orangered;
+  background-color: #3d105d;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -99,6 +99,9 @@ button:hover {
   padding: 5px !important;
 }
 .register-loading{
-  background:orangered;
+  background:#7012b300;
   width:30px
+}
+.register-dis{
+  margin:10px 0px 30px 0px;
 }

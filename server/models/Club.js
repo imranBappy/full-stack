@@ -29,6 +29,10 @@ const clubSchema = new Schema({
         type: String,
         ref:'user'
     },
+    rate:{
+        type: Number,
+        required: true
+    }
 },{timestamps: true} );
 
 const Club = model('club', clubSchema);

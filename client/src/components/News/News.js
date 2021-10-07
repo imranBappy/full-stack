@@ -8,7 +8,7 @@ import  axios  from 'axios';
 const News = () => {
     const [news, setNews] = useState('')
     useEffect(()=>{
-        axios.get('https://server.hosttesting.xyz/option/news')
+        axios.get('http://localhost:4000/option/news')
         .then(res =>res)
         .then(data=>{
             if (data.data.data) {

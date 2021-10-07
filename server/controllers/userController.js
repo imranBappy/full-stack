@@ -5,7 +5,7 @@ const Club = require('../models/Club');
 
 exports.registerPostController = async (req, res, next) =>{
     try {
-        console.log(req.query);
+
         const hash = await bcrypt.hash(req.body.password, 10)
         req.body.password = hash;
 
@@ -80,7 +80,7 @@ exports.loginPostController = async (req, res, next)=>{
         const matchPassword = await bcrypt.compare(password, user.password);
         if (!matchPassword) return res.json({message:'Password is wrang', error: true});
         if (!user.active) return res.json({message:'You account is disabled !', error: true})
-        const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '24h'})
+        const token = jwt.sign({_id:user._id}, process.env.SECRET,{expiresIn: '30 days'})
         res.json({
             message:'User Login Successful! ',
             token: token,

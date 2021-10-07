@@ -1,5 +1,5 @@
 import React from 'react';
-import userAbater from '../../img/dddd.jpg';
+import userAbater from '../../img/profile.png';
 import {connect} from 'react-redux';
 import {logoutAction} from '../../store/actions/authAction';
 import './Profile.css'

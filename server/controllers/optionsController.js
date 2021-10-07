@@ -75,21 +75,11 @@ exports.sponsorPostController = async (req, res, next) =>{
 }
 exports.rateUpdateController = async (req, res, next) =>{
     try {
-        if (req.query.rate === 'club' ) {
-        console.log(req.body);
-
-        await Rate.findOneAndUpdate({_id:'6138b5e469f2164564901407'},{$set:{
-            club:req.body.club
-        }})
-
-        }else if (req.query.rate === 'sponsor'){
-        console.log(req.body);
-
+        if (req.query.rate === 'sponsor'){
             await Rate.findOneAndUpdate({_id:'6138b5e469f2164564901407'},{$set:{
                 sponsor:req.body.sponsor
             }})
         }
-      
         res.json({
             message:'Successful Updated'
         })
@@ -100,18 +90,12 @@ exports.rateUpdateController = async (req, res, next) =>{
 
 exports.rateGetController = async (req, res, next) =>{
     try {
-        if (req.query.rate === 'club' ) {
-            const clubRate = await Rate.find({});
-            res.json({
-                data:clubRate[0].club
-            })
-        }else if (req.query.rate === 'sponsor'){
+        if (req.query.rate === 'sponsor'){
             const clubRate = await Rate.find({});
             res.json({
                 data:clubRate[0].sponsor
             })
         }
-       
     } catch (error) {
         next(error)
     }

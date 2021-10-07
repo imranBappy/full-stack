@@ -4,7 +4,7 @@ import './Footer.css'
 const Footer = () => {
     return (
         <div className="footer">
-            <div className="container">
+            <div className="container" style={{padding:'5px 0px'}}>
                <div className="footer__container">
                <p>Copyright @ 2021</p>
                 <div className="footer__img">

@@ -24,7 +24,7 @@ if (token) {
       }
     })
     const decode = jwt_decide(token);
-    Axios.get(`https://server.hosttesting.xyz/user/single-user/${decode._id}`,{
+    Axios.get(`http://localhost:4000/user/single-user/${decode._id}`,{
       	headers:{
           authorization: token
         }

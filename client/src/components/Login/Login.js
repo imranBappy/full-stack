@@ -94,8 +94,7 @@ const Login = (props) => {
     return (
         <div>
                 <div className="container">
-                    <h1 style={{marginBottom:5}} >Login</h1>
-                    <hr/>
+                    <h1 style={{margin:"10px 0px 30xp 0px"}} >Login</h1>
                     
                     <label htmlFor="username"><b>Username</b></label>
                     <input 
@@ -125,7 +124,7 @@ const Login = (props) => {
                 </div>
                 
                 <div className="container signin">
-                    <p>I Have a no account? <a href="/register">Sign in</a>.</p>
+                    <p className="register-dis">I Have a no account? <a href="/register">Sign in</a>.</p>
                 </div>
         </div>
     );

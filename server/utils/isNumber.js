@@ -3,3 +3,4 @@ function isNumber(num) {
     const number = num.toFixed(2)
     return Number(number)
 }
+module.exports = isNumber; 

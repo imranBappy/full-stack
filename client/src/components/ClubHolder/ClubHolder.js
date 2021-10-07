@@ -13,14 +13,14 @@ const ClubHolder = (props) => {
     const [club, setClub] = useState({})
     useEffect(()=>{
         if (props.club) {
-            axios.get(`https://server.hosttesting.xyz/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club.clubId}`)
+            axios.get(`http://localhost:4000/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club.clubId}`)
             .then(function (response) {
                 // console.log(response.data);
                 setBet(response.data)
             })
             .catch(function (error) {
             }) 
-            axios.get(`https://server.hosttesting.xyz/club/${props.username}`)
+            axios.get(`http://localhost:4000/club/${props.username}`)
             .then(function (response) {
                 setClub(response.data.club)
             })
@@ -32,7 +32,7 @@ const ClubHolder = (props) => {
 
     // console.log(bet.length);
     const active = page =>{
-        axios.get(`https://server.hosttesting.xyz/usersbet/club-bet-get?page=${page}&club=${props.club.clubId}`)
+        axios.get(`http://localhost:4000/usersbet/club-bet-get?page=${page}&club=${props.club.clubId}`)
         .then(function (response) {
             setBet(response.data)
         })

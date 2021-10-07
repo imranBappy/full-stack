@@ -10,3 +10,4 @@ client/build
 dashboard/build
 
 .vscode
+git push --set-upstream origin version-1

@@ -4,20 +4,11 @@ const setMiddleware = require('./middlewares/middlewares');
 const setRoutes = require('./routes/routes');
 require('dotenv').config();
 const app = express();
-// some change
+
 // setMiddleware
 setMiddleware(app);
-app.use((req,res,next)=>{
- console.log(`method = ${req.method}
-link = ${req.headers.referer}
-origin = ${req.headers.origin}/${req.url}
-`);
-    next()
-})
 // setRoute
-app.get('/', (req, res)=>{
-    res.send('hello Bangladesh')
-})
+
 setRoutes(app);
 mongoose.set('useFindAndModify', false);
 

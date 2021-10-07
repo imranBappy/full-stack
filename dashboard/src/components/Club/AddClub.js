@@ -10,7 +10,8 @@ const AddClub = (props) => {
     const [club, setClub] = useState({
         name:'',
         clubId: '',
-        clubHolder:''
+        clubHolder:'',
+        rate:0
     })
 
     const [error, setError] = useState({ 
@@ -28,6 +29,19 @@ const AddClub = (props) => {
             setError(checkForm(value, 'clubHolder'))
         }
         
+        if (name === 'rate' && !parseFloat(value)) {
+            setError({
+                message:'Invalid Rate',
+                error: true
+            })
+        }
+        if(name === 'rate' && parseFloat(value)){
+            setClub({...club, [name]: parseFloat(value) });
+            setError({
+                message:'',
+                error: false
+            })
+        }   
         if (name === 'name') {
             if (value.length > 2) {
                 setError({
@@ -96,6 +110,16 @@ const AddClub = (props) => {
                             id="clubHolder"
                             label="clubHolder"
                             name="clubHolder"
+                            onChange={handelChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="rate"
+                            label="Rate"
+                            name="rate"
                             onChange={handelChange}
                         />
                         {

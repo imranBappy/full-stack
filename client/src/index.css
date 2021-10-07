@@ -156,3 +156,6 @@ button{
 .login-aria button{
     border: none
 }
+input:focus{
+    background-color: #0e0416 !important;
+}

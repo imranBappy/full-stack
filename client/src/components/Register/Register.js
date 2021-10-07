@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -197,22 +198,25 @@ const Register = (props) => {
                 'callback': (response) => {}
             }, auth);
 // 01926219353
-            axios.post(`https://server.hosttesting.xyz/user/register?check=true`, user)
+            axios.post(`http://localhost:4000/user/register?check=true`, user)
             .then(res=>{
 
                 if (!res.data.error) {
                     signInWithPhoneNumber(auth, user.phone, recaptcha)
                     .then( e => {
                     const otp = prompt('Enter the OTP... ') // null , ''
-                    if (!otp) return props.alertAction({
-                        message:'Authentication Failed',
-                        error: true,
-                    })
+                    if (!otp) {
+                        setRegister(false)
+                        return props.alertAction({
+                            message:'Authentication Failed',
+                            error: true,
+                        })
+                    }
+
                     e.confirm(otp).then( result => {
-                    console.log('r = ', result);
-                    console.log('r = ', result.user);
+                   
                     if (result.user) {
-                        props.registerAction(user, histroy)
+                    props.registerAction(user, histroy)
                     setUser({
                         name:'',
                         email:'',
@@ -280,8 +284,8 @@ const Register = (props) => {
             <div id="recaptcha"></div>
                 <div className="register">
                     <h1 style={{marginBottom:5}} >Register</h1>
-                    <p>Please fill in this form to create an account.</p>
-                    <hr/>
+                    <p className="register-dis">Please fill in this form to create an account.</p>
+                    
                     
                     <label htmlFor="name"><b>Full Name</b></label>
                     <input 
@@ -370,9 +374,8 @@ const Register = (props) => {
                         style={error.confirmPassword.error? {marginBottom:5}: {marginBottom:22}}
                         required/>
                     <p className='error'>{error.confirmPassword.message}</p>
-                    
-                    <hr/>
-                    <p>By creating an account you agree to our <a href="/">Terms & Privacy</a>.</p>
+                   
+                    <p className="register-dis">By creating an account you agree to our <a href="/">Terms & Privacy</a>.</p>
 
                     <button onClick={handleSubmit} type="submit" className={`registerbtn ${ loadingImg ? '' : 're-btn-container'}`}>
                     

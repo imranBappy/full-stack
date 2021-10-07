@@ -17,10 +17,11 @@ exports.betPostController = async (req, res, next) =>{
         }, {new: true});
         const bet = new UserBet({...req.body, user: user._id, win: false})
         await bet.save();
+       
+        console.log(isNumber(user.balance - Number(req.body.amount)))
         await User.findByIdAndUpdate(user._id,{
             balance: isNumber(user.balance - Number(req.body.amount))
         });
-
         // sRate
         if (!user.sName) return res.json({
             message: 'Bet send successfully!', error: false
@@ -52,19 +53,20 @@ exports.betPostController = async (req, res, next) =>{
             message: 'Bet send successfully!', error: false
         })
 
-
-        let clubBalance = req.body.amount * rate.club ;
+        // club rate update
+        let clubBalance = req.body.amount * club.rate ;
         let clubRateBalance = clubBalance - req.body.amount
         await User.findByIdAndUpdate(clubHolder[0]._id,{
             balance: isNumber(clubHolder[0].balance + clubRateBalance)
         });
 
-        const res = await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
+        await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
         res.json({
             message: 'Bet send successfully!', error: false
         })
     } catch (error) {
-        next()
+        error.status = 500
+        next(error)
     }
 };
 

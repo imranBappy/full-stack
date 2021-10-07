@@ -4,10 +4,14 @@ input[type=number], input[type=password] {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;
   }
   
   input[type=number]:focus, input[type=password]:focus {
-    background-color: #ddd;
     outline: none;
+  }
+  select{
+    background:#1c072b !important;
+  }
+  button{
+    background:#7f27b9;
   }

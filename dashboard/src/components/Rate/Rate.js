@@ -3,7 +3,6 @@ import  axios  from 'axios';
 import store from './../../store/store';
 const Number = () => {
     const [sponsor, setSponsor] = useState(0);
-    const [club, setClub] = useState(0);
 
     useEffect(()=>{
         axios.get('http://localhost:4000/option/rate?rate=sponsor')
@@ -11,11 +10,7 @@ const Number = () => {
         .then(data=>{
             setSponsor(data.data.data)
         })
-        axios.get('http://localhost:4000/option/rate?rate=club')
-        .then(res =>res)
-        .then(data =>{
-            setClub(data.data.data)
-        })
+        
     },[])
     const sponsorHandleChange = e =>{
         const number = parseFloat(e.target.value);
@@ -30,19 +25,7 @@ const Number = () => {
             setSponsor(number)
         }
     }
-    const clubHandleChange = e =>{
-        const number = parseFloat(e.target.value);
-        if (e.target.value.length > 0) {
-            if (e.target.value[e.target.value.length - 1] === '.' ) {
-                return setClub(e.target.value)
-            }
-        }
-        if (!number) {
-            setClub('')
-        }else{
-            setClub(number)
-        }
-    }
+    
     const handleSubmitSponsor = () =>{
         console.log(sponsor === '');
         // if (sponsor === ''){
@@ -59,19 +42,7 @@ const Number = () => {
                 })
         // }
     }
-    const handleSubmitClub = () =>{
-        axios.patch('http://localhost:4000/option/rate?rate=club',{club: club === ''? 0: club})
-        .then(res =>res)
-        .then(data=>{
-            store.dispatch({
-                type: 'SET_ALERT',
-                payload:{
-                    message: data.data.message,
-                    error:data.data.error
-                }
-            })
-        })
-    }
+   
     return (
         <div>
 
@@ -86,14 +57,7 @@ const Number = () => {
 
             </div>
     <br />            
-            <div>
-              <label htmlFor="sponsor">Club Rate : &nbsp;	&nbsp;	&nbsp; </label>
-
-              <input onChange={clubHandleChange} value={club} name="club" placeholder="Club Rate" type="text" />
-              <button onClick={handleSubmitClub} type="submit">Submit</button>
-
-            </div>
-    <br />            
+                        
 
           
 
