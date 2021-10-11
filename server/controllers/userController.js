@@ -5,10 +5,8 @@ const Club = require('../models/Club');
 
 exports.registerPostController = async (req, res, next) =>{
     try {
-
         const hash = await bcrypt.hash(req.body.password, 10)
         req.body.password = hash;
-
         const username = await User.find({username: req.body.username})
         if (username.length !== 0 ) {
             return res.json({

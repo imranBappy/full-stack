@@ -4,13 +4,14 @@ const User = require("../models/User")
 exports.clubPortController = async (req, res, next) =>{
     try {
         const checkClub = await Club.find({clubId: req.body.clubId})
+        
         if (checkClub.length) {
             return res.json({
                 message: 'Club Id Invalid',
                 error: true
             })
         }
-
+        
         const checkUser = await User.find({username: req.body.clubHolder})
         if (!checkUser.length) {
             return res.json({
@@ -68,9 +69,16 @@ exports.rankingClubGetController = async (req, res, next) =>{
 }
 exports.clubUpdatePutController = async (req, res, next) =>{
     try {
+        const clubId = await User.findById(req.user);
+        await Club.findByIdAndUpdate(clubId.club,{
+            $pull:{'user': req.user}
+        })
         await User.findByIdAndUpdate(req.user,{$set:{
             club:req.query.club
         }})
+        await Club.findByIdAndUpdate(req.query.club,{
+            $push:{'user': req.user}
+        })
         res.json({
             message:"Updated Successfully",
             error:false,
