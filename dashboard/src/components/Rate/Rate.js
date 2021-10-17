@@ -6,12 +6,12 @@ const Number = () => {
     const [club, setClub] = useState(0);
 
     useEffect(()=>{
-        axios.get('http://localhost:4000/option/rate?rate=sponsor')
+        axios.get('https://server.hosttesting.xyz/option/rate?rate=sponsor')
         .then(res =>res)
         .then(data=>{
             setSponsor(data.data.data)
         })
-        axios.get('http://localhost:4000/option/rate?rate=club')
+        axios.get('https://server.hosttesting.xyz/option/rate?rate=club')
         .then(res =>res)
         .then(data =>{
             setClub(data.data.data)
@@ -46,7 +46,7 @@ const Number = () => {
     const handleSubmitSponsor = () =>{
         console.log(sponsor === '');
         // if (sponsor === ''){
-                 axios.patch('http://localhost:4000/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
+                 axios.patch('https://server.hosttesting.xyz/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
                 .then(res =>res)
                 .then(data=>{
                     store.dispatch({
@@ -60,7 +60,7 @@ const Number = () => {
         // }
     }
     const handleSubmitClub = () =>{
-        axios.patch('http://localhost:4000/option/rate?rate=club',{club: club === ''? 0: club})
+        axios.patch('https://server.hosttesting.xyz/option/rate?rate=club',{club: club === ''? 0: club})
         .then(res =>res)
         .then(data=>{
             store.dispatch({

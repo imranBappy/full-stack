@@ -121,7 +121,6 @@ const TransactionInput = (props) => {
             }
         }
     }
-    console.log(`Transaction = ${props.transaction}`)
     return (
         <div className='container'>
             <ul style={{listStyle:'none'}}>

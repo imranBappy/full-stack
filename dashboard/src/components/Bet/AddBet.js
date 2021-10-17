@@ -21,7 +21,7 @@ const AddBet = (props) => {
     
     useEffect(() =>{
         if (query.get("resultId")) {
-            axios.get(`http://localhost:4000/bet/get-single-bet?betId=${query.get("resultId")}`).then(res =>{
+            axios.get(`https://server.hosttesting.xyz/bet/get-single-bet?betId=${query.get("resultId")}`).then(res =>{
                 console.log(res.data.bet);
                 if (res.data.bet) {
                     setGame(res.data.bet);
@@ -64,7 +64,7 @@ const AddBet = (props) => {
     const handleUpdate = () =>{
         if (checkValid()) {
             setIsValid(true);
-            axios.put(`http://localhost:4000/bet/result-update`, game).then(res=>{
+            axios.put(`https://server.hosttesting.xyz/bet/result-update`, game).then(res=>{
                 props.alertAction(res.data)
             })
         }

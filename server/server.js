@@ -4,6 +4,8 @@ const setMiddleware = require('./middlewares/middlewares');
 const setRoutes = require('./routes/routes');
 require('dotenv').config();
 const app = express();
+const User = require('./models/User')
+const Club = require('./models/Club')
 
 // setMiddleware
 // master branch
@@ -16,8 +18,21 @@ origin = ${req.headers.origin}/${req.url}
     next()
 })
 // setRoute
-app.get('/', (req, res)=>{
-    res.send('hello Bangladesh')
+app.get('/', async (req, res)=>{
+    // const newUser = []
+    // const reUser = []
+
+    // const users = await User.find({})
+    // for(let i = 0; i < users.length; i++){
+    //     const perfectUser = await User.findById(users[i].sName)
+    //     if(!perfectUser){
+    //         console.log(perfectUser)
+    //         newUser.push(users[i])
+    //         const rrr = await User.findByIdAndUpdate(users[i]._id,{sName:'60ea8db5fcabd2314dca0777'},{new:true})
+    //         console.log(rrr)
+    //     }
+    // }
+    res.send('Hello Bangladesh!')
 })
 setRoutes(app);
 mongoose.set('useFindAndModify', false);

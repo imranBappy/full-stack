@@ -4,7 +4,7 @@ import setAuthHeader from '../../utils/setAuthHeader';
 import * as Types from './types';
 export const authAction = (user, history) => async dispatch =>{
     try {
-        const result = await axios.post('http://localhost:4000/admin/login', user)
+        const result = await axios.post('https://server.hosttesting.xyz/admin/login', user)
         if (result.data.error)return dispatch({
             type: Types.SET_ALERT,
             payload:result.data

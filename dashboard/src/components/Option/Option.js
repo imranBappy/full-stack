@@ -12,7 +12,7 @@ const Option = () => {
     const [news, setNews] = useState('');
     const newSubmit = () =>{
         console.log(news);
-        axios.post('http://localhost:4000/option/news',{news})
+        axios.post('https://server.hosttesting.xyz/option/news',{news})
         .then(res =>res)
         .then(data=>{
             store.dispatch({
@@ -25,7 +25,7 @@ const Option = () => {
         })
     }
     useEffect(()=>{
-        axios.get('http://localhost:4000/option/news')
+        axios.get('https://server.hosttesting.xyz/option/news')
         .then(res =>res)
         .then(data=>{
             setNews(data.data.data.news)

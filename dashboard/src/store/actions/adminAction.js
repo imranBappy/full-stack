@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const adminAddAction = (admin) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:4000/admin/add`, admin);
+        const res = await axios.post(`https://server.hosttesting.xyz/admin/add`, admin);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -24,7 +24,7 @@ export const adminAddAction = (admin) => async dispatch => {
 
 export const loadAdminAction = () => async dispatch => {
     try {
-        const admin = await axios.get(`http://localhost:4000/admin/all-admin`);
+        const admin = await axios.get(`https://server.hosttesting.xyz/admin/all-admin`);
         dispatch({
             type: Types.SET_ADMIN,
             payload:{
@@ -44,7 +44,7 @@ export const loadAdminAction = () => async dispatch => {
 
 export const adminDeleteAction = (admin,) => async dispatch => {
     try {
-        const res = await axios.delete(`http://localhost:4000/admin/delete?_id=${admin._id}`);
+        const res = await axios.delete(`https://server.hosttesting.xyz/admin/delete?_id=${admin._id}`);
         dispatch({
             type: Types.SET_ADMIN,
             payload:{
@@ -72,7 +72,7 @@ export const adminDeleteAction = (admin,) => async dispatch => {
 
 export const adminEditAction = (admin) => async dispatch => {
     try {
-        const res = await axios.put(`http://localhost:4000/admin/change?_id=${admin._id}&admin=${admin.isAdmin? 0 : 1}`);
+        const res = await axios.put(`https://server.hosttesting.xyz/admin/change?_id=${admin._id}&admin=${admin.isAdmin? 0 : 1}`);
         dispatch({
             type: Types.SET_ADMIN,
             payload:{

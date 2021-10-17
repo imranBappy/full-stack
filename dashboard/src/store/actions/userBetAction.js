@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const userBetGetAction = (page) => async dispatch => {
     try {
-        const bet = await axios.get(`http://localhost:4000/usersbet?page=${page}`);
+        const bet = await axios.get(`https://server.hosttesting.xyz/usersbet?page=${page}`);
         dispatch({
             type: Types.SET_USER_BET,
             payload:{
@@ -25,7 +25,7 @@ export const userBetGetAction = (page) => async dispatch => {
 export const betStatusAction = (result, resultIndex, allResult, c, status, singleBet, betIndex, allBet) => async dispatch => {
     try {
         result.status === 'Accepted' ? result.status = 'Win' : result.status = 'Loss'
-        const res = await axios.patch(`http://localhost:4000/usersbet/result-status-update?resultId=${result._id}&status=${result.status}`)
+        const res = await axios.patch(`https://server.hosttesting.xyz/usersbet/result-status-update?resultId=${result._id}&status=${result.status}`)
         if (res.data.error) return dispatch({
             type: Types.SET_ALERT,
             payload:{

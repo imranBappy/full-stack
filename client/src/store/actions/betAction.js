@@ -3,6 +3,7 @@ import * as Types from './types';
 
 export const betAction = (userBit, auth) => async dispatch=>{
     try {
+        // const res = await axios.post(`http://localhost:4000/usersbet/adduserbet`, userBit);
         const res = await axios.post(`https://server.hosttesting.xyz/usersbet/adduserbet`, userBit);
         auth.user.balance = auth.user.balance - Number(userBit.amount)
         dispatch({

@@ -8,7 +8,7 @@ const Profile = (props) => {
     return (
         <div className="container">
             <div className="card">
-                <img src={userAbater} alt="profile-pic" style={{with: '80%'}}/>
+                <img src={userAbater} alt="profile-pic" style={{with: '80%', borderRadius:'50%'}}/>
                 <h1>{profile.name} <span style={{fontSize:20}} >({profile.username})</span> </h1>
                 <p className="title">{profile.isClubHolder ? 'Club Holder' : 'Normal User'}</p>
                 <p>Balance: {profile.balance}</p>

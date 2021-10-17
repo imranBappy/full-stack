@@ -156,3 +156,17 @@ button{
 .login-aria button{
     border: none
 }
+
+button{
+    background: #1c072b !important;
+}
+input:active{
+    background: #1c072b !important;
+
+}
+input:checked{
+    background: #1c072b !important;
+}
+input:focus{
+    background: #0c0313 !important;
+}

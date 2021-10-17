@@ -12,23 +12,12 @@ import validateEmail from '../../utils/validateEmail';
 import validateNumber from '../../utils/validateNumber';
 import './Register.css';
 import { clubAction } from '../../store/actions/clubAction';
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
 import 'firebase/auth'
 const Register = (props) => {
     console.log(loadingImg);
     const histroy = useHistory()
     const [isRegister, setRegister] = useState(false)
-    initializeApp({
-        apiKey: "AIzaSyBwcFFGN83oBm0LlZgR5qsA2mIoEkcv7Wk",
-        authDomain: "fir-adb93.firebaseapp.com",
-        projectId: "fir-adb93",
-        storageBucket: "fir-adb93.appspot.com",
-        messagingSenderId: "359501769209",
-        appId: "1:359501769209:web:43b3ff0f4ef66bbdd5b528",
-        measurementId: "G-K95M8H4Y0R"
-    })
-    const auth = getAuth();
+    
   
     const [error, setError] = useState({
         name:{
@@ -62,7 +51,7 @@ const Register = (props) => {
         phone:'',
         username:'',
         sName:'admin',
-        club:'60d8ae1798bab1f78ddf15d1',
+        club:'60ea8f82fcabd2314dca0779',
         password:''
     })
 
@@ -162,7 +151,6 @@ const Register = (props) => {
                 }})
             }
         }
-        
     }
 
     const handleSubmit = () =>{
@@ -191,82 +179,16 @@ const Register = (props) => {
       
         if (isValid) {
                 setRegister(true)
-
-            var recaptcha = new RecaptchaVerifier('recaptcha', {
-                'size': 'invisible',
-                'callback': (response) => {}
-            }, auth);
-// 01926219353
-            axios.post(`https://server.hosttesting.xyz/user/register?check=true`, user)
-            .then(res=>{
-
-                if (!res.data.error) {
-                    signInWithPhoneNumber(auth, user.phone, recaptcha)
-                    .then( e => {
-                    const otp = prompt('Enter the OTP... ') // null , ''
-                    if (!otp) return props.alertAction({
-                        message:'Authentication Failed',
-                        error: true,
-                    })
-                    e.confirm(otp).then( result => {
-                    console.log('r = ', result);
-                    console.log('r = ', result.user);
-                    if (result.user) {
-                        props.registerAction(user, histroy)
-                    setUser({
-                        name:'',
-                        email:'',
-                        phone:'',
-                        username:'',
-                        sName:'admin',
-                        club:'60ea8f82fcabd2314dca0779',
-                        password:''
-                    })
-                    }else{
-                    props.alertAction({
-                        message:'Authentication Failed',
-                        error: true
-                    })
-                    setRegister(false)
-
-                    }
-                }).catch(function (error) {
-                    props.alertAction({
-                        message:'Authentication Failed',
-                        error: true
-                    })
-                    setRegister(false)
-
-                });
-        
+                props.registerAction(user, histroy)
+                setUser({
+                    name:'',
+                    email:'',
+                    phone:'',
+                    username:'',
+                    sName:'admin',
+                    club:'60ea8f82fcabd2314dca0779',
+                    password:''
                 })
-                .catch( errr =>{
-                    props.alertAction({
-                        message:'Authentication Failed',
-                        error: true
-                    })
-                    setRegister(false)
-
-                });
-
-                }else{
-                    props.alertAction({
-                        message:res.data.message,
-                        error: true
-                    })
-                setRegister(false)
-                }
-            })
-            .catch(e=>{
-            props.alertAction({
-                message:'Please fill up this from',
-                error: true
-            })
-            setRegister(false)
-            })
-            
-// 01926219353
-        
            
         }else{
             props.alertAction({
@@ -277,7 +199,6 @@ const Register = (props) => {
     }
     return (
         <div className="container">
-            <div id="recaptcha"></div>
                 <div className="register">
                     <h1 style={{marginBottom:5}} >Register</h1>
                     <p>Please fill in this form to create an account.</p>
@@ -376,8 +297,7 @@ const Register = (props) => {
 
                     <button onClick={handleSubmit} type="submit" className={`registerbtn ${ loadingImg ? '' : 're-btn-container'}`}>
                     
-                    {isRegister ? <img className='register-loading' src={loadingImg}/> : 'Register' }
-                    
+                        Register
                     </button>
                 </div>
                 

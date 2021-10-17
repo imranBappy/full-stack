@@ -52,7 +52,7 @@ const GameAdd = (props) => {
 
     useEffect(()=>{
         if (id) {
-        axios.get(`http://localhost:4000/game/single/${id}`)
+        axios.get(`https://server.hosttesting.xyz/game/single/${id}`)
         .then(res=>{
             setGame(res.data.game)
         })

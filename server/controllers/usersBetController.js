@@ -7,7 +7,9 @@ const isNumber = require('../utils/isNumber')
 
 exports.betPostController = async (req, res, next) =>{
     try {
+        // return 0;
         const user = await User.findById(req.user);
+        console.log(req.body)
         if (!(user.balance >= req.body.amount)) return res.json({
             message: 'There is not enough balance',
             error: true
@@ -31,6 +33,7 @@ exports.betPostController = async (req, res, next) =>{
         });
         
         const rate = await Rate.findById('6138b5e469f2164564901407');
+        
         let balance = req.body.amount * rate.sponsor ;
         let sponsorRateBalance = balance - req.body.amount
         await User.findByIdAndUpdate(sUser[0]._id,{
@@ -59,12 +62,13 @@ exports.betPostController = async (req, res, next) =>{
             balance: isNumber(clubHolder[0].balance + clubRateBalance)
         });
 
-        const res = await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
+        await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
         res.json({
             message: 'Bet send successfully!', error: false
         })
     } catch (error) {
-        next()
+        error.status = 500
+        next(error)
     }
 };
 

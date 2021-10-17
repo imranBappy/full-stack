@@ -5,7 +5,7 @@ const Number = () => {
     const [number, setNumber] = useState({ number:'', method:'', type:'' });
     const [data, setData] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:4000/option/number')
+        axios.get('https://server.hosttesting.xyz/option/number')
         .then(res =>res)
         .then(data=>{
             setData(data.data.data)
@@ -15,7 +15,7 @@ const Number = () => {
         setNumber({...number, [e.target.name]: e.target.value});
     }
     const handleSubmit = () =>{
-        axios.post('http://localhost:4000/option/number',number)
+        axios.post('https://server.hosttesting.xyz/option/number',number)
         .then(res =>res)
         .then(data=>{
             store.dispatch({
@@ -29,7 +29,7 @@ const Number = () => {
         setData([...data, number])
     }
     const handleDelete = id =>{
-        axios.delete(`http://localhost:4000/option/number?id=${id}`)
+        axios.delete(`https://server.hosttesting.xyz/option/number?id=${id}`)
         .then(res =>res)
         .then(data=>{
             store.dispatch({

@@ -19,7 +19,7 @@ const Title = (props) => {
     let query = useQuery();
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/bet/single-bet-get?betId=${query.get('betId')}`).then(res=>{
+        axios.get(`https://server.hosttesting.xyz/bet/single-bet-get?betId=${query.get('betId')}`).then(res=>{
             if (res.data.bet) {
                 setGame(res.data.bet)
             }
