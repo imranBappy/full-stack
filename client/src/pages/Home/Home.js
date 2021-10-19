@@ -42,7 +42,7 @@ const Home = (props) => {
                                 <span className='upcoming-text'>Upcoming</span>
                            </div>
                         </div>
-                        <UpcomingGame game={upcoming} />
+                        <UpcomingGame handleModel={handleModel} game={upcoming} />
                     </div>
                 </div>
         </>

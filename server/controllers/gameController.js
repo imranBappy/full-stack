@@ -54,11 +54,12 @@ exports.allGameLoadGetController = async (req, res, next) =>{
 }
 exports.gameUpdateController = async (req, res, next) =>{
     try {
-        console.log(req.body)
         const updatedGame = await Game.findByIdAndUpdate(req.body._id,{
             name: req.body.name,
-            status: req.body.status,
-            isActive: req.body.isActive
+            // status: req.body.status,
+            // isActive: req.body.isActive,
+            country1:req.body.country1,
+            country2:req.body.country2
         },{ returnOriginal: false },).select({
             __v:0,
             createdAt:0,

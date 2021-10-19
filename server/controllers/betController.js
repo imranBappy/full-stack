@@ -66,7 +66,7 @@ exports.betAllDeleteController = async (req, res, next) =>{
 }
 exports.singleBetGetController = async (req, res, next) =>{
     try {
-        const {betId} = req.query;
+        const { betId } = req.query;
         const bet = await Result.findById(betId).select({
             __v:0
         })

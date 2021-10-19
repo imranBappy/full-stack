@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const clubAction = club => async dispatch =>{
     try {
-        const res = await axios.post(`https://server.hosttesting.xyz/club/add-club`, club)
+        const res = await axios.post(`https://day20.herokuapp.com/club/add-club`, club)
           dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -25,7 +25,7 @@ export const clubAction = club => async dispatch =>{
 
 export const loadAllClub = (page) => async dispatch => {
     try {
-        const res = await axios.get(`https://server.hosttesting.xyz/club/get-all-club?page=${page}`);
+        const res = await axios.get(`https://day20.herokuapp.com/club/get-all-club?page=${page}`);
         dispatch({
             type: Types.SET_CLUB,
             payload:{

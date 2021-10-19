@@ -53,8 +53,8 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
                                                 bet.question && bet.question.map(q=>{
                                                     return (
                                                         <>
-                                                            {q.show && <button 
-                                                                onClick={()=>handleBet(main._id, bet._id, q._id ) }
+                                                            { <button 
+                                                                onClick={q.show ?()=>handleBet(main._id, bet._id, q._id ):()=>{} }
                                                                 key={q._id}>{q.question} 
                                                                 <span>{q.rate}</span> 
                                                                 </button>}

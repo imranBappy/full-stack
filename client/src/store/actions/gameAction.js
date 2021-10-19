@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as Types from './types';
 export const allGameGetAction = () => async dispatch => {
     try {
-        const game = await axios.get('https://server.hosttesting.xyz/game/get-game');
+        const game = await axios.get('https://day20.herokuapp.com/game/get-game');
         dispatch({
             type: Types.SET_GAME,
             payload: {

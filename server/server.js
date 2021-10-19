@@ -32,7 +32,7 @@ app.get('/', async (req, res)=>{
     //         console.log(rrr)
     //     }
     // }
-    res.send('Hello Bangladesh!')
+    res.send('Hello Bangladesh!!')
 })
 setRoutes(app);
 mongoose.set('useFindAndModify', false);

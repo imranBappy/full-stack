@@ -24,7 +24,7 @@ if (token) {
         token
       }
     })
-    Axios.get(`https://server.hosttesting.xyz/admin/single-user/${decode._id}`,{
+    Axios.get(`https://day20.herokuapp.com/admin/single-user/${decode._id}`,{
       	headers:{
           authorization: token
         }

@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { alertAction } from '../../store/actions/alertAction';
 import { registerAction } from '../../store/actions/authAction';
 import axios from 'axios';
-// import loadingImg from '../../img/logo.png'
 import loadingImg from '../../img/loading.gif'
 
 import validateEmail from '../../utils/validateEmail';

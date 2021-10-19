@@ -3,12 +3,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import {connect} from 'react-redux'
 import { betAction } from '../../store/actions/betAction';
 import { BetContext, ModalContext } from '../Layout/Layout';
+import findBet from '../../utils/findBet';
 
 const BetInput = (props) => {
     const [bet, setBet] = useState({
         bet: 100,
         message: ''
     });
+    
     const user = props.auth.user
     const [Bet, SetBet] = useContext(BetContext);
     const [,setOpen] = useContext(ModalContext);
@@ -16,12 +18,12 @@ const BetInput = (props) => {
         if(user.balance < 100) setBet({...bet, message:'There is not enough balance'})
      },[])
     const handelChange = e =>{
+        
         const name = e.target.name, value = e.target.value;
         let number
         if(Number(value)) number = typeof Number(value)          
         if(number === 'number' || value === ''){
             if(user.balance >= Number(value)) {
-                console.log(user.balance);
                 setBet({...bet, [name]: value, message:''});
                 SetBet({...Bet, amount: Number(value)});
             }else{
@@ -48,18 +50,19 @@ const BetInput = (props) => {
                         value={bet.bet} 
                         type="text" 
                     />
+                    <p state={{paddingBottom:10}}>Possible Winning: {Bet.amount * findBet(props.games, Bet) }</p>
                     {
                         bet.message && <p className='error' >{bet.message}</p>
                     }
                     <button onClick={handleSubmit} >Submit</button>
-
                 </>
-            
-            
         </div>
     );
 };
 const mapStateToProps = state =>({
-    auth: state.auth
+    auth: state.auth,
+    games: state.game.game
 })
 export default connect(mapStateToProps,{betAction})(BetInput) ;
+
+

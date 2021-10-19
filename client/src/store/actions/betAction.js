@@ -3,9 +3,10 @@ import * as Types from './types';
 
 export const betAction = (userBit, auth) => async dispatch=>{
     try {
-        // const res = await axios.post(`http://localhost:4000/usersbet/adduserbet`, userBit);
-        const res = await axios.post(`https://server.hosttesting.xyz/usersbet/adduserbet`, userBit);
+        // const res = await axios.post(`https://day20.herokuapp.com/usersbet/adduserbet`, userBit);
+        const res = await axios.post(`https://day20.herokuapp.com/usersbet/adduserbet`, userBit);
         auth.user.balance = auth.user.balance - Number(userBit.amount)
+        console.log({res}, {userBit});
         dispatch({
             type: Types.SET_ALERT,
             payload: {
@@ -24,7 +25,7 @@ export const betAction = (userBit, auth) => async dispatch=>{
 };
 export const betGetAction = page => async dispatch =>{
     try {
-        const res = await axios.get(`https://server.hosttesting.xyz/usersbet/user-bet-get?page=${page}`);
+        const res = await axios.get(`https://day20.herokuapp.com/usersbet/user-bet-get?page=${page}`);
         dispatch({
             type: Types.SET_BET,
             payload: {

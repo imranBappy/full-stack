@@ -7,6 +7,7 @@ const UpcomingGame = (props) => {
            {
             props.game.length ? 
             <Game
+            handleModel={props.handleModel}
                 game={props.game}
                 style={{}}
                 classNames='accordion'

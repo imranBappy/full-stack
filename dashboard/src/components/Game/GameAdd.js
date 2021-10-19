@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { gameAddAction } from '../../store/actions/gameAction';
 import axios from 'axios';
+import { alertAction } from '../../store/actions/alertAction';
 
 const gameType = ['Football', 'Cricket', 'Basketball'];
 
@@ -52,17 +53,17 @@ const GameAdd = (props) => {
 
     useEffect(()=>{
         if (id) {
-        axios.get(`https://server.hosttesting.xyz/game/single/${id}`)
+        axios.get(`https://day20.herokuapp.com/game/single/${id}`)
         .then(res=>{
             setGame(res.data.game)
         })
         }
     },[])
-    // mutipoll server 
-    // image store
-    // image ki data base store kora jay
     const updateHandler = () =>{
         
+        axios.patch(`https://day20.herokuapp.com/game/game-update`, game).then(res=>{
+            props.alertAction(res.data)
+        })
     }
     return (
         <>
@@ -187,4 +188,4 @@ const GameAdd = (props) => {
 const mapStateToProps = state =>({
     game: state.game
 })
-export default connect(mapStateToProps, {gameAddAction})(GameAdd) ;
+export default connect(mapStateToProps, {gameAddAction, alertAction})(GameAdd) ;

@@ -2,7 +2,7 @@ import * as Types from './types';
 import axios from 'axios';
 export const allTransactionGetAction = (page, transaction) => async dispatch =>{
     try {
-        const res = await axios.get(`https://server.hosttesting.xyz/transaction?transaction=${transaction}&page=${page}`);
+        const res = await axios.get(`https://day20.herokuapp.com/transaction?transaction=${transaction}&page=${page}`);
         console.log(transaction);
         dispatch({
             type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
@@ -31,7 +31,7 @@ export const transactionAcceptAction = (transaction,index, rows, length, status,
                 error: false
             }
         });
-        const updateTransaction = await axios.patch(`https://server.hosttesting.xyz/transaction/update-transaction/${transaction._id}?status=${transaction.status}&userId=${transaction.user._id}`);
+        const updateTransaction = await axios.patch(`https://day20.herokuapp.com/transaction/update-transaction/${transaction._id}?status=${transaction.status}&userId=${transaction.user._id}`);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
