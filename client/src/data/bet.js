@@ -30,6 +30,11 @@ const columns = () =>([
         minWidth: 80 ,
     },
     { 
+        id: 'wining', 
+        label: 'Possible Winning', 
+        minWidth: 80 ,
+    },
+    { 
         id: 'status', 
         label: 'Status', 
         minWidth: 80 ,

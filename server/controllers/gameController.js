@@ -46,7 +46,7 @@ exports.allGameLoadGetController = async (req, res, next) =>{
             updatedAt: 0,
             __v: 0
         })
-       
+       console.log(game)
         res.json({game})
     } catch (error) {
         next(error)
@@ -56,8 +56,8 @@ exports.gameUpdateController = async (req, res, next) =>{
     try {
         const updatedGame = await Game.findByIdAndUpdate(req.body._id,{
             name: req.body.name,
-            // status: req.body.status,
-            // isActive: req.body.isActive,
+            status: req.body.status,
+            isActive: req.body.isActive,
             country1:req.body.country1,
             country2:req.body.country2
         },{ returnOriginal: false },).select({
@@ -90,7 +90,6 @@ exports.singleGameGetController = async (req, res, next)=>{
         const game = await Game.findById(req.params.id).select({
             updatedAt:0,
             createdAt:0,
-            status:0,
             bets:0,
             __v:0
         })

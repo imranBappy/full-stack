@@ -7,9 +7,7 @@ const isNumber = require('../utils/isNumber')
 
 exports.betPostController = async (req, res, next) =>{
     try {
-        // return 0;
         const user = await User.findById(req.user);
-        console.log(req.body)
         if (!(user.balance >= req.body.amount)) return res.json({
             message: 'There is not enough balance',
             error: true
@@ -102,7 +100,7 @@ exports.userBetStatusUpdateController = async (req, res, next) =>{
             const userBets = await UserBet.find({user: user._id, result: result._id});
             let userBalance = user.balance;
             for (let j = 0; j < userBets.length; j++) {
-                userBalance += isNumber(Number(userBets[j].amount) * Number(result.rate)) 
+                userBalance += isNumber(Number(userBets[j].amount) * Number(userBets[j].rate)) 
             };
             if (status === 'Win') {
                 await User.findByIdAndUpdate(user._id,{

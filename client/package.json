@@ -1,5 +1,5 @@
 {
-  "homepage": "https://day20.net",
+  "homepage": "https://www.b24win.com",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://day20.herokuapp.com/"
+  "proxy": "https://day20.herokuapp.com"
 }

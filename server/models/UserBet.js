@@ -4,6 +4,10 @@ const userBetSchema = new Schema({
         type: Number,
         required: true
     },
+    rate:{
+        type: Number,
+        required: true
+    },
     win:{
         type: Boolean,
         required: true

@@ -16,9 +16,9 @@ const Modal = () => {
     }
     return (
         <div className="container">
-            <div id="myModal" style={open} class="modal">
-                <div class="modal-content">
-                    <span onClick={closeModal} class="close">&times;</span>
+            <div id="myModal" style={open} className="modal">
+                <div className="modal-content">
+                    <span onClick={closeModal} className="close">&times;</span>
                     {open.component === 'TransactionInput' && <TransactionInput transaction ='deposit' />}
                     {open.component === 'bet' && <BetInput/>}
                 </div>

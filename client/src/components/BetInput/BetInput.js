@@ -34,7 +34,7 @@ const BetInput = (props) => {
     }
     const handleSubmit = () =>{
         if (!bet.message) {
-            props.betAction(Bet, props.auth)
+            props.betAction({...Bet, rate: findBet(props.games, Bet) }, props.auth)
             setOpen({display: 'none', component:''})
         }
     }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { alertAction } from '../../store/actions/alertAction';
 import { loginAction } from '../../store/actions/authAction';
+import { Link } from 'react-router-dom'
 import '../Register/Register.css';
 
 const Login = (props) => {
@@ -125,7 +126,7 @@ const Login = (props) => {
                 </div>
                 
                 <div className="container signin">
-                    <p>I Have a no account? <a href="/register">Sign in</a>.</p>
+                    <p>I Have a no account? <Link to="/register">Sign in</Link>.</p>
                 </div>
         </div>
     );

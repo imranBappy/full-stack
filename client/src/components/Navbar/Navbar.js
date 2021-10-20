@@ -11,7 +11,6 @@ import './Navbar.css';
 import menuIcon from '../../img/menu.webp'
 const Navbar = (props) => {
     const location = useLocation();
-    console.log();
     const {alert, auth} = props;
     const [menu, setMenu] = useState(false)
     const [, setOpen] = useContext(ModalContext)

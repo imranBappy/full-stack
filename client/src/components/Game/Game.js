@@ -75,9 +75,6 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             </div>
             )
             }
-          
-            
-            
         </div>
     );
 };

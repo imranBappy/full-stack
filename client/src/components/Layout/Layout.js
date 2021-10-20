@@ -22,7 +22,7 @@ const Layout = (props) => {
         amount:100,
         game:'',
         bet:'',
-        result:'',
+        result:''
     })
     return (
         <>

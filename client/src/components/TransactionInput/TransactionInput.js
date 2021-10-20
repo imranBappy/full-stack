@@ -29,7 +29,7 @@ const TransactionInput = (props) => {
             setTransactionInput({...TransactionInput, message:'There is not enough balance'})
             setError({...error, amount: 'There is not enough balance'});
         }
-        console.log(props.user.balance > -1);
+        
         if (props.user.balance > -1) {
           axios.get('/option/number').then(res=>res)
             .then(data=>{
@@ -100,7 +100,12 @@ const TransactionInput = (props) => {
         for (const key in obb) {
             const value = obb[key];
                 if (type ==='TransactionInput') {
-                    if (!value) return false;
+                        if(props.transaction === "withdraw" && key === 'trxId' ){
+                        }else{
+                            if (!value){
+                                return false;
+                            }
+                        }
                 }else{
                     if (value) return false;
                 }
@@ -108,6 +113,7 @@ const TransactionInput = (props) => {
         return true;
     }
     const handleSubmit = () =>{
+        // console.log(checkValid(TransactionInput, 'TransactionInput'))
         if (checkValid(TransactionInput, 'TransactionInput')) {
             if (checkValid(error)) {
                 props.TransactionInputRequestAction(TransactionInput, props.user);

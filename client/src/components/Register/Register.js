@@ -160,7 +160,6 @@ const Register = (props) => {
                 isValid = false;
             }
         }
-        
         for (const key in user) {
             const input = user[key];
             if (!input) {
@@ -172,10 +171,6 @@ const Register = (props) => {
         }else if(user.phone[0]==='0'){
             user.phone = `+88${user.phone}`
         }
-
-        
-// return 
-      
         if (isValid) {
                 setRegister(true)
                 props.registerAction(user, histroy)

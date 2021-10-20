@@ -131,7 +131,3 @@ exports.betUpdateController = async (req, res, next) => {
         next(error);
     }
 }
-
-// 1 bet bet je je user bet course oi gula ekta array te rakhte hobe
-// oi bet er status change kora dite hobe
-// user array looping kore bet rate diye caulculate kore update korte hobe

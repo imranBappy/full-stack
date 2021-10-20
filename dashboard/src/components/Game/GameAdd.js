@@ -60,7 +60,6 @@ const GameAdd = (props) => {
         }
     },[])
     const updateHandler = () =>{
-        
         axios.patch(`https://day20.herokuapp.com/game/game-update`, game).then(res=>{
             props.alertAction(res.data)
         })

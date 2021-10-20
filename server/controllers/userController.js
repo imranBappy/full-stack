@@ -5,7 +5,6 @@ const Club = require('../models/Club');
 
 exports.registerPostController = async (req, res, next) =>{
     try {
-        console.log(req.query);
         const hash = await bcrypt.hash(req.body.password, 10)
         req.body.password = hash;
 
@@ -36,28 +35,21 @@ exports.registerPostController = async (req, res, next) =>{
 
         const sName = await User.find({username: req.body.sName.trim()})
             if (sName.length === 0 ) {
-                req.body.sName = '60d8c7fa7c05af12ce47a178'
+                req.body.sName = '60ea8db5fcabd2314dca0777'
             }else{
                 req.body.sName = sName[0]._id;
             }
-            if (!req.query.check) {
-                const user = new User({...req.body, active: true});
-                const newUser = await user.save();
-                await Club.findByIdAndUpdate(req.body.club,{
+            const user = new User({...req.body, active: true});
+            const newUser = await user.save();
+            await Club.findByIdAndUpdate(req.body.club,{
                     $push:{'user': newUser._id}
-                })
-                res.json({
-                    message:'User register successfully!',
-                    error: false,
-                    data:[]
-                })
-            }else{
-                return res.json({
-                message:'User Valid',
+            })
+            res.json({
+                message:'User register successfully!',
                 error: false,
                 data:[]
-                })
-            }
+            })
+            
         
     } catch (error) {
         next(error)

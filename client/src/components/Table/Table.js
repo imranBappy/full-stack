@@ -8,7 +8,6 @@ const Table = ({columns, rows, action, path, length}) => {
     const history = useHistory()
     const [page, setPage] = useState(0);
     const [totalPage, setTotalPage] = useState(0)
-    // console.log(rows);
     useEffect(()=>{
         if (query.get('page')){
             setPage(Number(query.get('page')));
@@ -52,7 +51,6 @@ const Table = ({columns, rows, action, path, length}) => {
                     </tr>
                     {
                         rows.map((row) =>{
-                            // console.log(row);
                             return (
                                 <tr>
                                     {
@@ -66,8 +64,9 @@ const Table = ({columns, rows, action, path, length}) => {
                                                 column.id === 'status' && path ==='/club-holder' ? row.result.status  :
                                                 column.id === 'game' ? value.name :
                                                 column.id === 'bet' ? value.title :
+                                                column.id === 'wining' ? row.amount * row.rate :
                                                 column.id === 'result' ? value.question :
-                                                column.id === 'rate' ? row.result.rate :
+                                                column.id === 'rate' ?row.rate :
                                                 column.id === 'status' && path ==='/bet' ? row.result.status  :
                                                 value
                                                 
