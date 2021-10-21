@@ -18,48 +18,32 @@ const Number = () => {
         })
     },[])
     const sponsorHandleChange = e =>{
-        const number = parseFloat(e.target.value);
-        if (e.target.value.length > 0) {
-            if (e.target.value[e.target.value.length - 1] === '.' ) {
-                return setSponsor(e.target.value)
-            }
-        }
-        if (!number) {
-            setSponsor('')
-        }else{
-            setSponsor(number)
-        }
+        setSponsor(e.target.value)
     }
     const clubHandleChange = e =>{
-        const number = parseFloat(e.target.value);
-        if (e.target.value.length > 0) {
-            if (e.target.value[e.target.value.length - 1] === '.' ) {
-                return setClub(e.target.value)
-            }
-        }
-        if (!number) {
-            setClub('')
-        }else{
-            setClub(number)
-        }
+        setClub(e.target.value)
     }
     const handleSubmitSponsor = () =>{
-        console.log(sponsor === '');
-        // if (sponsor === ''){
-                 axios.patch('https://day20.herokuapp.com/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
-                .then(res =>res)
-                .then(data=>{
-                    store.dispatch({
-                        type: 'SET_ALERT',
-                        payload:{
-                            message: data.data.message,
-                            error:data.data.error
-                        }
-                    })
+        if (parseFloat(sponsor)) {
+            axios.patch('https://day20.herokuapp.com/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
+            .then(res =>res)
+            .then(data=>{
+                store.dispatch({
+                    type: 'SET_ALERT',
+                    payload:{
+                        message: data.data.message,
+                        error:data.data.error
+                    }
                 })
-        // }
+            })
+        }else{
+            alert('Please Input Number')
+        }
+            
     }
     const handleSubmitClub = () =>{
+        
+        if (parseFloat(club)) {
         axios.patch('https://day20.herokuapp.com/option/rate?rate=club',{club: club === ''? 0: club})
         .then(res =>res)
         .then(data=>{
@@ -71,6 +55,10 @@ const Number = () => {
                 }
             })
         })
+        }else{
+            alert('Please Input Number')
+        }
+        
     }
     return (
         <div>
@@ -83,9 +71,8 @@ const Number = () => {
                 value={sponsor}
                  name="sponsor" placeholder="Sponsor Rate" type="text" />
                <button onClick={handleSubmitSponsor} type="submit">Submit</button>
-
             </div>
-    <br />            
+            <br />            
             <div>
               <label htmlFor="sponsor">Club Rate : &nbsp;	&nbsp;	&nbsp; </label>
 

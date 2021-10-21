@@ -145,7 +145,7 @@ exports.userClubBetGetController = async (req, res, next) =>{
     try {
         let newBet = []
         const betsLength = await UserBet.find({})
-        const bet = await UserBet.find({})
+        const bet = await UserBet.find({club:req.query.club})
         .populate({
             path:'user',
             select:'username',
@@ -158,19 +158,17 @@ exports.userClubBetGetController = async (req, res, next) =>{
         .populate('bet', 'title')
         .populate('result', 'question rate status')
         .sort('-createdAt')
-        // .skip(5* Number(page)).limit(10)
-
-        for (let i = 0; i < bet.length; i++) {
-            const obj = bet[i];
-            
-                    if (obj['user'].club.clubId ===req.query.club) {
-                        newBet = [...newBet, obj]
-                    }
-               
-        }
-        const result = newBet.splice(5 * Number(page),5)
-
-        res.json({result, length: betsLength.length});
+        .skip(5* Number(page)).limit(5)
+        // console.log(req.query.club)
+        // for (let i = 0; i < bet.length; i++) {
+        //     const obj = bet[i];
+        //     console.log(obj['user'].club.clubId)
+        //         if (obj['user'].club.clubId ===req.query.club) {
+        //             newBet = [...newBet, obj]
+        //         }
+        // }
+        // const result = newBet.splice(5 * Number(page),5)
+        res.json({result: bet, length: betsLength.length});
     } catch (error) {
         next(error)   
     }

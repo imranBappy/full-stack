@@ -29,3 +29,6 @@
         color:red
     }
 }
+.ul{
+    scroll-behavior: smooth;
+}

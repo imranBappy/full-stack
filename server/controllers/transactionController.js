@@ -4,12 +4,17 @@ exports.transactionPortController = async (req, res, next) =>{
     try {
         const transaction = new Transaction({...req.body, status:'Pending'});
         const user = await User.findById(req.body.user)
+        
         if (req.body.transaction === 'withdraw') {
-            await User.findByIdAndUpdate(user._id, {
-                balance: user.balance  - Number(req.body.amount)
-            });
+            if(user.balance >=Number(req.body.amount) ) {
+                await User.findByIdAndUpdate(user._id, {
+                    balance: user.balance  - Number(req.body.amount)
+                });
+                await transaction.save()
+            }else{
+                return res.json({message: `There is not enough balance`, error: true})
+            }
         }
-        await transaction.save()
         res.json({message: `${req.body.transaction} Request successfully`})
     } catch (error) {
         next(error)

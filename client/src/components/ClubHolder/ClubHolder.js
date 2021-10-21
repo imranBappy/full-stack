@@ -11,11 +11,14 @@ const ClubHolder = (props) => {
     const query = useQuery(useLocation);
     const [bet, setBet] = useState({result:[], length: 0});
     const [club, setClub] = useState({})
+    // http://localhost:4000
+    // https://day20.herokuapp.com
     useEffect(()=>{
+        console.log(111, props.club)
         if (props.club) {
-            axios.get(`https://day20.herokuapp.com/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club.clubId}`)
+            axios.get(`https://day20.herokuapp.com/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club._id}`)
             .then(function (response) {
-                // console.log(response.data);
+                console.log(response.data);
                 setBet(response.data)
             })
             .catch(function (error) {
@@ -54,5 +57,5 @@ const ClubHolder = (props) => {
 const mapStateToProps = state =>({
     club: state.auth.user.club,
     username:state.auth.user.username
-})
+});
 export default connect(mapStateToProps)(ClubHolder) ;

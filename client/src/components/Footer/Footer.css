@@ -31,3 +31,15 @@
 .footer__container p {
     text-align: left;
 }
+
+@media screen and (max-width: 480px) {
+    /* .footer__container{
+        background-color:greenyellow !important;
+    } */
+    .footer__img>img {
+        height: 25px;
+    }
+    .footer__container>p{
+        font-size: 12px;
+    }
+  }

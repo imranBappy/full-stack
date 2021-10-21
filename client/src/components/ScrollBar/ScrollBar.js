@@ -5,9 +5,10 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 const ScrollBar = (props) => {
     const location = useLocation();
+
     return (
        <div className="container">
-            <div className="scroll-bar">
+            <div className="scroll-bar" >
             <ul>
                 {
                     props.data.map((i, n)=>{

@@ -2,7 +2,9 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Club = require('../models/Club');
+const Forget = require('../models/Forget');
 
+const emailSender = require('../utils/emailSender')
 exports.registerPostController = async (req, res, next) =>{
     try {
         const hash = await bcrypt.hash(req.body.password, 10)
@@ -49,8 +51,7 @@ exports.registerPostController = async (req, res, next) =>{
                 error: false,
                 data:[]
             })
-            
-        
+            emailSender(req.body.email,`Thanks ${req.body.name} for create account`)
     } catch (error) {
         next(error)
     }
@@ -167,6 +168,47 @@ exports.userUpdateController = async (req, res, next) =>{
             user: updateUser
         });
     } catch (error) {
+        next(error)
+    }
+}
+
+exports.forgetUserPostController = async (req, res, next) =>{
+    try{
+        console.log(req.body)
+
+        const forget = await Forget.find({email: req.body.email})
+        for(let i = 0; i < forget.length; i++){
+            await Forget.findByIdAndDelete(forget[i]._id)
+        }
+        const token = jwt.sign({email:req.body.email}, process.env.SECRET,{expiresIn: '0.1h'});
+        const otp = Math.floor(Math.random() * 1000000)
+        const newForget = new Forget({email:req.body.email, token, otp})
+        await newForget.save()
+        emailSender(req.body.email,`Your OTP:  ${otp}`)
+        res.json({
+            message: 'Successfully! Send OTP',
+            error: false
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.forgetCheckPostController = async (req, res, next) =>{
+    try{
+        const forget = await Forget.findOne({otp: req.body.otp})
+        const otp = Math.floor(Math.random() * 10000000)
+        await jwt.verify(forget.token, process.env.SECRET );
+        const hash = await bcrypt.hash(otp.toString(), 10)
+        await User.findOneAndUpdate({email: forget.email},{$set:{password: hash}})
+        await Forget.findByIdAndDelete(forget._id)
+        emailSender(forget.email,`Your Password:  ${otp}`)
+        res.json({
+            message: 'Successfully! Send Password you email',
+            error: false
+        })
+    } catch (error) {
+        error.status = 700
         next(error)
     }
 }

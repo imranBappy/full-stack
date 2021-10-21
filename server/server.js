@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 const User = require('./models/User')
 const Club = require('./models/Result')
-
+const sendMail = require('./utils/emailSender')
 // setMiddleware
 // master branch
 setMiddleware(app);
@@ -18,18 +18,9 @@ origin = ${req.headers.origin}/${req.url}
     next()
 })
 // setRoute
-app.get('/', async (req, res)=>{
 
-    // const users = await Club.find({})
-    // for(let i = 0; i < users.length; i++){
-    //     await Club.findByIdAndDelete(users[i]._id)
-
-        // if(users[i].clubId !== 'official'){
-        //     await Club.findByIdAndDelete(users[i]._id)
-        // }
-    // }
-
-    res.send('Done')
+app.get('/', (req, res) => {
+      res.send('Hello world')
 })
 setRoutes(app);
 mongoose.set('useFindAndModify', false);
@@ -47,6 +38,11 @@ app.use((req,res,next)=>{
 app.use((error, req, res, next)=>{
     console.log(error)
     switch (error.status) {
+        case 700:
+            return res.json({
+                message: 'Please provide valid otp',
+                error:true
+            })
         case 404:
             return res.json({
                 message: 'Page Not Found',
@@ -57,6 +53,7 @@ app.use((error, req, res, next)=>{
                 message: 'User Unauthorized',
                 error:true
             })
+        
         default:
             return res.json({
                 message: 'Server side error',

@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { alertAction } from '../../store/actions/alertAction';
 import { registerAction } from '../../store/actions/authAction';
-import axios from 'axios';
 import loadingImg from '../../img/loading.gif'
 
 import validateEmail from '../../utils/validateEmail';
@@ -15,7 +14,7 @@ import 'firebase/auth'
 const Register = (props) => {
     console.log(loadingImg);
     const histroy = useHistory()
-    const [isRegister, setRegister] = useState(false)
+    const [, setRegister] = useState(false)
     
   
     const [error, setError] = useState({
@@ -287,7 +286,7 @@ const Register = (props) => {
                     <p className='error'>{error.confirmPassword.message}</p>
                     
                     <hr/>
-                    <p>By creating an account you agree to our <a href="/">Terms & Privacy</a>.</p>
+                    <p>By creating an account you agree to our <Link to="/">Terms & Privacy</Link>.</p>
 
                     <button onClick={handleSubmit} type="submit" className={`registerbtn ${ loadingImg ? '' : 're-btn-container'}`}>
                     
@@ -296,7 +295,7 @@ const Register = (props) => {
                 </div>
                 
                 <div className="container signin">
-                    <p>Already have an account? <a href="/login">Sign in</a>.</p>
+                    <p>Already have an account? <Link to="/login">Sign in</Link>.</p>
                 </div>
         </div>
     );

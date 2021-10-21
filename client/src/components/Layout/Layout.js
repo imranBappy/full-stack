@@ -12,8 +12,11 @@ import Footer from './../Footer/Footer';
 
 export const ModalContext = createContext()
 export const BetContext = createContext()
+export const MenuContext = createContext()
 
 const Layout = (props) => {
+    const [menu, setMenu] = useState(false)
+
     const [open, setOpen] = useState({
         display:'none',
         component:'TransactionInput'
@@ -29,9 +32,13 @@ const Layout = (props) => {
             <Switch>
                 <BetContext.Provider value={[bet, setBet]}>
                     <ModalContext.Provider value={[open, setOpen]} >
+                        <MenuContext.Provider value={[menu, setMenu]} >
+
                         <Navbar/>
                         <Modal/>
                         {props.children}
+                        </MenuContext.Provider>
+
                     </ModalContext.Provider>
                 <Footer/>
                 </BetContext.Provider>

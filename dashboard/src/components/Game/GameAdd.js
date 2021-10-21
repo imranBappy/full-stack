@@ -7,7 +7,7 @@ import { gameAddAction } from '../../store/actions/gameAction';
 import axios from 'axios';
 import { alertAction } from '../../store/actions/alertAction';
 
-const gameType = ['Football', 'Cricket', 'Basketball'];
+const gameType = ['Football', 'Cricket', 'Basketball','TableTennis'];
 
 const GameAdd = (props) => {
     const history = useHistory()

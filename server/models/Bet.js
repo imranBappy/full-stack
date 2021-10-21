@@ -20,7 +20,6 @@ const betSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'game',
         required: true
-
     }
 },{timestamps: true})
 

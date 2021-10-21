@@ -5,15 +5,15 @@ import { Link,useLocation } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import { logoutAction } from '../../store/actions/authAction';
 import Alert from '../Alert/Alert';
-import { ModalContext } from '../Layout/Layout';
+import { MenuContext, ModalContext } from '../Layout/Layout';
 import './media.css';
 import './Navbar.css';
 import menuIcon from '../../img/menu.webp'
 const Navbar = (props) => {
     const location = useLocation();
     const {alert, auth} = props;
-    const [menu, setMenu] = useState(false)
     const [, setOpen] = useContext(ModalContext)
+    const [menu, setMenu] = useContext(MenuContext)
 
     const handleClick = () =>{
         setMenu(!menu)

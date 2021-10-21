@@ -3,13 +3,9 @@ import * as Types from './types';
 
 export const betAction = (userBit, auth) => async dispatch=>{
     try {
-        // console.log(userBit)
-        // return 0;
-        // const res = await axios.post(`http://localhost:4000/usersbet/adduserbet`, userBit);
-
+     
         const res = await axios.post(`https://day20.herokuapp.com/usersbet/adduserbet`, userBit);
         auth.user.balance = auth.user.balance - Number(userBit.amount)
-        console.log({res}, {userBit});
         dispatch({
             type: Types.SET_ALERT,
             payload: {

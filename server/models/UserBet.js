@@ -17,6 +17,11 @@ const userBetSchema = new Schema({
         ref:'game',
         required: true
     },
+    club:{
+        type: Schema.Types.ObjectId,
+        ref:'bet',
+        required: true
+    },
     bet:{
         type: Schema.Types.ObjectId,
         ref:'bet',
@@ -32,7 +37,6 @@ const userBetSchema = new Schema({
         ref:'user',
         required: true
     }
-
 },{timestamps: true})
 
 const UserBet = model('userBet', userBetSchema);

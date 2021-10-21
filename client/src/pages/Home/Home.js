@@ -8,6 +8,7 @@ import {allGameGetAction} from '../../store/actions/gameAction';
 import { connect } from 'react-redux';
 import './home.css';
 import { BetContext, ModalContext } from '../../components/Layout/Layout';
+import Category from '../../components/Category/Category';
 
 const Home = (props) => {
     const [live, setLive] = useState([]);
@@ -18,7 +19,7 @@ const Home = (props) => {
         props.allGameGetAction()
         setInterval(() => {
             props.allGameGetAction()
-        }, 5000000);
+        }, 1000000);
     },[]);
     useEffect(()=>{
         const liveGame = props.game.filter(game => game.status === 'Live')
@@ -35,6 +36,7 @@ const Home = (props) => {
                 <div className="home">
                     <div className='home-controller'>
                         <News/>
+                        <Category/>
                         <LiveEffect/>
                         <LiveGame handleModel={handleModel} game={live} />
                         <div className="container">

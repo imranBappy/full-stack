@@ -127,6 +127,8 @@ const Login = (props) => {
                 
                 <div className="container signin">
                     <p>I Have a no account? <Link to="/register">Sign in</Link>.</p>
+                    <p>Forget you password ? <Link to="/forget">Forget</Link>.</p>
+
                 </div>
         </div>
     );

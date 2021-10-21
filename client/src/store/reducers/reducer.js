@@ -17,5 +17,4 @@ const reducer = combineReducers({
     transaction: TransactionReducer,
     transfer:balanceTransferReducer
 })
-
 export default reducer
