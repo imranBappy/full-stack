@@ -122,19 +122,18 @@ const TransactionInput = (props) => {
     return true;
   };
   const handleSubmit = () => {
-    props.TransactionInputRequestAction(TransactionInput, props.user);
-    // if (checkValid(TransactionInput, "TransactionInput")) {
-    //   if (checkValid(error)) {
-    //     props.TransactionInputRequestAction(TransactionInput, props.user);
-    //     setTransactionInput({
-    //       amount: defaultValue,
-    //       trxId: "",
-    //       method: "",
-    //       number: "",
-    //     });
-    //     setOpen({ display: "none" });
-    //   }
-    // }
+    if (checkValid(TransactionInput, "TransactionInput")) {
+      if (checkValid(error)) {
+        props.TransactionInputRequestAction(TransactionInput, props.user);
+        setTransactionInput({
+          amount: defaultValue,
+          trxId: "",
+          method: "",
+          number: "",
+        });
+        setOpen({ display: "none" });
+      }
+    }
   };
  
   return (
