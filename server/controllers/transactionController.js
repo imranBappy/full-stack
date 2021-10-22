@@ -14,7 +14,10 @@ exports.transactionPortController = async (req, res, next) =>{
             }else{
                 return res.json({message: `There is not enough balance`, error: true})
             }
+        }else{
+            await transaction.save()
         }
+
         res.json({message: `${req.body.transaction} Request successfully`})
     } catch (error) {
         next(error)

@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Club = require('../models/Club');
 const Forget = require('../models/Forget');
-
 const emailSender = require('../utils/emailSender')
+
 exports.registerPostController = async (req, res, next) =>{
     try {
         const hash = await bcrypt.hash(req.body.password, 10)
@@ -174,9 +174,13 @@ exports.userUpdateController = async (req, res, next) =>{
 
 exports.forgetUserPostController = async (req, res, next) =>{
     try{
-        console.log(req.body)
 
         const forget = await Forget.find({email: req.body.email})
+        const user = await User.find({email: req.body.email})
+        if(!user.length) return res.json({
+            message: 'User Not Found!',
+            error: true
+        })
         for(let i = 0; i < forget.length; i++){
             await Forget.findByIdAndDelete(forget[i]._id)
         }
@@ -184,7 +188,7 @@ exports.forgetUserPostController = async (req, res, next) =>{
         const otp = Math.floor(Math.random() * 1000000)
         const newForget = new Forget({email:req.body.email, token, otp})
         await newForget.save()
-        emailSender(req.body.email,`Your OTP:  ${otp}`)
+        console.log(emailSender(req.body.email,`Your OTP:  ${otp}`))
         res.json({
             message: 'Successfully! Send OTP',
             error: false
@@ -200,7 +204,7 @@ exports.forgetCheckPostController = async (req, res, next) =>{
         const otp = Math.floor(Math.random() * 10000000)
         await jwt.verify(forget.token, process.env.SECRET );
         const hash = await bcrypt.hash(otp.toString(), 10)
-        await User.findOneAndUpdate({email: forget.email},{$set:{password: hash}})
+        const result = await User.findOneAndUpdate({email: forget.email},{$set:{password: hash}})
         await Forget.findByIdAndDelete(forget._id)
         emailSender(forget.email,`Your Password:  ${otp}`)
         res.json({

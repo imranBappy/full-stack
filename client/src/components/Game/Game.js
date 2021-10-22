@@ -16,7 +16,7 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             e.target.nextElementSibling.style = 'max-height:0'
         }else{
             e.target.className = 'accordion active'
-            e.target.nextElementSibling.style = 'max-height:1000px';
+            e.target.nextElementSibling.style = 'max-height:1500px';
         }
     }
     

@@ -10,9 +10,10 @@ const BetInput = (props) => {
         bet: 100,
         message: ''
     });
-    
     const user = props.auth.user
     const [Bet, SetBet] = useContext(BetContext);
+    const [rate , setRate] = useState(Bet.amount * findBet(props.games, Bet) )
+
     const [,setOpen] = useContext(ModalContext);
     useEffect(() =>{ 
         if(user.balance < 100) setBet({...bet, message:'There is not enough balance'})
@@ -21,7 +22,9 @@ const BetInput = (props) => {
         
         const name = e.target.name, value = e.target.value;
         let number
-        if(Number(value)) number = typeof Number(value)          
+        
+        if(Number(value)) number = typeof Number(value)    
+        setRate(value * findBet(props.games, Bet) )
         if(number === 'number' || value === ''){
             if(user.balance >= Number(value)) {
                 setBet({...bet, [name]: value, message:''});
@@ -50,7 +53,7 @@ const BetInput = (props) => {
                         value={bet.bet} 
                         type="text" 
                     />
-                    <p state={{paddingBottom:10}}>Possible Winning: {Bet.amount * findBet(props.games, Bet) }</p>
+                    <p state={{paddingBottom:10}}>Possible Winning: {rate}</p>
                     {
                         bet.message && <p className='error' >{bet.message}</p>
                     }

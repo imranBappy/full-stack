@@ -4,7 +4,13 @@ const Contact = () => {
     return (
         <div>
             <div className="container">
-                <h1>This contact component</h1>
+                <h1>Contact US</h1>
+                <br />
+                <p>Please Send Email: b24winbet@gmail.com </p>
+                <br />
+                <br />
+                <br />
+
             </div>
         </div>
     );

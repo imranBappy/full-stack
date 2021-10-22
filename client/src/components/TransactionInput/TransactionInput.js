@@ -6,8 +6,10 @@ import { TransactionInputRequestAction } from "../../store/actions/transactionAc
 import { ModalContext } from "../Layout/Layout";
 import "./TransactionInput.css";
 import axios from "axios";
+import {useHistory} from 'react-router-dom'
 const TransactionInput = (props) => {
   const methods = ["Bkash", "Rocket", "Nagad"];
+  const history = useHistory()
   const defaultValue = props.transaction === "deposit" ? 300 : 500;
   const [, setOpen] = useContext(ModalContext);
   const [TransactionInput, setTransactionInput] = useState({
@@ -132,6 +134,7 @@ const TransactionInput = (props) => {
           number: "",
         });
         setOpen({ display: "none" });
+        history.push('/statement/transaction?page=0')
       }
     }
   };

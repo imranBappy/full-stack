@@ -16,7 +16,9 @@ const emailSender = (email, text)=>{
         subject:'B24win.com',
         text: text
     }
-    transporter.sendMail(mailOption,(error, info)=>{})
+    transporter.sendMail(mailOption,(error, info)=>{
+      return {error, info}
+    })
 }
 
 module.exports = emailSender

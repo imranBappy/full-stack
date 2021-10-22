@@ -32,7 +32,8 @@ const AddBet = (props) => {
 
     const [isValid, setIsValid] = useState(true)
     const handelChange = e => {
-        let name = e.target.name, value = e.target.value
+        let name = e.target.name, value = e.target.value;
+        console.log(value)
         setGame({ ...game, [name]: value, bet:query.get("betId") ? query.get("betId"):'' });
     };
   

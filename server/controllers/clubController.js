@@ -18,17 +18,20 @@ exports.clubPortController = async (req, res, next) =>{
                 error: true
             })
         }
-        await User.findOneAndUpdate({username: req.body.clubHolder},{$set:{
-            isClubHolder: true
-        }})
+      if(checkUser[0].isClubHolder){
+        return res.json({
+            message: 'Already He is a club holder',
+            error: true
+        })
+      }
         
         const newClub =  new Club({...req.body, balance:0});
-        const results = await newClub.save();
+        const createdClub = await newClub.save();
         
         await User.findOneAndUpdate({username: req.body.clubHolder},{$set:{
-            club: true
+            isClubHolder: true,
+            club:createdClub._id
         }})
-        console.log(results)
         res.json({
             message: 'Club Created Successfully',
             error: false
