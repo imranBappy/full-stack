@@ -8,7 +8,7 @@ const LiveGame = ({game, handleModel}) => {
             <Game
                 handleModel={handleModel}
                 game={game}
-                style={{maxHeight:500}}
+                style={{maxHeight:1000}}
                 classNames='accordion active'
             />:
             <>
