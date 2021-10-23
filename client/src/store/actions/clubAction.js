@@ -21,7 +21,6 @@ export const clubAction = () => async dispatch =>{
 export const clubUpdateAction = (club) => async dispatch =>{
     try {
         const res = await axios.put(`https://day20.herokuapp.com/club/update?club=${club}`);
-        console.log(res.data)
         dispatch({
             type: Types.SET_ALERT,
             payload: {

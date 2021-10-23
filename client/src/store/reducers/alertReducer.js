@@ -6,7 +6,9 @@ const init = {
 }
 
 const alertReducer = (state = init, action) =>{
-    document.documentElement.scrollTop = 0;
+    if(action.type !== 'SET_GAME'){
+        document.documentElement.scrollTop = 0;
+    }
     switch(action.type){
         case Types.SET_ALERT:
             return{

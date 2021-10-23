@@ -19,7 +19,8 @@ const Home = (props) => {
         props.allGameGetAction()
         setInterval(() => {
             props.allGameGetAction()
-        }, 2500);
+        }, 20000);
+
     },[]);
     useEffect(()=>{
         const liveGame = props.game.filter(game => game.status === 'Live')

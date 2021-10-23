@@ -5,8 +5,7 @@ import axios from "axios";
 export const clubAction = club => async dispatch =>{
     try {
         club.clubId = club.clubId.toLocaleLowerCase()
-        // const res = await axios.post(`https://day20.herokuapp.com/club/add-club`, club)
-        const res = await axios.post(`http://localhost:4000/club/add-club`, club)
+        const res = await axios.post(`https://day20.herokuapp.com/club/add-club`, club)
 
           dispatch({
             type: Types.SET_ALERT,

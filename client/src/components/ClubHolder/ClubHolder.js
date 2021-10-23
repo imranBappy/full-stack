@@ -11,8 +11,6 @@ const ClubHolder = (props) => {
     const query = useQuery(useLocation);
     const [bet, setBet] = useState({result:[], length: 0});
     const [club, setClub] = useState({})
-    // http://localhost:4000
-    // https://day20.herokuapp.com
     useEffect(()=>{
         console.log(111, props.club)
         if (props.club) {
@@ -33,7 +31,6 @@ const ClubHolder = (props) => {
         
     },[props.club])
 
-    // console.log(bet.length);
     const active = page =>{
         axios.get(`https://day20.herokuapp.com/usersbet/club-bet-get?page=${page}&club=${props.club.clubId}`)
         .then(function (response) {

@@ -4,9 +4,7 @@ import setAuthHeader from '../../utils/setAuthHeader';
 export const registerAction = (user, history) => async dispatch => {
     try {
         user.username = user.username.toLocaleLowerCase()
-        // https://day20.herokuapp.com/
         const result = await axios.post('https://day20.herokuapp.com/user/register', user);
-        console.log(result);
         dispatch({
             type: Types.SET_ALERT,
             payload:{

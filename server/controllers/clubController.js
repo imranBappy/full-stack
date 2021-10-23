@@ -24,18 +24,22 @@ exports.clubPortController = async (req, res, next) =>{
             error: true
         })
       }
-        
+        await Club.findOneAndUpdate({_id:checkUser[0].club}, 
+            { $pop: { user: checkUser[0]._id  } })
+
         const newClub =  new Club({...req.body, balance:0});
         const createdClub = await newClub.save();
-        
         await User.findOneAndUpdate({username: req.body.clubHolder},{$set:{
             isClubHolder: true,
             club:createdClub._id
         }})
+        await Club.findOneAndUpdate({_id:createdClub._id}, 
+            { $push: { user: checkUser[0]._id  } })
+
         res.json({
             message: 'Club Created Successfully',
             error: false
-        })
+        })  
     } catch (error) {
         next(error)
     }
@@ -76,9 +80,17 @@ exports.rankingClubGetController = async (req, res, next) =>{
 }
 exports.clubUpdatePutController = async (req, res, next) =>{
     try {
+        const user = await User.findById(req.user)
+
+        await Club.findOneAndUpdate({_id:user.club}, 
+            { $pop: { user: user._id  } })
+
         await User.findByIdAndUpdate(req.user,{$set:{
             club:req.query.club
         }})
+        await Club.findOneAndUpdate({_id:req.query.club}, 
+            { $push: { user: user._id  } })
+
         res.json({
             message:"Updated Successfully",
             error:false,
@@ -90,16 +102,13 @@ exports.clubUpdatePutController = async (req, res, next) =>{
 
 exports.singleClub = async (req, res, next) =>{
     try {
-        console.log(req.params.id);
         const club = await Club.findOne({clubHolder: req.params.id})
         .select({
             __v:0,
             createdAt:0,
             updatedAt:0,
             clubHolder:0,
-            // user: 0,
         })
-        console.log(club);
        
         res.json({
             club
