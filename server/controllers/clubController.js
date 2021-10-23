@@ -3,14 +3,16 @@ const User = require("../models/User")
 
 exports.clubPortController = async (req, res, next) =>{
     try {
+         
         const checkClub = await Club.find({clubId: req.body.clubId})
+        
         if (checkClub.length) {
             return res.json({
                 message: 'Club Id Invalid',
                 error: true
             })
         }
-
+        
         const checkUser = await User.find({username: req.body.clubHolder})
         if (!checkUser.length) {
             return res.json({
@@ -18,23 +20,27 @@ exports.clubPortController = async (req, res, next) =>{
                 error: true
             })
         }
+
+       
       if(checkUser[0].isClubHolder){
         return res.json({
             message: 'Already He is a club holder',
             error: true
         })
       }
+
         await Club.findOneAndUpdate({_id:checkUser[0].club}, 
-            { $pop: { user: checkUser[0]._id  } })
+            { $pull: { 'user': checkUser[0]._id  } })
 
         const newClub =  new Club({...req.body, balance:0});
         const createdClub = await newClub.save();
+
         await User.findOneAndUpdate({username: req.body.clubHolder},{$set:{
             isClubHolder: true,
             club:createdClub._id
         }})
         await Club.findOneAndUpdate({_id:createdClub._id}, 
-            { $push: { user: checkUser[0]._id  } })
+            { $push: { 'user': checkUser[0]._id  } })
 
         res.json({
             message: 'Club Created Successfully',
@@ -83,13 +89,13 @@ exports.clubUpdatePutController = async (req, res, next) =>{
         const user = await User.findById(req.user)
 
         await Club.findOneAndUpdate({_id:user.club}, 
-            { $pop: { user: user._id  } })
+            { $pop: { 'user': user._id  } })
 
         await User.findByIdAndUpdate(req.user,{$set:{
             club:req.query.club
         }})
         await Club.findOneAndUpdate({_id:req.query.club}, 
-            { $push: { user: user._id  } })
+            { $push: { 'user': user._id  } })
 
         res.json({
             message:"Updated Successfully",

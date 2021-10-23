@@ -19,11 +19,13 @@ origin = ${req.headers.origin}/${req.url}
 })
 // setRoute
 
-app.get('/', (req, res) => {
-      res.send('Hello world')
-})
+// mongoose.set('useFindAndModify', false);
 setRoutes(app);
-mongoose.set('useFindAndModify', false);
+app.get('/', (req, res) => {
+    res.send('Hello world')
+})
+
+
 
 app.use((req,res,next)=>{
     console.log(`method = ${req.method}
