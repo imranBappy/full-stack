@@ -201,7 +201,7 @@ exports.forgetUserPostController = async (req, res, next) =>{
 exports.forgetCheckPostController = async (req, res, next) =>{
     try{
         const forget = await Forget.findOne({otp: req.body.otp})
-        const otp = Math.floor(Math.random() * 10000000)
+        const otp = Math.floor(Math.random() * 100000000)
         await jwt.verify(forget.token, process.env.SECRET );
         const hash = await bcrypt.hash(otp.toString(), 10)
         const result = await User.findOneAndUpdate({email: forget.email},{$set:{password: hash}})

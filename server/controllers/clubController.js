@@ -89,7 +89,7 @@ exports.clubUpdatePutController = async (req, res, next) =>{
         const user = await User.findById(req.user)
 
         await Club.findOneAndUpdate({_id:user.club}, 
-            { $pop: { 'user': user._id  } })
+            { $pull: { 'user': user._id  } })
 
         await User.findByIdAndUpdate(req.user,{$set:{
             club:req.query.club

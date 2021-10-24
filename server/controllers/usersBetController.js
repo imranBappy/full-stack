@@ -15,52 +15,25 @@ exports.betPostController = async (req, res, next) =>{
         await Result.findByIdAndUpdate(req.body.result,{
             $push:{'user': user._id}
         }, {new: true});
+
         const bet = new UserBet({...req.body, user: user._id, win: false})
         await bet.save();
+        
         await User.findByIdAndUpdate(user._id,{
             balance: isNumber(user.balance - Number(req.body.amount))
         });
 
-        // sRate
-        if (!user.sName) return res.json({
-            message: 'Bet send successfully!', error: false
-        });
-        const sUser = await User.find({_id:user.sName})
-        if (!sUser[0]) return res.json({
-            message: 'Bet send successfully!', error: false
-        });
-        
         const rate = await Rate.findById('6138b5e469f2164564901407');
-        
-        let balance = req.body.amount * rate.sponsor ;
-        let sponsorRateBalance = balance - req.body.amount
-        await User.findByIdAndUpdate(sUser[0]._id,{
-            balance: isNumber(sUser[0].balance + sponsorRateBalance) 
-        });
         // club rate
-
-        if (!user.club) return res.json({
-            message: 'Bet send successfully!', error: false
-        });
-
-        const club = await Club.findById(user.club)
-        if (!club) return res.json({
-            message: 'Bet send successfully!', error: false
-        });
-
-        const clubHolder = await User.find({username:club.clubHolder})
-        if (!clubHolder[0] && !clubHolder.isClubHolder) return res.json({
-            message: 'Bet send successfully!', error: false
-        })
-
-
         let clubBalance = req.body.amount * rate.club ;
-        let clubRateBalance = clubBalance - req.body.amount
-        await User.findByIdAndUpdate(clubHolder[0]._id,{
-            balance: isNumber(clubHolder[0].balance + clubRateBalance)
-        });
+        const club = await Club.findById(user.club)
+        const clubHolder = await User.find({username:club.clubHolder})
 
-        await Club.findByIdAndUpdate(user.club,{balance: isNumber(club.balance + clubRateBalance) })
+        await User.findByIdAndUpdate(clubHolder[0]._id,{
+            balance: clubHolder[0].balance + isNumber(clubBalance)
+        });
+        await Club.findByIdAndUpdate(user.club,{balance: club.balance + isNumber(clubBalance) })
+       
         res.json({
             message: 'Bet send successfully!', error: false
         })

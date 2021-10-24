@@ -41,7 +41,7 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
                             main.type === "TableTennis" ? tableTennis :
                             main.type === "Football"? football :  basketball
                         } alt="" /> 
-                        {`${main.country1} VS ${main.country2} ${main.name}`}
+                        {`${main.country1} VS ${main.country2} ${main.name} | ${main.date}`}
                     </h1>
                     <div className="panel" style={style} >
                         {

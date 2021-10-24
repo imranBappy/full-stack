@@ -168,7 +168,7 @@ function InfoTable(props) {
                               column.id === 'game' ? `${value.country1} VS ${value.country2}- ${value.name}`:
                               column.id === 'bet' ? value.title:
                               column.id === 'result' ? value.question:
-                              column.id === 'rate' && props.path === '/bet-list'? row.result.rate:
+                              column.id === 'rate' && props.path === '/bet-list'? row.rate:
                               column.id === 'status' && props.path === '/bet-list'? row.result.status
                             : value
                             }
