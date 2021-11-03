@@ -19,7 +19,6 @@ const Game = ({game, style, classNames,  handleModel, auth}) =>{
             e.target.nextElementSibling.style = 'max-height:1500px';
         }
     }
-    
     const handleBet=(...rest) =>{
         if (auth)  {
             handleModel(...rest)
