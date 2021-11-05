@@ -19,7 +19,7 @@ const Home = (props) => {
         props.allGameGetAction()
         setInterval(() => {
             props.allGameGetAction()
-        }, 20000);
+        }, 3000);
 
     },[]);
     useEffect(()=>{
