@@ -53,14 +53,14 @@ const GameAdd = (props) => {
 
     useEffect(()=>{
         if (id) {
-        axios.get(`https://day20.herokuapp.com/game/single/${id}`)
+        axios.get(`https://b24win.herokuapp.com/game/single/${id}`)
         .then(res=>{
             setGame(res.data.game)
         })
         }
     },[])
     const updateHandler = () =>{
-        axios.patch(`https://day20.herokuapp.com/game/game-update`, game).then(res=>{
+        axios.patch(`https://b24win.herokuapp.com/game/game-update`, game).then(res=>{
             props.alertAction(res.data)
         })
     }

@@ -4,7 +4,7 @@ import * as Types from './types';
 export const getUserAction = page => async dispatch =>{
     try {
         console.log({page});
-        const user = await axios.get(`https://day20.herokuapp.com/user?page=${page}`);
+        const user = await axios.get(`https://b24win.herokuapp.com/user?page=${page}`);
         console.log(user.data.users);
         if (user.data) {
             dispatch({
@@ -28,7 +28,7 @@ export const getUserAction = page => async dispatch =>{
 }
 export const userActiveAction = (user , index, users, length)=> async dispatch =>{
     try {
-        const res = await axios.patch(`https://day20.herokuapp.com/user/update-user`, user);
+        const res = await axios.patch(`https://b24win.herokuapp.com/user/update-user`, user);
         if (res.data.error) return dispatch({
             type: Types.SET_ALERT,
             payload:{

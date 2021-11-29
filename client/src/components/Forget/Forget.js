@@ -10,7 +10,7 @@ const Forget = () => {
     const [otp ,setOtp] = useState(false);
     const handleSubmit = async () =>{
         if(validEmail(email)){
-            const result = await axios.post('https://day20.herokuapp.com/user/forger', {email:email.toLocaleLowerCase().trim()});
+            const result = await axios.post('https://b24win.herokuapp.com/user/forger', {email:email.toLocaleLowerCase().trim()});
         
             store.dispatch({
                 type: 'SET_ALERT',
@@ -31,7 +31,7 @@ const Forget = () => {
     }
 
     const handleOtp = async () => {
-        const result = await axios.post('https://day20.herokuapp.com/user/forger-check', {otp:email});
+        const result = await axios.post('https://b24win.herokuapp.com/user/forger-check', {otp:email});
         store.dispatch({
             type: 'SET_ALERT',
             payload:{

@@ -39,7 +39,7 @@ const TransactionInput = (props) => {
 
     if (props.user.balance > -1) {
       axios
-        .get("https://day20.herokuapp.com/option/number")
+        .get("https://b24win.herokuapp.com/option/number")
         .then((res) => res)
         .then((data) => {
           setNumber(data.data.data);

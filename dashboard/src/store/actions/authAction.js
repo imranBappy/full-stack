@@ -4,7 +4,7 @@ import setAuthHeader from '../../utils/setAuthHeader';
 import * as Types from './types';
 export const authAction = (user, history) => async dispatch =>{
     try {
-        const result = await axios.post('https://day20.herokuapp.com/admin/login', user)
+        const result = await axios.post('https://b24win.herokuapp.com/admin/login', user)
         if (result.data.error)return dispatch({
             type: Types.SET_ALERT,
             payload:result.data

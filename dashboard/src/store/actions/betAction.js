@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 export const betAction  = (bet, history) => async dispatch =>{
     try {
-        const result  = await Axios.post(`https://day20.herokuapp.com/bet/post-title`, bet)
+        const result  = await Axios.post(`https://b24win.herokuapp.com/bet/post-title`, bet)
         if (result.data._id) {
             history.push(`/bet-add/${bet.game}?betId=${result.data._id}`)
             dispatch({
@@ -28,7 +28,7 @@ export const betAction  = (bet, history) => async dispatch =>{
 
 export const resultAction = (question) => async dispatch => {
     try {
-        await Axios.post(`https://day20.herokuapp.com/bet/add-bet`, question)
+        await Axios.post(`https://b24win.herokuapp.com/bet/add-bet`, question)
         dispatch({
             type: Types.SET_ALERT,
             payload: {
@@ -49,7 +49,7 @@ export const resultAction = (question) => async dispatch => {
 
 export const loadAllBet = (gameId) => async dispatch => {
     try {
-        const data = await Axios.get(`https://day20.herokuapp.com/bet/get-all-bet?gameId=${gameId}`);
+        const data = await Axios.get(`https://b24win.herokuapp.com/bet/get-all-bet?gameId=${gameId}`);
         dispatch({
             type: Types.SET_BET,
             payload: {
@@ -69,7 +69,7 @@ export const loadAllBet = (gameId) => async dispatch => {
 
 export const betActionAction = (bet, index, bets) => async dispatch => {
     try {
-        const response = await Axios.put(`https://day20.herokuapp.com/bet/bet-update`, bet);
+        const response = await Axios.put(`https://b24win.herokuapp.com/bet/bet-update`, bet);
         if (response.data.error) return dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -104,7 +104,7 @@ export const betActionAction = (bet, index, bets) => async dispatch => {
 }
 export const resultShowAction = (result, resultIndex, bet, index, bets) => async dispatch => {
     try {
-        const res = await Axios.put(`https://day20.herokuapp.com/bet/result-update`,result )
+        const res = await Axios.put(`https://b24win.herokuapp.com/bet/result-update`,result )
         bet.question.splice(resultIndex,1, res.data.result)
         bets.splice(index,1, bet);
         dispatch({

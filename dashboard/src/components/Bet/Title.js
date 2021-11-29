@@ -19,7 +19,7 @@ const Title = (props) => {
     let query = useQuery();
     
     useEffect(()=>{
-        axios.get(`https://day20.herokuapp.com/bet/single-bet-get?betId=${query.get('betId')}`).then(res=>{
+        axios.get(`https://b24win.herokuapp.com/bet/single-bet-get?betId=${query.get('betId')}`).then(res=>{
             if (res.data.bet) {
                 setGame(res.data.bet)
             }
@@ -57,7 +57,7 @@ const Title = (props) => {
     const handleUpdate = () =>{
         if (checkValid()) {
             setIsValid(true);
-            axios.put(`https://day20.herokuapp.com/bet/bet-update`, game).then(res=>{
+            axios.put(`https://b24win.herokuapp.com/bet/bet-update`, game).then(res=>{
                 props.alertAction(res.data)
             })
         }

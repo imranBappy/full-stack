@@ -17,9 +17,9 @@ const Home = (props) => {
     const [Bet, setBet] = useContext(BetContext)
     useEffect(()=>{
         props.allGameGetAction()
-        setInterval(() => {
-            props.allGameGetAction()
-        }, 3000);
+        // setInterval(() => {
+        //     props.allGameGetAction()
+        // }, 3000);
 
     },[]);
     useEffect(()=>{

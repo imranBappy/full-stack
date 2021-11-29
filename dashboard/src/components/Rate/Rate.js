@@ -6,12 +6,12 @@ const Number = () => {
     const [club, setClub] = useState(0);
 
     useEffect(()=>{
-        axios.get('https://day20.herokuapp.com/option/rate?rate=sponsor')
+        axios.get('https://b24win.herokuapp.com/option/rate?rate=sponsor')
         .then(res =>res)
         .then(data=>{
             setSponsor(data.data.data)
         })
-        axios.get('https://day20.herokuapp.com/option/rate?rate=club')
+        axios.get('https://b24win.herokuapp.com/option/rate?rate=club')
         .then(res =>res)
         .then(data =>{
             setClub(data.data.data)
@@ -25,7 +25,7 @@ const Number = () => {
     }
     const handleSubmitSponsor = () =>{
         if (parseFloat(sponsor)) {
-            axios.patch('https://day20.herokuapp.com/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
+            axios.patch('https://b24win.herokuapp.com/option/rate?rate=sponsor',{sponsor: sponsor === ''? 0: sponsor})
             .then(res =>res)
             .then(data=>{
                 store.dispatch({
@@ -44,7 +44,7 @@ const Number = () => {
     const handleSubmitClub = () =>{
         
         if (parseFloat(club)) {
-        axios.patch('https://day20.herokuapp.com/option/rate?rate=club',{club: club === ''? 0: club})
+        axios.patch('https://b24win.herokuapp.com/option/rate?rate=club',{club: club === ''? 0: club})
         .then(res =>res)
         .then(data=>{
             store.dispatch({

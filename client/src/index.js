@@ -24,7 +24,7 @@ if (token) {
       }
     })
     const decode = jwt_decide(token);
-    Axios.get(`https://day20.herokuapp.com/user/single-user/${decode._id}`,{
+    Axios.get(`https://b24win.herokuapp.com/user/single-user/${decode._id}`,{
       	headers:{
           authorization: token
         }

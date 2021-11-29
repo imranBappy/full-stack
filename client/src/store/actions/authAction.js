@@ -4,7 +4,7 @@ import setAuthHeader from '../../utils/setAuthHeader';
 export const registerAction = (user, history) => async dispatch => {
     try {
         user.username = user.username.toLocaleLowerCase()
-        const result = await axios.post('https://day20.herokuapp.com/user/register', user);
+        const result = await axios.post('https://b24win.herokuapp.com/user/register', user);
         dispatch({
             type: Types.SET_ALERT,
             payload:{
@@ -26,7 +26,7 @@ export const registerAction = (user, history) => async dispatch => {
 
 export const loginAction = (user, history) => async dispatch =>{
     try {
-        const result = await axios.post('https://day20.herokuapp.com/user/login', user);
+        const result = await axios.post('https://b24win.herokuapp.com/user/login', user);
         const token = result.data.token;
         if (token) {
             localStorage.setItem('token', token)
@@ -90,7 +90,7 @@ export const logoutAction = () => dispatch =>{
 }
 export const changePassAction = (pass) => async dispatch =>{
     try {
-        const result = await axios.put('https://day20.herokuapp.com/user/login', pass);
+        const result = await axios.put('https://b24win.herokuapp.com/user/login', pass);
         const token = localStorage.getItem('token')
         if (token) {
             localStorage.removeItem('token');

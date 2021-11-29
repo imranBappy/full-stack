@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const balanceTransferPostAction = (transfer)=> async dispatch => {
     try {
-        const res = await axios.post(`https://day20.herokuapp.com/transfer/post`, transfer);
+        const res = await axios.post(`https://b24win.herokuapp.com/transfer/post`, transfer);
         dispatch({
             type: Types.SET_ALERT,
             payload: {
@@ -22,7 +22,7 @@ export const balanceTransferPostAction = (transfer)=> async dispatch => {
 
 export const balanceTransferGetAction = (page)=> async dispatch => {
     try {
-        const res = await axios.get(`https://day20.herokuapp.com/transfer/get-transfer?page=${page}&user=user`);
+        const res = await axios.get(`https://b24win.herokuapp.com/transfer/get-transfer?page=${page}&user=user`);
         dispatch({
             type: Types.SET_TRANSFER,
             payload: {

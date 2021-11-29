@@ -14,14 +14,14 @@ const ClubHolder = (props) => {
     useEffect(()=>{
         console.log(111, props.club)
         if (props.club) {
-            axios.get(`https://day20.herokuapp.com/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club._id}`)
+            axios.get(`https://b24win.herokuapp.com/usersbet/club-bet-get?page=${query.get('page')}&club=${props.club._id}`)
             .then(function (response) {
                 console.log(response.data);
                 setBet(response.data)
             })
             .catch(function (error) {
             }) 
-            axios.get(`https://day20.herokuapp.com/club/${props.username}`)
+            axios.get(`https://b24win.herokuapp.com/club/${props.username}`)
             .then(function (response) {
                 setClub(response.data.club)
             })
@@ -32,7 +32,7 @@ const ClubHolder = (props) => {
     },[props.club])
 
     const active = page =>{
-        axios.get(`https://day20.herokuapp.com/usersbet/club-bet-get?page=${page}&club=${props.club.clubId}`)
+        axios.get(`https://b24win.herokuapp.com/usersbet/club-bet-get?page=${page}&club=${props.club.clubId}`)
         .then(function (response) {
             setBet(response.data)
         })

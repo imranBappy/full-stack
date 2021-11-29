@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as Types from './types';
 export const allGameGetAction = (type) => async dispatch => {
     try {
-        const game = await axios.get(`https://day20.herokuapp.com/game/get-game?type=${type?type:0}`);
+        const game = await axios.get(`https://b24win.herokuapp.com/game/get-game?type=${type?type:0}`);
         dispatch({
             type: Types.SET_GAME,
             payload: {
@@ -10,6 +10,8 @@ export const allGameGetAction = (type) => async dispatch => {
             }
         })
     } catch (error) {
+        console.log(error.toJSON());
+        console.dir({error});
         dispatch({
             type: Types.SET_ALERT,
             payload: {
