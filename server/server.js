@@ -38,7 +38,7 @@ app.use((req,res,next)=>{
 });
 
 app.use((error, req, res, next)=>{
-    console.log(error)
+    // console.log(error)
     switch (error.status) {
         case 700:
             return res.json({

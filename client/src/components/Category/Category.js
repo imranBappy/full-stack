@@ -17,12 +17,12 @@ import { MenuContext, } from '../Layout/Layout';
 const Category = (props) => {
     const [menu] = useContext(MenuContext)
 
-    function scrollWin(e) {
-        const ul = document.querySelector('.scroll')
-        ul.scrollLeft = e ? ul.scrollLeft - 130 :  ul.scrollLeft + 130
-      }
+    // function scrollWin(e) {
+    //     const ul = document.querySelector('.scroll')
+    //     ul.scrollLeft = e ? ul.scrollLeft - 130 :  ul.scrollLeft + 130
+    //   }
 
-      const handleGame = (type = 0) =>{
+      const handleGame = (type = '0') =>{
         props.allGameGetAction(type)
       }
     return (

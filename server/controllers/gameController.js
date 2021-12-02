@@ -34,8 +34,7 @@ exports.gameGetController = async (req, res, next) =>{
 }
 exports.allGameLoadGetController = async (req, res, next) =>{
     try {
-        const type = req.query.type;
-        
+        const type = req.query.type ;
         const game = await Game.find(type === '0'? {isActive: true}: {isActive: true, type}).populate({
             path:'bets',
             select: 'title show',
@@ -43,7 +42,8 @@ exports.allGameLoadGetController = async (req, res, next) =>{
                 path:'question',
                 select:'question rate show',
             }
-        }).select({
+        })
+        .select({
             createdAt:0,
             updatedAt: 0,
             __v: 0
