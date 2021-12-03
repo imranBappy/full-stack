@@ -9,6 +9,9 @@ import { connect } from 'react-redux';
 import './home.css';
 import { BetContext, ModalContext } from '../../components/Layout/Layout';
 import Category from '../../components/Category/Category';
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
+
 
 const Home = (props) => {
     const [live, setLive] = useState([]);
@@ -20,7 +23,27 @@ const Home = (props) => {
         setInterval(() => {
             props.allGameGetAction()
         }, 3000);
-
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdGFZ6vwIX0qLZ4Yx_GLtJoDEKQz1kx7g",
+            authDomain: "b24win-c0633.firebaseapp.com",
+            projectId: "b24win-c0633",
+            storageBucket: "b24win-c0633.appspot.com",
+            messagingSenderId: "144113535461",
+            appId: "1:144113535461:web:e321b826a1f9553c76c70c",
+            measurementId: "G-TLEKF6VQRR"
+          };
+          
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          getAnalytics(app);
+        // const analytics = getAnalytics();
+        // logEvent(analytics, 'notification_received');
+        // logEvent(analytics, 'select_content', {
+        // content_type: 'image',
+        // content_id: 'P12453',
+        // items: [{ name: 'Kittens' }]
+        // })
+       
     },[]);
     useEffect(()=>{
         const liveGame = props.game.filter(game => game.status === 'Live')
