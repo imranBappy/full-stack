@@ -41,7 +41,6 @@ const Navbar = (props) => {
                         </a>
                         <ul> 
                             <li><Link to="/">Home</Link></li>
-
                             <li>
                                 <Link to={auth.isAuthenticated ? '/statement' : '/login'}>
                                 {auth.isAuthenticated ? 'Dashboard' : 'Login'}

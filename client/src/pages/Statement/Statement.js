@@ -25,12 +25,12 @@ const Statement = (props) => {
             <PrivateRoute path='/statement/deposit'>
                 <TransactionInput transaction ='deposit' />
             </PrivateRoute>
-            <PrivateRoute path='/statement/transfer'>
+            {/* <PrivateRoute path='/statement/transfer'>
                 <BalanceTransfer />
-            </PrivateRoute>
-            <PrivateRoute path='/statement/send-transfer'>
+            </PrivateRoute> */}
+            {/* <PrivateRoute path='/statement/send-transfer'>
                 <BalanceTransferFrom/>
-            </PrivateRoute>
+            </PrivateRoute> */}
             <PrivateRoute path='/statement/password'>
                 <Password />
             </PrivateRoute>

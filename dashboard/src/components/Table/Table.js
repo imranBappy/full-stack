@@ -55,7 +55,7 @@ function InfoTable(props) {
                 <TableRow>
                   {columns.map((column) => (
                     <TableCell
-                      key={column.id}
+                      key={column._id}
                       align={column.align}
                       style={{ minWidth: column.minWidth }}
                     >
@@ -71,10 +71,10 @@ function InfoTable(props) {
                       {columns.map((column) => {
                         const value = row[column.id]
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={column._id} align={column.align}>
                             {
                               column.id === 'user' && props.path === '/bet' ? value ? value.length : 0 :
-                              column.id === 'club' ? value.clubId ? value.clubId: 'null' :
+                              column.id === 'club' ? value ? value.clubId: 'null' :
                               column.id === 'user' && props.path === '/club' ? value.length :
                               column.id === 'user' ? value.username :
                               column.id === 'createdAt' ? new Date(value).toLocaleString() :

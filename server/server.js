@@ -18,11 +18,11 @@ origin = ${req.headers.origin}/${req.url}
     next()
 })
 // setRoute
-// test comment 1
+
 // mongoose.set('useFindAndModify', false);
 setRoutes(app);
 app.get('/', (req, res) => {
-    res.send('Hello world1')
+    res.send('Hello world!')
 })
 
 
@@ -38,7 +38,6 @@ app.use((req,res,next)=>{
 });
 
 app.use((error, req, res, next)=>{
-    // console.log(error)
     switch (error.status) {
         case 700:
             return res.json({
@@ -67,8 +66,10 @@ app.use((error, req, res, next)=>{
 
 
 const port = process.env.PORT || 4000
-const mongoURI = `mongodb+srv://${process.env.BD_USER}:${process.env.DB_PASS}@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`
-
+// const mongoURI = `mongodb+srv://${process.env.BD_USER}:${process.env.DB_PASS}@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`
+const mongoURl=`mongodb+srv://day20:sKia5oUhAVLZPjYL@cluster0.n9sfu.mongodb.net/bdGame?authSource=admin&replicaSet=atlas-rf5475-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true`
 app.listen(port,()=>{
-    mongoose.connect(`mongodb+srv://day20:sKia5oUhAVLZPjYL@cluster0.n9sfu.mongodb.net/bdGame?retryWrites=true&w=majority`,{useNewUrlParser:true, useUnifiedTopology:true})
+    mongoose.connect(`mongodb+srv://b24win:wJ3yJPZxjr9XuJh@cluster0.u7k3g.mongodb.net/b24win?authSource=admin&replicaSet=atlas-ls7wd9-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true`,{useNewUrlParser:true, useUnifiedTopology:true})
+    // mongoose.connect(mongoURl,{useNewUrlParser:true, useUnifiedTopology:true})
+
 })

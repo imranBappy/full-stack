@@ -144,6 +144,7 @@ exports.allUserGetController = async (req, res, next) =>{
                 createdAt:0,
                 updatedAt:0
             })
+
         res.json({
             users: user,
             length: arr.length

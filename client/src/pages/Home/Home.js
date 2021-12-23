@@ -36,13 +36,8 @@ const Home = (props) => {
           // Initialize Firebase
           const app = initializeApp(firebaseConfig);
           getAnalytics(app);
-        // const analytics = getAnalytics();
-        // logEvent(analytics, 'notification_received');
-        // logEvent(analytics, 'select_content', {
-        // content_type: 'image',
-        // content_id: 'P12453',
-        // items: [{ name: 'Kittens' }]
-        // })
+        const analytics = getAnalytics();
+        logEvent(analytics, 'notification_received');
        
     },[]);
     useEffect(()=>{

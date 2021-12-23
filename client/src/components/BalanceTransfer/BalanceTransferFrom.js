@@ -23,8 +23,11 @@ const BalanceTransferFrom = (props) => {
                 setTransfer({...transfer,[name]: value, message:'There is not enough balance'})
             }
             if (!(Number(value)>= 100)) setTransfer({...transfer, [name]: value, message:'You can bet at least 100 Taka'})
+            if(user.balance < 100) setTransfer({...transfer, message:'There is not enough balance'})
+    
+        
         }else{
-            setTransfer({...transfer, [name]: value, message:''});
+            setTransfer({...transfer, [name]: value});
         }
     }
     const handleSubmit = () =>{

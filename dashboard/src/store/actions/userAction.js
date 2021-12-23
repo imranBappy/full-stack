@@ -3,9 +3,8 @@ import * as Types from './types';
 
 export const getUserAction = page => async dispatch =>{
     try {
-        console.log({page});
         const user = await axios.get(`https://b24win.herokuapp.com/user?page=${page}`);
-        console.log(user.data.users);
+        console.log(user.data);
         if (user.data) {
             dispatch({
                 type: Types.SET_USER,

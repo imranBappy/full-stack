@@ -3,7 +3,7 @@ import axios from 'axios';
 export const allTransactionGetAction = (page, transaction) => async dispatch =>{
     try {
         const res = await axios.get(`https://b24win.herokuapp.com/transaction?transaction=${transaction}&page=${page}`);
-        console.log(transaction);
+        console.log(res);
         dispatch({
             type: transaction==='withdraw'? Types.SET_WITHDRAW: Types.SET_DEPOSIT,
             payload:{

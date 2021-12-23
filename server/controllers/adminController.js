@@ -24,6 +24,7 @@ exports.adminPostController = async (req, res, next) =>{
 
 exports.adminPostLoginController = async (req, res, next) =>{
     const {password, email} = req.body
+  
     try {
         const result = await Admin.find({email: email.trim()});
         const admin = result[0];
@@ -42,6 +43,7 @@ exports.adminPostLoginController = async (req, res, next) =>{
             error:false
         })
     } catch (error) {
+        console.error(error);
         next(error)
     }
 }

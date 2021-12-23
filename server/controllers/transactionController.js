@@ -29,6 +29,7 @@ exports.transactionGetController =  async (req, res, next) =>{
     try {
         const {transaction, page, user} = req.query;
         const pageNumber =  page || 0 ;
+        console.log(pageNumber);
         let createTransaction = {}
         if (user) {
             createTransaction = {user};
@@ -36,7 +37,7 @@ exports.transactionGetController =  async (req, res, next) =>{
             createTransaction = {transaction};
         }
         const length = await Transaction.find(createTransaction).count({})
-        const Transactions = await Transaction.find(createTransaction).populate('user', 'username balance')
+        const Transactions = await Transaction.find({}).populate('user', 'username balance')
         .sort('-createdAt')
         .skip(5 * Number(pageNumber)).limit(5)
         .select({
@@ -45,9 +46,10 @@ exports.transactionGetController =  async (req, res, next) =>{
         });
         res.json({
             transaction: Transactions,
-            length
+            length: length
         })
     } catch (error) {
+        console.log(error);
         next(error)
     }
 }
